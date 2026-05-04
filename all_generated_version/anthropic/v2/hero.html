@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Noto+Serif+Gujarati:wght@400;600;700&family=Rozha+One&family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; min-height: 100%; }
+    body { overflow-x: hidden; }
+    .ww-section { width: 100%; position: relative; isolation: isolate; }
+    /* =====================================================
+   HERO_001 — Kavya & Mihir | Royal Gujarati Wedding
+   ===================================================== */
+
+.hero_001 {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(
+    155deg,
+    #1a0a00 0%,
+    #2d1000 18%,
+    #4b1c02 35%,
+    #6b2d08 50%,
+    #3d1500 68%,
+    #200900 85%,
+    #0e0400 100%
+  );
+  font-family: 'Cormorant Garamond', serif;
+  box-sizing: border-box;
+  padding: 80px 40px;
+}
+
+/* ── CORNER ORNAMENTS ── */
+.hero_001__corner {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  pointer-events: none;
+  z-index: 2;
+}
+.hero_001__corner::before,
+.hero_001__corner::after {
+  content: '';
+  position: absolute;
+  background: transparent;
+  border-color: #c9922a;
+  border-style: solid;
+}
+.hero_001__corner--tl { top: 24px; left: 24px; }
+.hero_001__corner--tl::before {
+  top: 0; left: 0;
+  width: 70px; height: 70px;
+  border-width: 2px 0 0 2px;
+}
+.hero_001__corner--tl::after {
+  top: 14px; left: 14px;
+  width: 45px; height: 45px;
+  border-width: 1px 0 0 1px;
+  border-color: #e8b84b44;
+}
+.hero_001__corner--tr { top: 24px; right: 24px; }
+.hero_001__corner--tr::before {
+  top: 0; right: 0;
+  width: 70px; height: 70px;
+  border-width: 2px 2px 0 0;
+}
+.hero_001__corner--tr::after {
+  top: 14px; right: 14px;
+  width: 45px; height: 45px;
+  border-width: 1px 1px 0 0;
+  border-color: #e8b84b44;
+}
+.hero_001__corner--bl { bottom: 24px; left: 24px; }
+.hero_001__corner--bl::before {
+  bottom: 0; left: 0;
+  width: 70px; height: 70px;
+  border-width: 0 0 2px 2px;
+}
+.hero_001__corner--bl::after {
+  bottom: 14px; left: 14px;
+  width: 45px; height: 45px;
+  border-width: 0 0 1px 1px;
+  border-color: #e8b84b44;
+}
+.hero_001__corner--br { bottom: 24px; right: 24px; }
+.hero_001__corner--br::before {
+  bottom: 0; right: 0;
+  width: 70px; height: 70px;
+  border-width: 0 2px 2px 0;
+}
+.hero_001__corner--br::after {
+  bottom: 14px; right: 14px;
+  width: 45px; height: 45px;
+  border-width: 0 1px 1px 0;
+  border-color: #e8b84b44;
+}
+
+/* ── MANDALA RINGS ── */
+.hero_001__mandala {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  animation: hero001MandalaRotate 60s linear infinite;
+}
+.hero_001__mandala--outer {
+  width: 820px;
+  height: 820px;
+  border: 1px dashed #c9922a22;
+  box-shadow: 0 0 0 1px #c9922a0a inset;
+}
+.hero_001__mandala--inner {
+  width: 560px;
+  height: 560px;
+  border: 1px solid #c9922a18;
+  animation-direction: reverse;
+  animation-duration: 40s;
+}
+.hero_001__mandala--inner::before {
+  content: '';
+  position: absolute;
+  inset: 18px;
+  border-radius: 50%;
+  border: 1px dashed #e8b84b1a;
+}
+.hero_001__mandala--outer::before {
+  content: '';
+  position: absolute;
+  inset: 20px;
+  border-radius: 50%;
+  border: 1px solid #c9922a10;
+}
+
+@keyframes hero001MandalaRotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ── FLOATING PETALS ── */
+.hero_001__petal {
+  position: absolute;
+  border-radius: 50% 0 50% 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  animation: hero001PetalFloat 8s ease-in-out infinite;
+}
+.hero_001__petal--1 { width: 10px; height: 14px; background: #e8632a88; top: 15%; left: 12%; animation-delay: 0s; animation-duration: 9s; }
+.hero_001__petal--2 { width: 8px; height: 12px; background: #f0a030aa; top: 70%; left: 8%; animation-delay: 1.5s; animation-duration: 11s; }
+.hero_001__petal--3 { width: 12px; height: 16px; background: #e8632a66; top: 30%; right: 10%; animation-delay: 3s; animation-duration: 8s; }
+.hero_001__petal--4 { width: 9px; height: 13px; background: #f0a030bb; top: 80%; right: 14%; animation-delay: 0.8s; animation-duration: 10s; }
+.hero_001__petal--5 { width: 7px; height: 11px; background: #c9922a99; top: 55%; left: 5%; animation-delay: 2.2s; animation-duration: 12s; }
+.hero_001__petal--6 { width: 11px; height: 15px; background: #e8b84b77; top: 20%; right: 6%; animation-delay: 4s; animation-duration: 9.5s; }
+
+@keyframes hero001PetalFloat {
+  0%   { opacity: 0; transform: translateY(0) rotate(0deg); }
+  15%  { opacity: 0.8; }
+  80%  { opacity: 0.5; }
+  100% { opacity: 0; transform: translateY(-80px) rotate(180deg); }
+}
+
+/* ── SIDE PANELS ── */
+.hero_001__side-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  z-index: 3;
+}
+.hero_001__side-panel--left  { left: 0; }
+.hero_001__side-panel--right { right: 0; }
+
+/* Toran */
+.hero_001__toran-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.hero_001__toran-leaf {
+  width: 18px;
+  height: 26px;
+  background: linear-gradient(160deg, #2e7d32, #66bb6a);
+  border-radius: 50% 50% 50% 0 / 60% 60% 40% 40%;
+  box-shadow: 0 2px 8px #0006;
+  position: relative;
+}
+.hero_001__toran-leaf::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, #f0a030, #c9922a);
+  border-radius: 50%;
+}
+
+/* Diya */
+.hero_001__diya-shell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.hero_001__diya-base {
+  width: 36px;
+  height: 16px;
+  background: linear-gradient(180deg, #c9922a, #7a4a00);
+  border-radius: 0 0 50% 50%;
+  box-shadow: 0 4px 12px #c9922a55;
+}
+.hero_001__diya-flame {
+  width: 10px;
+  height: 18px;
+  background: linear-gradient(180deg, #fff4c2, #ffcc02, #ff8800);
+  border-radius: 50% 50% 20% 20%;
+  margin-top: -4px;
+  animation: hero001FlameFlicker 1.6s ease-in-out infinite alternate;
+  box-shadow: 0 0 14px 4px #ffcc0288, 0 0 28px 8px #ff880044;
+}
+
+@keyframes hero001FlameFlicker {
+  0%   { transform: scaleX(1) scaleY(1) rotate(-2deg); opacity: 1; }
+  50%  { transform: scaleX(0.85) scaleY(1.1) rotate(2deg); opacity: 0.9; }
+  100% { transform: scaleX(1.1) scaleY(0.95) rotate(-1deg); opacity: 1; }
+}
+
+/* Gujarati vertical strip */
+.hero_001__gujarati-strip {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: 'Noto Serif Gujarati', serif;
+  font-size: 13px;
+  color: #e8b84b99;
+  letter-spacing: 4px;
+  padding: 8px 0;
+}
+
+/* ── MAIN CONTENT WRAP ── */
+.hero_001__content-wrap {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 780px;
+  width: 100%;
+  gap: 0;
+}
+
+/* ── BADGE ── */
+.hero_001__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(90deg, transparent, #c9922a22, transparent);
+  border: 1px solid #c9922a44;
+  border-radius: 40px;
+  padding: 7px 24px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(6px);
+}
+.hero_001__badge-text {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #e8b84b;
+}
+.hero_001__badge-symbol {
+  color: #c9922a;
+  font-size: 10px;
+}
+
+/* ── GANESH INVOCATION ── */
+.hero_001__ganesh-invocation {
+  margin-bottom: 16px;
+}
+.hero_001__om {
+  font-family: 'Noto Serif Gujarati', serif;
+  font-size: 15px;
+  color: #f0c96088;
+  letter-spacing: 3px;
+}
+
+/* ── NAMES ── */
+.hero_001__names-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.hero_001__name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.hero_001__name-label {
+  font-family: 'Manrope', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #c9922a;
+}
+.hero_001__name-text {
+  font-family: 'Rozha One', serif;
+  font-size: clamp(62px, 9vw, 104px);
+  font-weight: 400;
+  color: #f5e6c8;
+  line-height: 1;
+  margin: 0;
+  text-shadow:
+    0 0 60px #c9922a44,
+    0 4px 30px #00000088;
+  letter-spacing: -1px;
+  animation: hero001NameGlow 4s ease-in-out infinite alternate;
+}
+@keyframes hero001NameGlow {
+  0%   { text-shadow: 0 0 40px #c9922a33, 0 4px 30px #00000088; }
+  100% { text-shadow: 0 0 80px #e8b84b55, 0 4px 40px #00000099; }
+}
+
+/* Ampersand */
+.hero_001__ampersand-wrap {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.hero_001__ampersand-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid #c9922a66;
+  animation: hero001AmpRing 6s ease-in-out infinite alternate;
+}
+.hero_001__ampersand-ring::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  border: 1px dashed #c9922a33;
+}
+@keyframes hero001AmpRing {
+  0%   { box-shadow: 0 0 0 0 #c9922a00; }
+  100% { box-shadow: 0 0 20px 6px #c9922a22; }
+}
+.hero_001__ampersand {
+  font-family: 'Playfair Display', serif;
+  font-size: 38px;
+  color: #c9922a;
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── DIVIDER ── */
+.hero_001__divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  width: 100%;
+  justify-content: center;
+}
+.hero_001__divider-line {
+  flex: 1;
+  max-width: 180px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #c9922a88, transparent);
+  display: block;
+}
+.hero_001__divider-gem {
+  color: #c9922a;
+  font-size: 14px;
+}
+
+/* ── DETAILS ROW ── */
+.hero_001__details-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.hero_001__detail-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: #ffffff0d;
+  border: 1px solid #c9922a33;
+  border-radius: 30px;
+  padding: 6px 16px;
+  backdrop-filter: blur(8px);
+}
+.hero_001__detail-icon {
+  font-size: 13px;
+  line-height: 1;
+}
+.hero_001__detail-val {
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #f5e6c8cc;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.hero_001__detail-dot {
+  color: #c9922a55;
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* ── MESSAGE ── */
+.hero_001__message-wrap {
+  max-width: 600px;
+  margin-bottom: 28px;
+  padding: 22px 32px;
+  background: linear-gradient(135deg, #ffffff08, #c9922a0a);
+  border: 1px solid #c9922a2a;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+.hero_001__message-wrap::before {
+  content: '"';
+  position: absolute;
+  top: -12px;
+  left: 24px;
+  font-family: 'Playfair Display', serif;
+  font-size: 60px;
+  color: #c9922a44;
+  line-height: 1;
+}
+.hero_001__message {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  font-weight: 400;
+  font-style: italic;
+  color: #f5e6c8bb;
+  line-height: 1.85;
+  margin: 0;
+  letter-spacing: 0.3px;
+}
+
+/* ── CEREMONY TAGS ── */
+.hero_001__tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 36px;
+}
+.hero_001__tag {
+  font-family: 'Manrope', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #c9922a;
+  border: 1px solid #c9922a55;
+  border-radius: 3px;
+  padding: 5px 14px;
+  background: #c9922a0a;
+  transition: background 0.3s, color 0.3s;
+}
+.hero_001__tag:hover {
+  background: #c9922a22;
+  color: #e8b84b;
+}
+
+/* ── CTA ── */
+.hero_001__cta {
+  display: inline-block;
+  text-decoration: none;
+  position: relative;
+  margin-bottom: 32px;
+}
+.hero_001__cta-inner {
+  display: block;
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #1a0a00;
+  background: linear-gradient(135deg, #e8b84b, #c9922a, #f0d070, #c9922a);
+  background-size: 200% 200%;
+  padding: 16px 48px;
+  border-radius: 4px;
+  animation: hero001CTAShimmer 4s ease-in-out infinite;
+  box-shadow:
+    0 4px 24px #c9922a66,
+    0 1px 0 #fff3 inset;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.hero_001__cta:hover .hero_001__cta-inner {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 36px #c9922a88, 0 1px 0 #fff3 inset;
+}
+@keyframes hero001CTAShimmer {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── FOOTER GUJARATI ── */
+.hero_001__footer-guj {
+  font-family: 'Noto Serif Gujarati', serif;
+  font-size: 14px;
+  color: #c9922a66;
+  letter-spacing: 6px;
+}
+
+/* =====================================================
+   RESPONSIVE — 900px
+   ===================================================== */
+@media (max-width: 900px) {
+  .hero_001 {
+    padding: 60px 20px;
+  }
+  .hero_001__side-panel {
+    display: none;
+  }
+  .hero_001__mandala--outer {
+    width: 560px;
+    height: 560px;
+  }
+  .hero_001__mandala--inner {
+    width: 360px;
+    height: 360px;
+  }
+  .hero_001__name-text {
+    font-size: clamp(56px, 11vw, 82px);
+  }
+  .hero_001__message-wrap {
+    padding: 18px 22px;
+  }
+  .hero_001__details-row {
+    gap: 8px;
+  }
+  .hero_001__detail-dot {
+    display: none;
+  }
+}
+
+/* =====================================================
+   RESPONSIVE — 640px
+   ===================================================== */
+@media (max-width: 640px) {
+  .hero_001 {
+    padding: 48px 16px 56px;
+    min-height: 100svh;
+  }
+  .hero_001__corner {
+    width: 80px;
+    height: 80px;
+  }
+  .hero_001__corner--tl::before,
+  .hero_001__corner--tr::before,
+  .hero_001__corner--bl::before,
+  .hero_001__corner--br::before {
+    width: 40px;
+    height: 40px;
+  }
+  .hero_001__corner--tl::after,
+  .hero_001__corner--tr::after,
+  .hero_001__corner--bl::after,
+  .hero_001__corner--br::after {
+    display: none;
+  }
+  .hero_001__mandala--outer {
+    width: 340px;
+    height: 340px;
+  }
+  .hero_001__mandala--inner {
+    width: 220px;
+    height: 220px;
+  }
+  .hero_001__badge-text {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+  .hero_001__names-wrap {
+    gap: 12px;
+    flex-direction: column;
+  }
+  .hero_001__name-text {
+    font-size: clamp(52px, 16vw, 72px);
+  }
+  .hero_001__ampersand-wrap {
+    width: 52px;
+    height: 52px;
+    transform: rotate(90deg);
+  }
+  .hero_001__ampersand {
+    font-size: 28px;
+  }
+  .hero_001__message {
+    font-size: 15px;
+  }
+  .hero_001__message-wrap {
+    padding: 18px 16px;
+  }
+  .hero_001__details-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .hero_001__detail-dot {
+    display: none;
+  }
+  .hero_001__detail-pill {
+    width: 100%;
+    justify-content: center;
+  }
+  .hero_001__cta-inner {
+    padding: 14px 36px;
+    letter-spacing: 3px;
+    font-size: 11px;
+  }
+  .hero_001__tags-row {
+    gap: 8px;
+  }
+  .hero_001__tag {
+    font-size: 9px;
+    padding: 5px 10px;
+  }
+  .hero_001__divider-line {
+    max-width: 80px;
+  }
+  .hero_001__footer-guj {
+    font-size: 12px;
+    letter-spacing: 4px;
+  }
+}
+  </style>
+</head>
+<body>
+<section class="ww-section hero_001">
+
+  <!-- Decorative corner ornaments -->
+  <div class="hero_001__corner hero_001__corner--tl"></div>
+  <div class="hero_001__corner hero_001__corner--tr"></div>
+  <div class="hero_001__corner hero_001__corner--bl"></div>
+  <div class="hero_001__corner hero_001__corner--br"></div>
+
+  <!-- Floating marigold petals -->
+  <div class="hero_001__petal hero_001__petal--1"></div>
+  <div class="hero_001__petal hero_001__petal--2"></div>
+  <div class="hero_001__petal hero_001__petal--3"></div>
+  <div class="hero_001__petal hero_001__petal--4"></div>
+  <div class="hero_001__petal hero_001__petal--5"></div>
+  <div class="hero_001__petal hero_001__petal--6"></div>
+
+  <!-- Background mandala rings -->
+  <div class="hero_001__mandala hero_001__mandala--outer"></div>
+  <div class="hero_001__mandala hero_001__mandala--inner"></div>
+
+  <!-- Left decorative panel -->
+  <div class="hero_001__side-panel hero_001__side-panel--left">
+    <div class="hero_001__toran-wrap">
+      <div class="hero_001__toran-leaf"></div>
+      <div class="hero_001__toran-leaf"></div>
+      <div class="hero_001__toran-leaf"></div>
+      <div class="hero_001__toran-leaf"></div>
+      <div class="hero_001__toran-leaf"></div>
+    </div>
+    <div class="hero_001__diya-shell">
+      <div class="hero_001__diya-base"></div>
+      <div class="hero_001__diya-flame"></div>
+    </div>
+    <div class="hero_001__gujarati-strip">
+      <span>શુભ વિવાહ</span>
+    </div>
+  </div>
+
+  <!-- Right decorative panel -->
+  <div class="hero_001__side-panel hero_001__side-panel--right">
+    <div class="hero_001__toran-wrap">
+      <div class="hero_001__toran-leaf"></div>
+      <div class="hero_001__toran-leaf"></div>
+      <div class="hero_001__toran-leaf"></div>
+      <div class="hero_001__toran-leaf"></div>
+      <div class="hero_001__toran-leaf"></div>
+    </div>
+    <div class="hero_001__diya-shell">
+      <div class="hero_001__diya-base"></div>
+      <div class="hero_001__diya-flame"></div>
+    </div>
+    <div class="hero_001__gujarati-strip">
+      <span>આનંદ મંગલ</span>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="hero_001__content-wrap">
+
+    <!-- Top badge -->
+    <div class="hero_001__badge">
+      <span class="hero_001__badge-symbol">✦</span>
+      <span class="hero_001__badge-text">A Sacred Celebration of Love</span>
+      <span class="hero_001__badge-symbol">✦</span>
+    </div>
+
+    <!-- Ganesh invocation -->
+    <div class="hero_001__ganesh-invocation">
+      <span class="hero_001__om">॥ શ્રી ગણેશાય નમઃ ॥</span>
+    </div>
+
+    <!-- Names -->
+    <div class="hero_001__names-wrap">
+      <div class="hero_001__name hero_001__name--bride">
+        <span class="hero_001__name-label">Bride</span>
+        <h1 class="hero_001__name-text">Kavya</h1>
+      </div>
+      <div class="hero_001__ampersand-wrap">
+        <div class="hero_001__ampersand-ring"></div>
+        <span class="hero_001__ampersand">&amp;</span>
+      </div>
+      <div class="hero_001__name hero_001__name--groom">
+        <span class="hero_001__name-label">Groom</span>
+        <h1 class="hero_001__name-text">Mihir</h1>
+      </div>
+    </div>
+
+    <!-- Divider ornament -->
+    <div class="hero_001__divider">
+      <span class="hero_001__divider-line"></span>
+      <span class="hero_001__divider-gem">❖</span>
+      <span class="hero_001__divider-line"></span>
+    </div>
+
+    <!-- Wedding details -->
+    <div class="hero_001__details-row">
+      <div class="hero_001__detail-pill">
+        <span class="hero_001__detail-icon">📅</span>
+        <span class="hero_001__detail-val">March 22, 2026</span>
+      </div>
+      <div class="hero_001__detail-dot">·</div>
+      <div class="hero_001__detail-pill">
+        <span class="hero_001__detail-icon">🏛</span>
+        <span class="hero_001__detail-val">Akshar Grand Palace</span>
+      </div>
+      <div class="hero_001__detail-dot">·</div>
+      <div class="hero_001__detail-pill">
+        <span class="hero_001__detail-icon">📍</span>
+        <span class="hero_001__detail-val">Somerset, New Jersey</span>
+      </div>
+    </div>
+
+    <!-- Hero message -->
+    <div class="hero_001__message-wrap">
+      <p class="hero_001__message">
+        With blessings of Shri Ganesh and our families, we invite you to celebrate a joyful Gujarati wedding filled with mehendi, garba, baraat, sacred pheras, dinner, music, and love.
+      </p>
+    </div>
+
+    <!-- Ceremony tags -->
+    <div class="hero_001__tags-row">
+      <span class="hero_001__tag">Mehendi</span>
+      <span class="hero_001__tag">Garba</span>
+      <span class="hero_001__tag">Baraat</span>
+      <span class="hero_001__tag">Pheras</span>
+      <span class="hero_001__tag">Sangeet</span>
+    </div>
+
+    <!-- CTA -->
+    <a class="hero_001__cta" href="#rsvp">
+      <span class="hero_001__cta-inner">RSVP with Joy</span>
+    </a>
+
+    <!-- Bottom Gujarati footer line -->
+    <div class="hero_001__footer-guj">
+      <span>પ્રેમ · આશીર્વાદ · ઉત્સવ</span>
+    </div>
+
+  </div>
+
+</section>
+</body>
+</html>

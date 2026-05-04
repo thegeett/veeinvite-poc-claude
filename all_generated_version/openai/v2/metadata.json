@@ -1,0 +1,13 @@
+{
+  "id": "openai/v2",
+  "label": "Initial generation",
+  "hero": {
+    "sectionId": "hero_001",
+    "sectionName": "Royal Palace Christian Gujarati Wedding Hero",
+    "html": "<section class=\"ww-section hero_001\"><div class=\"hero_001-content\"><h1 class=\"hero_001-title\">Kavya & Mihir</h1><p class=\"hero_001-date\">March 22, 2026</p><p class=\"hero_001-venue\">Akshar Grand Palace, Somerset, New Jersey</p><div class=\"hero_001-message\">With blessings of Shri Ganesh and our families, we invite you to celebrate a joyful Gujarati wedding filled with mehendi, garba, baraat, sacred pheras, dinner, music, and love.</div></div></section>",
+    "css": ".hero_001 { background: linear-gradient(135deg, rgba(255, 223, 186, 0.8), rgba(255, 237, 211, 0.8)), url(''), center/cover no-repeat; height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; color: #4b2e83; position: relative; padding: 20px; } .hero_001-content { max-width: 800px; backdrop-filter: blur(10px); background-color: rgba(255, 255, 255, 0.7); padding: 40px; border-radius: 15px; } .hero_001-title { font-family: 'Rozha One', serif; font-size: 3rem; margin-bottom: 20px; } .hero_001-date { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom: 10px; } .hero_001-venue { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom: 30px; } .hero_001-message { font-family: 'Noto Serif Gujarati', serif; font-size: 1.2rem; line-height: 1.8; } @media (max-width: 900px) { .hero_001-title { font-size: 2.5rem; } .hero_001-content { padding: 30px; } } @media (max-width: 640px) { .hero_001-title { font-size: 2rem; } .hero_001-date, .hero_001-venue { font-size: 1.2rem; } .hero_001-message { font-size: 1rem; } .hero_001-content { padding: 20px; } }",
+    "designNotes": "Created a romantic, royal palace theme using an elegant gradient background. Used a blend of English and Gujarati for cultural resonance. Incorporated a glass panel effect to make the text content stand out while maintaining a premium, modern vibe suited to a Gujarati Christian wedding."
+  },
+  "provider": "openai",
+  "createdAt": "2026-05-03T02:25:15.005Z"
+}

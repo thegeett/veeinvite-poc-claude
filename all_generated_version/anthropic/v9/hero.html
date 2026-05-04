@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Noto+Serif+Gujarati:wght@400;600;700&family=Rozha+One&family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; min-height: 100%; }
+    body { overflow-x: hidden; }
+    .ww-section { width: 100%; position: relative; isolation: isolate; }
+    
+/* ============================================================
+   HERO_001 — Celestial Night · Kavya & Mihir
+   ============================================================ */
+
+/* -- Base shell -- */
+.hero_001 {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+  overflow: hidden;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, #1a0a3c 0%, #0d0620 40%, #04010f 100%);
+  font-family: 'Manrope', sans-serif;
+  color: #f5e9c8;
+  box-sizing: border-box;
+}
+
+/* -- Starfield layers -- */
+.hero_001__stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero_001__star-layer {
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat;
+}
+.hero_001__star-layer--sm {
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.85) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px);
+  background-size: 120px 120px, 200px 200px;
+  background-position: 0 0, 60px 60px;
+  opacity: 0.55;
+  animation: hero_001_twinkle 6s ease-in-out infinite alternate;
+}
+.hero_001__star-layer--md {
+  background-image:
+    radial-gradient(circle, rgba(255,230,160,0.7) 1.5px, transparent 1.5px);
+  background-size: 180px 180px;
+  background-position: 30px 40px;
+  opacity: 0.35;
+  animation: hero_001_twinkle 9s ease-in-out infinite alternate-reverse;
+}
+.hero_001__star-layer--lg {
+  background-image:
+    radial-gradient(circle, rgba(255,220,120,0.5) 2px, transparent 2px);
+  background-size: 300px 300px;
+  background-position: 90px 20px;
+  opacity: 0.25;
+  animation: hero_001_twinkle 12s ease-in-out infinite alternate;
+}
+@keyframes hero_001_twinkle {
+  0%   { opacity: 0.2; }
+  50%  { opacity: 0.6; }
+  100% { opacity: 0.25; }
+}
+
+/* -- Glow orbs -- */
+.hero_001__orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(80px);
+}
+.hero_001__orb--left {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(160,60,220,0.28) 0%, transparent 70%);
+  top: -80px;
+  left: -100px;
+  animation: hero_001_orbpulse 8s ease-in-out infinite alternate;
+}
+.hero_001__orb--right {
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(240,130,30,0.22) 0%, transparent 70%);
+  bottom: 40px;
+  right: -80px;
+  animation: hero_001_orbpulse 11s ease-in-out infinite alternate-reverse;
+}
+.hero_001__orb--top {
+  width: 600px;
+  height: 300px;
+  background: radial-gradient(ellipse, rgba(100,40,200,0.18) 0%, transparent 70%);
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@keyframes hero_001_orbpulse {
+  0%   { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.15); opacity: 1; }
+}
+
+/* -- Floating petals -- */
+.hero_001__petals {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+.hero_001__petal {
+  position: absolute;
+  width: 10px;
+  height: 14px;
+  border-radius: 50% 50% 50% 0 / 60% 60% 40% 40%;
+  background: linear-gradient(135deg, #FFB347, #FF8C00);
+  opacity: 0;
+  animation: hero_001_floatpetal 12s ease-in-out infinite;
+}
+.hero_001__petal--1 { left: 8%;  top: 20%; animation-delay: 0s;   animation-duration: 14s; transform: rotate(20deg); }
+.hero_001__petal--2 { left: 18%; top: 70%; animation-delay: 2s;   animation-duration: 11s; transform: rotate(-30deg); }
+.hero_001__petal--3 { left: 82%; top: 15%; animation-delay: 4s;   animation-duration: 16s; transform: rotate(50deg); }
+.hero_001__petal--4 { left: 90%; top: 60%; animation-delay: 1s;   animation-duration: 13s; transform: rotate(-15deg); }
+.hero_001__petal--5 { left: 50%; top: 80%; animation-delay: 5s;   animation-duration: 10s; transform: rotate(35deg); }
+.hero_001__petal--6 { left: 65%; top: 30%; animation-delay: 3s;   animation-duration: 15s; transform: rotate(-45deg); }
+@keyframes hero_001_floatpetal {
+  0%   { opacity: 0; transform: translateY(0px) rotate(0deg); }
+  15%  { opacity: 0.7; }
+  80%  { opacity: 0.4; }
+  100% { opacity: 0; transform: translateY(-80px) rotate(25deg); }
+}
+
+/* -- Main layout wrap -- */
+.hero_001__wrap {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 80px 1fr 80px;
+  align-items: center;
+  min-height: calc(100vh - 48px);
+  padding: 60px 0 40px;
+  box-sizing: border-box;
+}
+
+/* -- Aside columns -- */
+.hero_001__aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  height: 100%;
+  padding: 20px 0;
+}
+.hero_001__aside-line {
+  flex: 1;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(255,210,100,0.35), transparent);
+  min-height: 40px;
+  max-height: 120px;
+}
+.hero_001__aside-label {
+  font-family: 'Manrope', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,210,100,0.55);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  white-space: nowrap;
+  transform: rotate(180deg);
+}
+.hero_001__aside-label--right {
+  transform: rotate(0deg);
+}
+
+/* -- Mandala -- */
+.hero_001__mandala-wrap {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero_001__mandala {
+  width: 64px;
+  height: 64px;
+  animation: hero_001_spin 60s linear infinite;
+  opacity: 0.75;
+}
+@keyframes hero_001_spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* -- Toran -- */
+.hero_001__toran-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.hero_001__toran {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.hero_001__toran-leaf {
+  display: block;
+  width: 16px;
+  height: 22px;
+  background: linear-gradient(160deg, #4caf50, #1b5e20);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  opacity: 0.75;
+  box-shadow: 0 0 6px rgba(100,200,80,0.3);
+}
+.hero_001__toran-leaf:nth-child(even) {
+  transform: scaleX(-1);
+  background: linear-gradient(160deg, #ff9800, #e65100);
+}
+.hero_001__toran-swag {
+  width: 2px;
+  height: 30px;
+  background: linear-gradient(to bottom, rgba(255,200,50,0.6), transparent);
+  border-radius: 1px;
+}
+
+/* -- Central content -- */
+.hero_001__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 32px;
+  gap: 0;
+}
+
+/* -- Badge -- */
+.hero_001__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,210,100,0.07);
+  border: 1px solid rgba(255,210,100,0.22);
+  border-radius: 100px;
+  padding: 6px 20px;
+  margin-bottom: 22px;
+  backdrop-filter: blur(6px);
+}
+.hero_001__badge-text {
+  font-family: 'Manrope', sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,210,100,0.85);
+}
+.hero_001__badge-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255,180,40,0.8);
+  display: inline-block;
+}
+
+/* -- Eyebrow -- */
+.hero_001__eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: rgba(255,230,160,0.65);
+  letter-spacing: 0.1em;
+  margin: 0 0 8px;
+  font-weight: 400;
+}
+
+/* -- Names -- */
+.hero_001__names-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 0;
+  flex-wrap: nowrap;
+}
+.hero_001__name {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(3.2rem, 8vw, 7rem);
+  line-height: 1;
+  margin: 0;
+  background: linear-gradient(160deg, #FFE49A 0%, #F0B429 45%, #C8860A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+  text-shadow: none;
+  filter: drop-shadow(0 0 28px rgba(240,180,40,0.35));
+}
+.hero_001__name--bride {
+  background: linear-gradient(160deg, #FFDDE6 0%, #FFB3C8 45%, #E05080 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 24px rgba(220,80,120,0.3));
+}
+
+/* -- Ampersand SVG -- */
+.hero_001__ampersand-wrap {
+  flex-shrink: 0;
+  width: 48px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px;
+}
+.hero_001__amp-svg {
+  width: 48px;
+  height: 64px;
+  overflow: visible;
+}
+
+/* -- Divider -- */
+.hero_001__divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 18px 0 16px;
+  width: 100%;
+  max-width: 420px;
+}
+.hero_001__divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255,210,100,0.45), transparent);
+}
+.hero_001__diya {
+  display: flex;
+  align-items: center;
+  animation: hero_001_diyaglow 2.5s ease-in-out infinite alternate;
+}
+@keyframes hero_001_diyaglow {
+  0%   { filter: drop-shadow(0 0 4px rgba(255,180,40,0.4)); }
+  100% { filter: drop-shadow(0 0 12px rgba(255,180,40,0.9)); }
+}
+
+/* -- Hero message -- */
+.hero_001__message {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.8;
+  color: rgba(245,233,200,0.78);
+  max-width: 560px;
+  margin: 0 0 28px;
+  letter-spacing: 0.01em;
+}
+
+/* -- Detail pills row -- */
+.hero_001__details-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,210,100,0.14);
+  border-radius: 60px;
+  padding: 10px 24px;
+  backdrop-filter: blur(10px);
+}
+.hero_001__detail-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 2px 14px;
+}
+.hero_001__detail-icon {
+  font-size: 8px;
+  color: rgba(255,200,60,0.7);
+}
+.hero_001__detail-text {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245,233,200,0.75);
+  white-space: nowrap;
+}
+.hero_001__detail-sep {
+  width: 1px;
+  height: 18px;
+  background: rgba(255,210,100,0.22);
+}
+
+/* -- CTA button -- */
+.hero_001__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(240,140,30,0.18) 0%, rgba(160,60,220,0.18) 100%);
+  border: 1px solid rgba(255,210,100,0.45);
+  border-radius: 4px;
+  padding: 15px 38px;
+  text-decoration: none;
+  color: #FFE49A;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.35s ease, box-shadow 0.35s ease, transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+.hero_001__cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,180,40,0.12), rgba(200,80,200,0.12));
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.hero_001__cta:hover::before {
+  opacity: 1;
+}
+.hero_001__cta:hover {
+  box-shadow: 0 0 30px rgba(240,150,30,0.35), 0 0 60px rgba(160,60,220,0.2);
+  transform: translateY(-2px);
+}
+.hero_001__cta-text {
+  position: relative;
+  z-index: 1;
+}
+.hero_001__cta-arrow {
+  font-size: 16px;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.25s ease;
+}
+.hero_001__cta:hover .hero_001__cta-arrow {
+  transform: translateX(4px);
+}
+
+/* -- Footer band -- */
+.hero_001__footer-band {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid rgba(255,210,100,0.12);
+  background: rgba(255,210,100,0.03);
+  overflow: hidden;
+}
+.hero_001__footer-text {
+  font-family: 'Manrope', sans-serif;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255,210,100,0.42);
+  white-space: nowrap;
+  animation: hero_001_marquee 22s linear infinite;
+  display: inline-block;
+  padding-left: 100%;
+}
+@keyframes hero_001_marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-200%); }
+}
+
+/* ============================================================
+   RESPONSIVE — 900px
+   ============================================================ */
+@media (max-width: 900px) {
+  .hero_001__wrap {
+    grid-template-columns: 56px 1fr 56px;
+    padding: 48px 0 36px;
+  }
+  .hero_001__content {
+    padding: 0 20px;
+  }
+  .hero_001__name {
+    font-size: clamp(2.8rem, 10vw, 5rem);
+  }
+  .hero_001__ampersand-wrap {
+    width: 38px;
+    height: 52px;
+  }
+  .hero_001__amp-svg {
+    width: 38px;
+    height: 52px;
+  }
+  .hero_001__mandala-wrap {
+    width: 52px;
+    height: 52px;
+  }
+  .hero_001__mandala {
+    width: 52px;
+    height: 52px;
+  }
+  .hero_001__details-row {
+    padding: 8px 16px;
+    gap: 0;
+  }
+  .hero_001__detail-pill {
+    padding: 2px 10px;
+  }
+  .hero_001__detail-text {
+    font-size: 10px;
+  }
+  .hero_001__orb--left {
+    width: 280px;
+    height: 280px;
+  }
+  .hero_001__orb--right {
+    width: 240px;
+    height: 240px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — 640px
+   ============================================================ */
+@media (max-width: 640px) {
+  .hero_001__wrap {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    padding: 56px 0 36px;
+    min-height: auto;
+  }
+  .hero_001__aside {
+    display: none;
+  }
+  .hero_001__content {
+    padding: 0 20px;
+    gap: 0;
+  }
+  .hero_001__badge {
+    margin-bottom: 16px;
+    padding: 5px 16px;
+  }
+  .hero_001__badge-text {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+  }
+  .hero_001__eyebrow {
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+  }
+  .hero_001__names-wrap {
+    gap: 6px;
+    flex-wrap: nowrap;
+  }
+  .hero_001__name {
+    font-size: clamp(2.4rem, 14vw, 3.8rem);
+  }
+  .hero_001__ampersand-wrap {
+    width: 30px;
+    height: 42px;
+  }
+  .hero_001__amp-svg {
+    width: 30px;
+    height: 42px;
+  }
+  .hero_001__message {
+    font-size: 0.98rem;
+    line-height: 1.75;
+    margin-bottom: 22px;
+  }
+  .hero_001__details-row {
+    flex-direction: column;
+    border-radius: 16px;
+    padding: 12px 20px;
+    gap: 4px;
+    align-items: flex-start;
+  }
+  .hero_001__detail-sep {
+    display: none;
+  }
+  .hero_001__detail-pill {
+    padding: 3px 0;
+  }
+  .hero_001__detail-text {
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+  }
+  .hero_001__cta {
+    padding: 13px 28px;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+  }
+  .hero_001__orb--left {
+    width: 200px;
+    height: 200px;
+    top: -40px;
+    left: -60px;
+  }
+  .hero_001__orb--right {
+    width: 180px;
+    height: 180px;
+    bottom: 20px;
+    right: -40px;
+  }
+  .hero_001__footer-band {
+    height: 40px;
+  }
+  .hero_001__footer-text {
+    font-size: 8.5px;
+    letter-spacing: 0.28em;
+  }
+  .hero_001__divider {
+    max-width: 280px;
+    margin: 14px 0 12px;
+  }
+}
+
+  </style>
+</head>
+<body>
+<section class="ww-section hero_001">
+
+  <!-- Starfield layer -->
+  <div class="hero_001__stars" aria-hidden="true">
+    <div class="hero_001__star-layer hero_001__star-layer--sm"></div>
+    <div class="hero_001__star-layer hero_001__star-layer--md"></div>
+    <div class="hero_001__star-layer hero_001__star-layer--lg"></div>
+  </div>
+
+  <!-- Decorative radial glow orbs -->
+  <div class="hero_001__orb hero_001__orb--left" aria-hidden="true"></div>
+  <div class="hero_001__orb hero_001__orb--right" aria-hidden="true"></div>
+  <div class="hero_001__orb hero_001__orb--top" aria-hidden="true"></div>
+
+  <!-- Floating marigold petals (CSS shapes) -->
+  <div class="hero_001__petals" aria-hidden="true">
+    <span class="hero_001__petal hero_001__petal--1"></span>
+    <span class="hero_001__petal hero_001__petal--2"></span>
+    <span class="hero_001__petal hero_001__petal--3"></span>
+    <span class="hero_001__petal hero_001__petal--4"></span>
+    <span class="hero_001__petal hero_001__petal--5"></span>
+    <span class="hero_001__petal hero_001__petal--6"></span>
+  </div>
+
+  <!-- Main layout grid -->
+  <div class="hero_001__wrap">
+
+    <!-- Left decorative column -->
+    <aside class="hero_001__aside" aria-hidden="true">
+      <div class="hero_001__aside-line"></div>
+      <div class="hero_001__mandala-wrap">
+        <!-- SVG Mandala -->
+        <svg class="hero_001__mandala" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="100" cy="100" r="96" fill="none" stroke="rgba(255,210,100,0.18)" stroke-width="1"/>
+          <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,210,100,0.22)" stroke-width="0.8"/>
+          <circle cx="100" cy="100" r="60" fill="none" stroke="rgba(255,210,100,0.28)" stroke-width="0.8"/>
+          <circle cx="100" cy="100" r="42" fill="none" stroke="rgba(255,210,100,0.35)" stroke-width="1"/>
+          <circle cx="100" cy="100" r="24" fill="none" stroke="rgba(255,210,100,0.5)" stroke-width="1"/>
+          <circle cx="100" cy="100" r="8" fill="rgba(255,210,100,0.55)"/>
+          <!-- 8 petals outer -->
+          <g stroke="rgba(255,210,100,0.3)" stroke-width="0.8" fill="none">
+            <ellipse cx="100" cy="62" rx="6" ry="16" transform="rotate(0 100 100)"/>
+            <ellipse cx="100" cy="62" rx="6" ry="16" transform="rotate(45 100 100)"/>
+            <ellipse cx="100" cy="62" rx="6" ry="16" transform="rotate(90 100 100)"/>
+            <ellipse cx="100" cy="62" rx="6" ry="16" transform="rotate(135 100 100)"/>
+            <ellipse cx="100" cy="62" rx="6" ry="16" transform="rotate(180 100 100)"/>
+            <ellipse cx="100" cy="62" rx="6" ry="16" transform="rotate(225 100 100)"/>
+            <ellipse cx="100" cy="62" rx="6" ry="16" transform="rotate(270 100 100)"/>
+            <ellipse cx="100" cy="62" rx="6" ry="16" transform="rotate(315 100 100)"/>
+          </g>
+          <!-- 8 inner petals -->
+          <g stroke="rgba(255,180,60,0.4)" stroke-width="0.7" fill="none">
+            <ellipse cx="100" cy="76" rx="4" ry="10" transform="rotate(0 100 100)"/>
+            <ellipse cx="100" cy="76" rx="4" ry="10" transform="rotate(45 100 100)"/>
+            <ellipse cx="100" cy="76" rx="4" ry="10" transform="rotate(90 100 100)"/>
+            <ellipse cx="100" cy="76" rx="4" ry="10" transform="rotate(135 100 100)"/>
+            <ellipse cx="100" cy="76" rx="4" ry="10" transform="rotate(180 100 100)"/>
+            <ellipse cx="100" cy="76" rx="4" ry="10" transform="rotate(225 100 100)"/>
+            <ellipse cx="100" cy="76" rx="4" ry="10" transform="rotate(270 100 100)"/>
+            <ellipse cx="100" cy="76" rx="4" ry="10" transform="rotate(315 100 100)"/>
+          </g>
+          <!-- diamond accents -->
+          <g fill="rgba(255,210,100,0.45)">
+            <polygon points="100,22 104,30 100,38 96,30"/>
+            <polygon points="100,162 104,170 100,178 96,170"/>
+            <polygon points="22,100 30,104 38,100 30,96"/>
+            <polygon points="162,100 170,104 178,100 170,96"/>
+          </g>
+        </svg>
+      </div>
+      <div class="hero_001__aside-line"></div>
+      <div class="hero_001__aside-label">22 · 03 · 2026</div>
+    </aside>
+
+    <!-- Central content -->
+    <div class="hero_001__content">
+
+      <!-- Pre-title badge -->
+      <div class="hero_001__badge">
+        <span class="hero_001__badge-dot"></span>
+        <span class="hero_001__badge-text">A Wedding Celebration</span>
+        <span class="hero_001__badge-dot"></span>
+      </div>
+
+      <!-- Eyebrow script -->
+      <p class="hero_001__eyebrow">Together Forever</p>
+
+      <!-- Names -->
+      <div class="hero_001__names-wrap">
+        <h1 class="hero_001__name hero_001__name--bride">Kavya</h1>
+        <div class="hero_001__ampersand-wrap" aria-hidden="true">
+          <svg class="hero_001__amp-svg" viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
+            <text x="50%" y="72" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="72" fill="url(#goldGrad)" font-style="italic">&amp;</text>
+            <defs>
+              <linearGradient id="goldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#FFE49A;stop-opacity:1"/>
+                <stop offset="50%" style="stop-color:#F0B429;stop-opacity:1"/>
+                <stop offset="100%" style="stop-color:#C8860A;stop-opacity:1"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <h1 class="hero_001__name hero_001__name--groom">Mihir</h1>
+      </div>
+
+      <!-- Divider with diya icons -->
+      <div class="hero_001__divider" aria-hidden="true">
+        <span class="hero_001__divider-line"></span>
+        <span class="hero_001__diya">
+          <!-- Diya SVG -->
+          <svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <ellipse cx="14" cy="20" rx="10" ry="5" fill="rgba(240,140,30,0.85)"/>
+            <ellipse cx="14" cy="18" rx="7" ry="3.5" fill="rgba(255,180,60,0.9)"/>
+            <path d="M14 4 Q16 10 14 14 Q12 10 14 4Z" fill="#FFD700"/>
+            <path d="M14 6 Q15.5 10 14 13 Q12.5 10 14 6Z" fill="#FFF0A0"/>
+            <ellipse cx="14" cy="14" rx="2" ry="2.5" fill="rgba(255,120,0,0.9)"/>
+          </svg>
+        </span>
+        <span class="hero_001__divider-line"></span>
+      </div>
+
+      <!-- Hero message -->
+      <p class="hero_001__message">
+        With blessings of Shri Ganesh and our families, we invite you to celebrate a joyful Gujarati wedding filled with mehendi, garba, baraat, sacred pheras, dinner, music, and love.
+      </p>
+
+      <!-- Event details pill row -->
+      <div class="hero_001__details-row">
+        <div class="hero_001__detail-pill">
+          <span class="hero_001__detail-icon">✦</span>
+          <span class="hero_001__detail-text">March 22, 2026</span>
+        </div>
+        <div class="hero_001__detail-sep" aria-hidden="true"></div>
+        <div class="hero_001__detail-pill">
+          <span class="hero_001__detail-icon">✦</span>
+          <span class="hero_001__detail-text">Akshar Grand Palace</span>
+        </div>
+        <div class="hero_001__detail-sep" aria-hidden="true"></div>
+        <div class="hero_001__detail-pill">
+          <span class="hero_001__detail-icon">✦</span>
+          <span class="hero_001__detail-text">Somerset, New Jersey</span>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <a class="hero_001__cta" href="#rsvp" role="button">
+        <span class="hero_001__cta-text">RSVP &amp; Celebrate With Us</span>
+        <span class="hero_001__cta-arrow">→</span>
+      </a>
+
+    </div>
+
+    <!-- Right decorative column -->
+    <aside class="hero_001__aside hero_001__aside--right" aria-hidden="true">
+      <div class="hero_001__aside-line"></div>
+      <div class="hero_001__toran-wrap">
+        <!-- Toran / hanging garland CSS shapes -->
+        <div class="hero_001__toran">
+          <span class="hero_001__toran-leaf"></span>
+          <span class="hero_001__toran-leaf"></span>
+          <span class="hero_001__toran-leaf"></span>
+          <span class="hero_001__toran-leaf"></span>
+          <span class="hero_001__toran-leaf"></span>
+        </div>
+        <div class="hero_001__toran-swag"></div>
+      </div>
+      <div class="hero_001__aside-line"></div>
+      <div class="hero_001__aside-label hero_001__aside-label--right">Somerset · NJ</div>
+    </aside>
+
+  </div>
+
+  <!-- Bottom decorative band -->
+  <div class="hero_001__footer-band" aria-hidden="true">
+    <span class="hero_001__footer-text">Mehendi · Garba · Baraat · Pheras · Dinner · Music · Love</span>
+  </div>
+
+</section>
+</body>
+</html>

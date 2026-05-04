@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Noto+Serif+Gujarati:wght@400;600;700&family=Rozha+One&family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; min-height: 100%; }
+    body { overflow-x: hidden; }
+    .ww-section { width: 100%; position: relative; isolation: isolate; }
+    .hero_001 {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  align-items: stretch;
+  color: #392015;
+  background: radial-gradient(circle at 16% 18%, rgba(255, 218, 151, 0.55) 0, rgba(255, 218, 151, 0) 28%), radial-gradient(circle at 86% 20%, rgba(172, 55, 47, 0.18) 0, rgba(172, 55, 47, 0) 32%), linear-gradient(135deg, #fff9ee 0%, #f7ead6 45%, #fff6e7 100%);
+  font-family: Manrope, sans-serif;
+}
+.hero_001::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  opacity: 0.42;
+  background-image: linear-gradient(rgba(123, 75, 39, 0.055) 1px, transparent 1px), linear-gradient(90deg, rgba(123, 75, 39, 0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(circle at 50% 42%, black 0%, transparent 72%);
+}
+.hero_001::after {
+  content: "";
+  position: absolute;
+  width: 62vw;
+  height: 62vw;
+  right: -25vw;
+  top: -20vw;
+  z-index: -2;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(180, 70, 44, 0.08) 0 31%, transparent 32% 100%), conic-gradient(from 10deg, rgba(162, 51, 45, 0.16), rgba(236, 177, 74, 0.22), rgba(162, 51, 45, 0.12), rgba(236, 177, 74, 0.22), rgba(162, 51, 45, 0.16));
+  filter: blur(0.2px);
+  opacity: 0.75;
+}
+.hero_001 .hero_001__wrap {
+  position: relative;
+  width: min(1440px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(420px, 0.78fr);
+  gap: clamp(28px, 5vw, 84px);
+  align-items: center;
+  padding: clamp(28px, 5.2vw, 76px) clamp(20px, 5.5vw, 88px);
+}
+.hero_001 .hero_001__toran {
+  position: absolute;
+  top: 0;
+  left: clamp(18px, 5vw, 76px);
+  right: clamp(18px, 5vw, 76px);
+  height: 76px;
+  display: flex;
+  justify-content: center;
+  gap: clamp(11px, 1.7vw, 22px);
+  pointer-events: none;
+  opacity: 0.9;
+}
+.hero_001 .hero_001__leaf {
+  width: 14px;
+  height: 45px;
+  border-radius: 100% 0 100% 0;
+  background: linear-gradient(145deg, #2f6f4c, #8b9e4b 60%, #e2b454);
+  transform-origin: top center;
+  transform: rotate(var(--tilt));
+  box-shadow: 0 7px 18px rgba(65, 74, 39, 0.13);
+}
+.hero_001 .hero_001__leaf::before {
+  content: "";
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  width: 1px;
+  height: 18px;
+  background: rgba(112, 76, 38, 0.28);
+}
+.hero_001 .hero_001__content {
+  position: relative;
+  max-width: 760px;
+  padding-top: 34px;
+}
+.hero_001 .hero_001__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 24px;
+  color: #8d3b2e;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.hero_001 .hero_001__eyebrow::before {
+  content: "";
+  width: 46px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #b98338);
+}
+.hero_001 .hero_001__title {
+  margin: 0;
+  max-width: 760px;
+  font-family: "Playfair Display", "Cormorant Garamond", serif;
+  font-size: clamp(72px, 10vw, 154px);
+  line-height: 0.78;
+  letter-spacing: -0.065em;
+  font-weight: 500;
+  color: #331a12;
+}
+.hero_001 .hero_001__amp {
+  display: inline-block;
+  margin: 0 0.06em;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-weight: 400;
+  color: #a74333;
+  text-shadow: 0 13px 34px rgba(167, 67, 51, 0.12);
+}
+.hero_001 .hero_001__blessing {
+  max-width: 660px;
+  margin: clamp(24px, 3vw, 36px) 0 0;
+  color: rgba(57, 32, 21, 0.78);
+  font-size: clamp(16px, 1.4vw, 20px);
+  line-height: 1.75;
+  letter-spacing: -0.01em;
+}
+.hero_001 .hero_001__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: clamp(28px, 3.6vw, 48px);
+}
+.hero_001 .hero_001__date-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 56px;
+  padding: 15px 22px;
+  border: 1px solid rgba(154, 86, 47, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 253, 247, 0.52);
+  box-shadow: 0 20px 54px rgba(92, 44, 26, 0.08);
+  backdrop-filter: blur(16px);
+  color: #5b2c1e;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+.hero_001 .hero_001__date-pill::before {
+  content: "✦";
+  color: #bc7a25;
+  font-size: 16px;
+  line-height: 1;
+}
+.hero_001 .hero_001__venue {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-left: 4px;
+  color: rgba(57, 32, 21, 0.78);
+  font-size: 14px;
+  line-height: 1.35;
+}
+.hero_001 .hero_001__venue strong {
+  color: #3b2117;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+}
+.hero_001 .hero_001__art {
+  position: relative;
+  min-height: 650px;
+  display: grid;
+  place-items: center;
+}
+.hero_001 .hero_001__halo {
+  position: absolute;
+  width: min(520px, 42vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 244, 218, 0.98) 0 31%, rgba(255, 244, 218, 0) 32%), repeating-conic-gradient(from 0deg, rgba(165, 55, 48, 0.22) 0 3deg, rgba(239, 188, 83, 0.28) 3deg 6deg, transparent 6deg 10deg), radial-gradient(circle, transparent 0 61%, rgba(137, 67, 38, 0.18) 62% 63%, transparent 64% 100%);
+  box-shadow: inset 0 0 0 1px rgba(161, 90, 45, 0.14), 0 34px 100px rgba(127, 62, 35, 0.13);
+  opacity: 0.96;
+}
+.hero_001 .hero_001__halo::before {
+  content: "";
+  position: absolute;
+  inset: 11%;
+  border-radius: 50%;
+  border: 1px solid rgba(179, 111, 46, 0.22);
+  background: repeating-conic-gradient(from 22deg, transparent 0 13deg, rgba(177, 72, 50, 0.08) 13deg 14deg);
+}
+.hero_001 .hero_001__panel {
+  position: relative;
+  width: min(430px, 100%);
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 34px 34px 32px;
+  border: 1px solid rgba(151, 82, 40, 0.2);
+  border-radius: 34px;
+  background: linear-gradient(160deg, rgba(255, 253, 246, 0.84), rgba(255, 246, 227, 0.58));
+  box-shadow: 0 32px 90px rgba(75, 36, 20, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(22px);
+}
+.hero_001 .hero_001__panel::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border-radius: 26px;
+  border: 1px solid rgba(174, 109, 45, 0.17);
+  pointer-events: none;
+}
+.hero_001 .hero_001__ganesh {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(164, 65, 47, 0.08);
+  color: #8b372c;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.hero_001 .hero_001__ganesh::before {
+  content: "ॐ";
+  font-family: "Noto Serif Gujarati", serif;
+  color: #b57924;
+  font-size: 16px;
+  line-height: 1;
+}
+.hero_001 .hero_001__monogram {
+  align-self: center;
+  position: relative;
+  width: 232px;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  margin-top: 26px;
+  border-radius: 50%;
+  color: #3a1d13;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 78px;
+  font-weight: 500;
+  letter-spacing: -0.08em;
+  background: radial-gradient(circle, rgba(255, 249, 237, 0.98) 0 44%, rgba(249, 224, 178, 0.36) 45% 64%, transparent 65%), conic-gradient(from 45deg, rgba(164, 65, 47, 0.18), rgba(230, 176, 75, 0.32), rgba(164, 65, 47, 0.18), rgba(230, 176, 75, 0.32), rgba(164, 65, 47, 0.18));
+  box-shadow: inset 0 0 0 1px rgba(155, 83, 42, 0.16), 0 22px 44px rgba(91, 47, 25, 0.11);
+}
+.hero_001 .hero_001__monogram::before {
+  content: "";
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  background: repeating-conic-gradient(from 0deg, rgba(166, 62, 49, 0.22) 0 2deg, transparent 2deg 9deg);
+  mask-image: radial-gradient(circle, transparent 0 75%, black 76% 100%);
+}
+.hero_001 .hero_001__monogram span {
+  position: relative;
+  z-index: 1;
+}
+.hero_001 .hero_001__monogram em {
+  position: relative;
+  z-index: 1;
+  margin: 0 8px;
+  color: #a74333;
+  font-style: italic;
+  font-size: 64px;
+  letter-spacing: -0.02em;
+}
+.hero_001 .hero_001__details {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 18px;
+  margin-top: 44px;
+}
+.hero_001 .hero_001__detail {
+  display: flex;
+  justify-content: space-between;
+  gap: 22px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(139, 77, 42, 0.16);
+}
+.hero_001 .hero_001__label {
+  color: rgba(91, 44, 30, 0.56);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+.hero_001 .hero_001__value {
+  max-width: 210px;
+  text-align: right;
+  color: #3b2117;
+  font-family: "Playfair Display", serif;
+  font-size: 22px;
+  line-height: 1.08;
+  font-weight: 500;
+}
+.hero_001 .hero_001__diya {
+  position: absolute;
+  right: 7%;
+  bottom: 9%;
+  width: 86px;
+  height: 62px;
+  border-radius: 12px 12px 50px 50px;
+  background: radial-gradient(circle at 50% 0, rgba(255, 241, 184, 0.9) 0 8%, transparent 9%), linear-gradient(180deg, #c96a34, #8d3927);
+  box-shadow: 0 18px 34px rgba(120, 48, 27, 0.18);
+  opacity: 0.9;
+}
+.hero_001 .hero_001__diya::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -48px;
+  width: 24px;
+  height: 52px;
+  transform: translateX(-50%);
+  border-radius: 70% 30% 60% 40%;
+  background: radial-gradient(circle at 50% 68%, #fff8c9 0 18%, #f2b947 19% 50%, #b64732 51% 100%);
+  filter: drop-shadow(0 0 18px rgba(238, 176, 67, 0.55));
+}
+.hero_001 .hero_001__diya::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 13px;
+  height: 1px;
+  background: rgba(255, 224, 144, 0.62);
+}
+.hero_001 .hero_001__flower {
+  position: absolute;
+  width: 18px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, #8b372c 0 18%, #e6a73e 20% 100%);
+  box-shadow: 16px 0 0 #e6a73e, -16px 0 0 #e6a73e, 0 16px 0 #e6a73e, 0 -16px 0 #e6a73e;
+  opacity: 0.82;
+}
+.hero_001 .hero_001__flower--one {
+  left: 3%;
+  bottom: 20%;
+}
+.hero_001 .hero_001__flower--two {
+  right: 13%;
+  top: 17%;
+  transform: scale(0.72);
+}
+@media (max-width: 900px) {
+  .hero_001 {
+    min-height: auto;
+  }
+  .hero_001::after {
+    width: 92vw;
+    height: 92vw;
+    right: -42vw;
+    top: -18vw;
+  }
+  .hero_001 .hero_001__wrap {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding-top: 92px;
+    padding-bottom: 52px;
+  }
+  .hero_001 .hero_001__content {
+    max-width: 780px;
+    padding-top: 0;
+  }
+  .hero_001 .hero_001__title {
+    font-size: clamp(72px, 16vw, 132px);
+  }
+  .hero_001 .hero_001__art {
+    min-height: 560px;
+  }
+  .hero_001 .hero_001__halo {
+    width: min(560px, 78vw);
+  }
+  .hero_001 .hero_001__panel {
+    width: min(500px, 100%);
+    min-height: 500px;
+  }
+  .hero_001 .hero_001__flower--one {
+    left: 9%;
+  }
+}
+@media (max-width: 640px) {
+  .hero_001 .hero_001__wrap {
+    padding: 82px 18px 34px;
+    gap: 26px;
+  }
+  .hero_001 .hero_001__toran {
+    height: 58px;
+    gap: 10px;
+    overflow: hidden;
+  }
+  .hero_001 .hero_001__leaf {
+    width: 11px;
+    height: 34px;
+  }
+  .hero_001 .hero_001__eyebrow {
+    margin-bottom: 18px;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+  }
+  .hero_001 .hero_001__eyebrow::before {
+    width: 30px;
+  }
+  .hero_001 .hero_001__title {
+    font-size: clamp(58px, 21vw, 92px);
+    line-height: 0.82;
+  }
+  .hero_001 .hero_001__blessing {
+    margin-top: 22px;
+    font-size: 15px;
+    line-height: 1.68;
+  }
+  .hero_001 .hero_001__actions {
+    align-items: stretch;
+    flex-direction: column;
+    margin-top: 26px;
+  }
+  .hero_001 .hero_001__date-pill {
+    justify-content: center;
+    min-height: 52px;
+    padding: 14px 18px;
+    font-size: 12px;
+  }
+  .hero_001 .hero_001__venue {
+    padding-left: 0;
+    font-size: 13px;
+  }
+  .hero_001 .hero_001__art {
+    min-height: 480px;
+  }
+  .hero_001 .hero_001__panel {
+    min-height: 444px;
+    padding: 24px 20px 22px;
+    border-radius: 28px;
+  }
+  .hero_001 .hero_001__panel::before {
+    inset: 9px;
+    border-radius: 22px;
+  }
+  .hero_001 .hero_001__halo {
+    width: 112vw;
+  }
+  .hero_001 .hero_001__ganesh {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    padding: 9px 12px;
+  }
+  .hero_001 .hero_001__monogram {
+    width: 184px;
+    font-size: 62px;
+    margin-top: 18px;
+  }
+  .hero_001 .hero_001__monogram em {
+    font-size: 50px;
+  }
+  .hero_001 .hero_001__details {
+    gap: 14px;
+    margin-top: 32px;
+  }
+  .hero_001 .hero_001__detail {
+    gap: 12px;
+    padding-top: 13px;
+  }
+  .hero_001 .hero_001__label {
+    font-size: 9px;
+    letter-spacing: 0.16em;
+  }
+  .hero_001 .hero_001__value {
+    max-width: 170px;
+    font-size: 18px;
+  }
+  .hero_001 .hero_001__diya {
+    right: 4%;
+    bottom: 5%;
+    transform: scale(0.72);
+  }
+  .hero_001 .hero_001__flower {
+    transform: scale(0.62);
+  }
+  .hero_001 .hero_001__flower--two {
+    right: 7%;
+    top: 12%;
+    transform: scale(0.52);
+  }
+}
+  </style>
+</head>
+<body>
+<section class="ww-section hero_001"><div class="hero_001__wrap"><div class="hero_001__toran" aria-hidden="true"><span class="hero_001__leaf" style="--tilt:-10deg"></span><span class="hero_001__leaf" style="--tilt:7deg"></span><span class="hero_001__leaf" style="--tilt:-5deg"></span><span class="hero_001__leaf" style="--tilt:11deg"></span><span class="hero_001__leaf" style="--tilt:-8deg"></span><span class="hero_001__leaf" style="--tilt:6deg"></span><span class="hero_001__leaf" style="--tilt:-12deg"></span><span class="hero_001__leaf" style="--tilt:9deg"></span><span class="hero_001__leaf" style="--tilt:-6deg"></span><span class="hero_001__leaf" style="--tilt:10deg"></span><span class="hero_001__leaf" style="--tilt:-7deg"></span><span class="hero_001__leaf" style="--tilt:5deg"></span></div><div class="hero_001__content"><p class="hero_001__eyebrow">Shri Ganeshaya Namah</p><h1 class="hero_001__title">Kavya <span class="hero_001__amp">&amp;</span> Mihir</h1><p class="hero_001__blessing">With blessings of Shri Ganesh and our families, we invite you to celebrate a joyful Gujarati wedding filled with mehendi, garba, baraat, sacred pheras, dinner, music, and love.</p><div class="hero_001__actions"><div class="hero_001__date-pill">March 22, 2026</div><div class="hero_001__venue"><strong>Akshar Grand Palace</strong><span>Somerset, New Jersey</span></div></div></div><div class="hero_001__art" aria-hidden="true"><div class="hero_001__halo"></div><div class="hero_001__flower hero_001__flower--one"></div><div class="hero_001__flower hero_001__flower--two"></div><div class="hero_001__panel"><div class="hero_001__ganesh">With blessings</div><div class="hero_001__monogram"><span>K</span><em>&amp;</em><span>M</span></div><div class="hero_001__details"><div class="hero_001__detail"><span class="hero_001__label">Wedding</span><span class="hero_001__value">Sacred Pheras</span></div><div class="hero_001__detail"><span class="hero_001__label">Joy</span><span class="hero_001__value">Garba &amp; Baraat</span></div><div class="hero_001__detail"><span class="hero_001__label">Evening</span><span class="hero_001__value">Dinner, Music &amp; Love</span></div></div></div><div class="hero_001__diya"></div></div></div></section>
+</body>
+</html>

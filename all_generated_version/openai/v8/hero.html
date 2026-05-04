@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Noto+Serif+Gujarati:wght@400;600;700&family=Rozha+One&family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; min-height: 100%; }
+    body { overflow-x: hidden; }
+    .ww-section { width: 100%; position: relative; isolation: isolate; }
+    .hero_001 {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  align-items: stretch;
+  color: #351b24;
+  background:
+    radial-gradient(circle at 14% 18%, rgba(255, 196, 143, 0.42) 0 13%, transparent 31%),
+    radial-gradient(circle at 82% 20%, rgba(229, 92, 120, 0.28) 0 12%, transparent 30%),
+    radial-gradient(circle at 70% 88%, rgba(255, 210, 92, 0.34) 0 14%, transparent 34%),
+    linear-gradient(135deg, #fff8ee 0%, #fde8dd 42%, #f7d7c9 100%);
+}
+.hero_001::before {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  z-index: -3;
+  opacity: 0.52;
+  background-image:
+    linear-gradient(30deg, rgba(116, 62, 43, 0.08) 12%, transparent 12.5%, transparent 87%, rgba(116, 62, 43, 0.08) 87.5%, rgba(116, 62, 43, 0.08)),
+    linear-gradient(150deg, rgba(116, 62, 43, 0.08) 12%, transparent 12.5%, transparent 87%, rgba(116, 62, 43, 0.08) 87.5%, rgba(116, 62, 43, 0.08)),
+    linear-gradient(30deg, rgba(116, 62, 43, 0.08) 12%, transparent 12.5%, transparent 87%, rgba(116, 62, 43, 0.08) 87.5%, rgba(116, 62, 43, 0.08)),
+    linear-gradient(150deg, rgba(116, 62, 43, 0.08) 12%, transparent 12.5%, transparent 87%, rgba(116, 62, 43, 0.08) 87.5%, rgba(116, 62, 43, 0.08));
+  background-position: 0 0, 0 0, 42px 74px, 42px 74px;
+  background-size: 84px 148px;
+  transform: rotate(-7deg) scale(1.08);
+}
+.hero_001::after {
+  content: "";
+  position: absolute;
+  width: 46rem;
+  height: 46rem;
+  right: -16rem;
+  top: -18rem;
+  z-index: -2;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.42) 0 22%, rgba(255, 173, 119, 0.25) 23% 45%, transparent 46%);
+  filter: blur(1px);
+}
+.hero_001 .hero_001__stage {
+  position: relative;
+  width: min(1480px, 100%);
+  margin: 0 auto;
+  padding: clamp(24px, 4vw, 64px);
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(430px, 1.08fr);
+  gap: clamp(28px, 5vw, 78px);
+  align-items: center;
+}
+.hero_001 .hero_001__copy {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+  padding: clamp(22px, 3vw, 42px) 0;
+}
+.hero_001 .hero_001__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 24px;
+  font-family: Manrope, sans-serif;
+  font-size: 0.77rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #9a3e48;
+}
+.hero_001 .hero_001__eyebrow::before,
+.hero_001 .hero_001__eyebrow::after {
+  content: "";
+  width: 34px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #b85d50, transparent);
+}
+.hero_001 .hero_001__title {
+  margin: 0;
+  font-family: "Cormorant Garamond", "Playfair Display", serif;
+  font-size: clamp(5rem, 11vw, 11.5rem);
+  line-height: 0.78;
+  letter-spacing: -0.075em;
+  font-weight: 600;
+  color: #401722;
+  text-wrap: balance;
+}
+.hero_001 .hero_001__amp {
+  display: inline-block;
+  margin: 0 0.03em;
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-weight: 500;
+  color: #c14b56;
+  text-shadow: 0 12px 40px rgba(193, 75, 86, 0.25);
+}
+.hero_001 .hero_001__date-line {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: clamp(24px, 3vw, 36px) 0 0;
+  font-family: Manrope, sans-serif;
+  color: #5c2a31;
+}
+.hero_001 .hero_001__date-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 18px;
+  border: 1px solid rgba(121, 49, 54, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.42);
+  box-shadow: 0 16px 40px rgba(107, 47, 43, 0.08);
+  backdrop-filter: blur(18px);
+  font-size: 0.86rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.hero_001 .hero_001__venue {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  font-weight: 600;
+  color: rgba(58, 25, 31, 0.76);
+}
+.hero_001 .hero_001__message {
+  max-width: 600px;
+  margin: 28px 0 0;
+  font-family: Manrope, sans-serif;
+  font-size: clamp(1rem, 1.2vw, 1.16rem);
+  line-height: 1.85;
+  color: rgba(55, 25, 30, 0.78);
+}
+.hero_001 .hero_001__details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 650px;
+  margin: 34px 0 0;
+}
+.hero_001 .hero_001__detail {
+  position: relative;
+  min-height: 96px;
+  padding: 18px 16px;
+  border: 1px solid rgba(113, 51, 43, 0.14);
+  border-radius: 24px;
+  background: rgba(255, 252, 246, 0.46);
+  box-shadow: 0 18px 55px rgba(98, 46, 40, 0.08);
+  backdrop-filter: blur(16px);
+}
+.hero_001 .hero_001__detail span {
+  display: block;
+  margin-bottom: 7px;
+  font-family: Manrope, sans-serif;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(154, 62, 72, 0.75);
+}
+.hero_001 .hero_001__detail strong {
+  display: block;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.42rem;
+  line-height: 1.05;
+  font-weight: 700;
+  color: #3c1820;
+}
+.hero_001 .hero_001__map-wrap {
+  position: relative;
+  min-height: clamp(560px, 74vh, 820px);
+  display: grid;
+  place-items: center;
+}
+.hero_001 .hero_001__map-orbit {
+  position: absolute;
+  inset: 5% 0 4% 6%;
+  border: 1px solid rgba(123, 54, 48, 0.12);
+  border-radius: 48% 52% 45% 55% / 54% 44% 56% 46%;
+  transform: rotate(-10deg);
+  background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0));
+}
+.hero_001 .hero_001__map-orbit::before {
+  content: "";
+  position: absolute;
+  inset: 40px;
+  border: 1px dashed rgba(178, 76, 69, 0.18);
+  border-radius: inherit;
+}
+.hero_001 .hero_001__map {
+  position: relative;
+  width: min(660px, 100%);
+  min-height: 620px;
+  border-radius: 44px;
+  border: 1px solid rgba(104, 44, 42, 0.16);
+  background:
+    radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.9), transparent 25%),
+    radial-gradient(circle at 78% 78%, rgba(255, 202, 112, 0.38), transparent 27%),
+    linear-gradient(145deg, rgba(255, 253, 246, 0.74), rgba(255, 233, 216, 0.34));
+  box-shadow: 0 34px 110px rgba(83, 39, 38, 0.18), inset 0 1px 0 rgba(255,255,255,0.8);
+  backdrop-filter: blur(26px);
+  overflow: hidden;
+}
+.hero_001 .hero_001__map::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background-image:
+    linear-gradient(rgba(126, 61, 51, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(126, 61, 51, 0.06) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(135deg, transparent 0%, black 18%, black 78%, transparent 100%);
+}
+.hero_001 .hero_001__map::after {
+  content: "KAVYA + MIHIR";
+  position: absolute;
+  right: -46px;
+  bottom: 88px;
+  transform: rotate(-90deg);
+  font-family: Manrope, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.32em;
+  color: rgba(86, 36, 37, 0.34);
+}
+.hero_001 .hero_001__route {
+  position: absolute;
+  inset: 64px 58px 82px 58px;
+  border-radius: 40px;
+  pointer-events: none;
+}
+.hero_001 .hero_001__route svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.hero_001 .hero_001__route path {
+  fill: none;
+  stroke: rgba(167, 64, 67, 0.55);
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-dasharray: 1 24;
+  filter: drop-shadow(0 12px 12px rgba(143, 63, 54, 0.16));
+}
+.hero_001 .hero_001__stop {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: 13px;
+  align-items: center;
+  width: 236px;
+  padding: 12px 14px 12px 12px;
+  border: 1px solid rgba(111, 48, 44, 0.14);
+  border-radius: 26px;
+  background: rgba(255, 251, 244, 0.78);
+  box-shadow: 0 20px 60px rgba(101, 44, 40, 0.14);
+  backdrop-filter: blur(18px);
+}
+.hero_001 .hero_001__stop:nth-of-type(1) {
+  left: 52px;
+  top: 68px;
+}
+.hero_001 .hero_001__stop:nth-of-type(2) {
+  right: 48px;
+  top: 190px;
+}
+.hero_001 .hero_001__stop:nth-of-type(3) {
+  left: 72px;
+  top: 322px;
+}
+.hero_001 .hero_001__stop:nth-of-type(4) {
+  right: 42px;
+  bottom: 100px;
+}
+.hero_001 .hero_001__pin {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ffe4a8, #ef6f74 72%, #8d2737);
+  color: #fffaf4;
+  font-family: "Playfair Display", serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  box-shadow: 0 14px 30px rgba(180, 70, 73, 0.24);
+}
+.hero_001 .hero_001__stop span {
+  display: block;
+  font-family: Manrope, sans-serif;
+  font-size: 0.63rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(151, 61, 70, 0.72);
+}
+.hero_001 .hero_001__stop strong {
+  display: block;
+  margin-top: 3px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.42rem;
+  line-height: 0.98;
+  color: #3c1720;
+}
+.hero_001 .hero_001__compass {
+  position: absolute;
+  left: 48px;
+  bottom: 34px;
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  border: 1px solid rgba(98, 41, 41, 0.18);
+  background: rgba(255, 255, 255, 0.42);
+  box-shadow: inset 0 0 0 14px rgba(255, 222, 202, 0.42), 0 18px 45px rgba(90, 43, 37, 0.10);
+  display: grid;
+  place-items: center;
+  font-family: Manrope, sans-serif;
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  color: rgba(69, 26, 32, 0.58);
+}
+.hero_001 .hero_001__compass::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 64px;
+  border-radius: 999px;
+  background: linear-gradient(#b33d4c 0 50%, #f7c870 50% 100%);
+  transform: rotate(38deg);
+  box-shadow: 0 8px 18px rgba(121, 49, 49, 0.17);
+}
+.hero_001 .hero_001__compass span {
+  position: relative;
+  z-index: 1;
+  padding-top: 74px;
+}
+.hero_001 .hero_001__legend {
+  position: absolute;
+  right: 34px;
+  top: 34px;
+  padding: 12px 14px;
+  border-radius: 999px;
+  background: rgba(67, 25, 32, 0.88);
+  color: #fff8ed;
+  font-family: Manrope, sans-serif;
+  font-size: 0.66rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  box-shadow: 0 22px 54px rgba(60, 23, 25, 0.22);
+}
+.hero_001 .hero_001__spark {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #c64855;
+  box-shadow: 0 0 0 9px rgba(198, 72, 85, 0.10), 0 0 35px rgba(198, 72, 85, 0.45);
+}
+.hero_001 .hero_001__spark:nth-child(1) {
+  left: 16%;
+  top: 12%;
+}
+.hero_001 .hero_001__spark:nth-child(2) {
+  right: 13%;
+  top: 42%;
+  background: #e8a94a;
+}
+.hero_001 .hero_001__spark:nth-child(3) {
+  left: 22%;
+  bottom: 17%;
+  background: #8b3445;
+}
+.hero_001 .hero_001__floating-label {
+  position: absolute;
+  right: 3%;
+  bottom: 8%;
+  transform: rotate(-8deg);
+  padding: 14px 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid rgba(107, 45, 45, 0.14);
+  box-shadow: 0 20px 60px rgba(101, 44, 40, 0.14);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.45rem;
+  line-height: 1;
+  color: #6c2632;
+}
+@media (max-width: 900px) {
+  .hero_001 {
+    min-height: auto;
+  }
+  .hero_001 .hero_001__stage {
+    grid-template-columns: 1fr;
+    padding: 34px 22px 44px;
+    gap: 26px;
+  }
+  .hero_001 .hero_001__copy {
+    max-width: 760px;
+    padding: 24px 0 0;
+  }
+  .hero_001 .hero_001__title {
+    font-size: clamp(4.6rem, 17vw, 8.5rem);
+  }
+  .hero_001 .hero_001__message {
+    max-width: 720px;
+  }
+  .hero_001 .hero_001__map-wrap {
+    min-height: 600px;
+  }
+  .hero_001 .hero_001__map {
+    width: min(720px, 100%);
+    min-height: 570px;
+  }
+  .hero_001 .hero_001__map-orbit {
+    inset: 2% 4%;
+  }
+}
+@media (max-width: 640px) {
+  .hero_001 .hero_001__stage {
+    padding: 24px 16px 34px;
+  }
+  .hero_001 .hero_001__eyebrow {
+    gap: 9px;
+    margin-bottom: 18px;
+    font-size: 0.68rem;
+  }
+  .hero_001 .hero_001__eyebrow::before,
+  .hero_001 .hero_001__eyebrow::after {
+    width: 22px;
+  }
+  .hero_001 .hero_001__title {
+    font-size: clamp(3.85rem, 21vw, 5.65rem);
+    letter-spacing: -0.065em;
+  }
+  .hero_001 .hero_001__date-line {
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .hero_001 .hero_001__date-pill {
+    width: 100%;
+    justify-content: center;
+    padding: 11px 14px;
+    font-size: 0.76rem;
+  }
+  .hero_001 .hero_001__venue {
+    font-size: 0.88rem;
+  }
+  .hero_001 .hero_001__message {
+    margin-top: 22px;
+    font-size: 0.96rem;
+    line-height: 1.72;
+  }
+  .hero_001 .hero_001__details {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 24px;
+  }
+  .hero_001 .hero_001__detail {
+    min-height: auto;
+    border-radius: 20px;
+  }
+  .hero_001 .hero_001__map-wrap {
+    min-height: 610px;
+  }
+  .hero_001 .hero_001__map {
+    min-height: 590px;
+    border-radius: 30px;
+  }
+  .hero_001 .hero_001__route {
+    inset: 76px 28px 120px 28px;
+  }
+  .hero_001 .hero_001__route path {
+    stroke-width: 7;
+    stroke-dasharray: 1 20;
+  }
+  .hero_001 .hero_001__stop {
+    width: min(242px, calc(100% - 34px));
+    grid-template-columns: 46px minmax(0, 1fr);
+    gap: 10px;
+    padding: 10px;
+    border-radius: 22px;
+  }
+  .hero_001 .hero_001__pin {
+    width: 46px;
+    height: 46px;
+    border-radius: 15px;
+    font-size: 1.12rem;
+  }
+  .hero_001 .hero_001__stop strong {
+    font-size: 1.24rem;
+  }
+  .hero_001 .hero_001__stop:nth-of-type(1) {
+    left: 18px;
+    top: 84px;
+  }
+  .hero_001 .hero_001__stop:nth-of-type(2) {
+    right: 18px;
+    top: 216px;
+  }
+  .hero_001 .hero_001__stop:nth-of-type(3) {
+    left: 18px;
+    top: 350px;
+  }
+  .hero_001 .hero_001__stop:nth-of-type(4) {
+    right: 18px;
+    bottom: 96px;
+  }
+  .hero_001 .hero_001__legend {
+    right: 20px;
+    top: 22px;
+    font-size: 0.58rem;
+  }
+  .hero_001 .hero_001__compass {
+    left: 20px;
+    bottom: 20px;
+    width: 86px;
+    height: 86px;
+    box-shadow: inset 0 0 0 10px rgba(255, 222, 202, 0.42), 0 18px 45px rgba(90, 43, 37, 0.10);
+  }
+  .hero_001 .hero_001__compass::before {
+    height: 48px;
+  }
+  .hero_001 .hero_001__compass span {
+    padding-top: 58px;
+    font-size: 0.52rem;
+  }
+  .hero_001 .hero_001__floating-label {
+    display: none;
+  }
+}
+  </style>
+</head>
+<body>
+<section class="ww-section hero_001"><div class="hero_001__stage"><div class="hero_001__copy"><p class="hero_001__eyebrow">A wedding festival in Somerset</p><h1 class="hero_001__title">Kavya <span class="hero_001__amp">&amp;</span> Mihir</h1><div class="hero_001__date-line"><div class="hero_001__date-pill">March 22, 2026</div><p class="hero_001__venue">Akshar Grand Palace<br>Somerset, New Jersey</p></div><p class="hero_001__message">With blessings of Shri Ganesh and our families, we invite you to celebrate a joyful Gujarati wedding filled with mehendi, garba, baraat, sacred pheras, dinner, music, and love.</p><div class="hero_001__details" aria-label="Wedding highlights"><div class="hero_001__detail"><span>Route</span><strong>Mehendi to music</strong></div><div class="hero_001__detail"><span>Mood</span><strong>Romantic festival</strong></div><div class="hero_001__detail"><span>Arrival</span><strong>Baraat energy</strong></div></div></div><div class="hero_001__map-wrap" aria-label="Festival map inspired wedding journey"><div class="hero_001__map-orbit"></div><div class="hero_001__map"><div class="hero_001__legend">Festival Map</div><div class="hero_001__route"><svg viewBox="0 0 520 470" role="img" aria-label="Decorative route through the wedding celebrations"><path d="M72 64 C210 8 314 92 270 172 C226 252 114 210 102 306 C88 418 286 390 430 300"></path></svg></div><div class="hero_001__stop"><div class="hero_001__pin">01</div><div><span>Color</span><strong>Mehendi</strong></div></div><div class="hero_001__stop"><div class="hero_001__pin">02</div><div><span>Rhythm</span><strong>Garba</strong></div></div><div class="hero_001__stop"><div class="hero_001__pin">03</div><div><span>Arrival</span><strong>Baraat</strong></div></div><div class="hero_001__stop"><div class="hero_001__pin">04</div><div><span>Vows</span><strong>Pheras</strong></div></div><div class="hero_001__compass"><span>LOVE</span></div></div><div class="hero_001__spark"></div><div class="hero_001__spark"></div><div class="hero_001__spark"></div><div class="hero_001__floating-label">Dinner · Music · Love</div></div></div></section>
+</body>
+</html>

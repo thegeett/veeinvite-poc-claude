@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Noto+Serif+Gujarati:wght@400;600;700&family=Rozha+One&family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; min-height: 100%; }
+    body { overflow-x: hidden; }
+    .ww-section { width: 100%; position: relative; isolation: isolate; }
+    
+/* ============================================================
+   hero_001 — Kavya & Mihir | Gujarati Hindu | Minimal Elegant
+   ============================================================ */
+
+/* ---------- Keyframes ---------- */
+@keyframes hero_001_flameDance {
+  0%,100% { transform: scaleX(1) scaleY(1) translateY(0); opacity:1; }
+  25%      { transform: scaleX(0.85) scaleY(1.15) translateY(-2px); opacity:0.9; }
+  75%      { transform: scaleX(1.1) scaleY(0.9) translateY(1px); opacity:0.95; }
+}
+@keyframes hero_001_fadeUp {
+  from { opacity:0; transform:translateY(28px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes hero_001_rotateSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes hero_001_floatBlob {
+  0%,100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-18px) scale(1.04); }
+}
+@keyframes hero_001_shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+/* ---------- Root shell ---------- */
+.hero_001 {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  background: #fdf8f1;
+  font-family: 'Manrope', sans-serif;
+  box-sizing: border-box;
+  padding: 0 0 56px;
+}
+
+/* ---------- Background layers ---------- */
+.hero_001__bg-base {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 0%,   #fff4e2 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 0% 100%,   #fde8c8 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 100% 100%, #fde8c8 0%, transparent 65%),
+    linear-gradient(160deg, #fdf8f1 0%, #fef5e4 50%, #fdf0e0 100%);
+  z-index: 0;
+}
+
+.hero_001__bg-grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.55;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ---------- Marigold blobs ---------- */
+.hero_001__marigold {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  animation: hero_001_floatBlob 7s ease-in-out infinite;
+}
+.hero_001__marigold--tl {
+  width: 340px;
+  height: 340px;
+  top: -120px;
+  left: -120px;
+  background: radial-gradient(circle at 40% 40%, #f5c97a55, #e8954422, transparent 70%);
+  animation-delay: 0s;
+}
+.hero_001__marigold--br {
+  width: 420px;
+  height: 420px;
+  bottom: -140px;
+  right: -140px;
+  background: radial-gradient(circle at 60% 60%, #f5c97a44, #e8954433, transparent 70%);
+  animation-delay: 3.5s;
+}
+
+/* ---------- Top / bottom ornament bars ---------- */
+.hero_001__top-bar,
+.hero_001__bottom-bar {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 28px 40px 0;
+}
+.hero_001__bottom-bar {
+  padding: 0 40px 0;
+  margin-top: 12px;
+}
+.hero_001__bar-line {
+  flex: 1;
+  max-width: 220px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #c9a96e88, #c9a96e, #c9a96e88, transparent);
+}
+.hero_001__ganesh-icon {
+  font-family: 'Noto Serif Gujarati', serif;
+  font-size: 1.6rem;
+  color: #b8893e;
+  line-height: 1;
+  letter-spacing: 0;
+  filter: drop-shadow(0 0 6px #f5c97a88);
+}
+.hero_001__rangoli-diamond {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #c9a96e;
+  transform: rotate(45deg);
+  box-shadow: 0 0 8px #c9a96e88;
+}
+
+/* ---------- Main shell (3-col) ---------- */
+.hero_001__shell {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 32px 24px 0;
+  gap: 0;
+  flex: 1;
+}
+
+/* ---------- Decorative side columns ---------- */
+.hero_001__deco-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  width: 88px;
+  flex-shrink: 0;
+  padding-top: 16px;
+}
+.hero_001__deco-col--right {
+  transform: scaleX(-1);
+}
+
+/* Toran */
+.hero_001__toran-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.hero_001__toran-strand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.hero_001__toran-leaf {
+  display: block;
+  width: 22px;
+  height: 34px;
+  background: linear-gradient(160deg, #5a9e6f, #3d7a52);
+  border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
+  box-shadow: inset -2px -3px 6px #2d5e3c44;
+  position: relative;
+}
+.hero_001__toran-leaf::after {
+  content: '';
+  position: absolute;
+  top: 6px; left: 50%;
+  transform: translateX(-50%);
+  width: 2px; height: 60%;
+  background: #2d5e3c55;
+  border-radius: 2px;
+}
+
+/* Diya */
+.hero_001__diya-wrap {
+  display: flex;
+  justify-content: center;
+}
+.hero_001__diya {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.hero_001__diya-flame {
+  width: 14px;
+  height: 22px;
+  background: linear-gradient(to top, #f97316, #fbbf24, #fef3c7);
+  border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
+  box-shadow: 0 0 10px #f97316aa, 0 0 20px #fbbf2466;
+  animation: hero_001_flameDance 1.8s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+.hero_001__diya-cup {
+  width: 36px;
+  height: 14px;
+  background: linear-gradient(135deg, #c9843e, #a0612a);
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  box-shadow: 0 3px 8px #a0612a55;
+}
+
+/* Rangoli dots */
+.hero_001__rangoli-dot-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.hero_001__rdot {
+  display: block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #c9a96e;
+  opacity: 0.55;
+}
+.hero_001__rdot--lg {
+  width: 10px; height: 10px;
+  opacity: 0.8;
+  background: radial-gradient(circle, #e8c47a, #c9a96e);
+}
+
+/* ---------- Center content ---------- */
+.hero_001__center {
+  flex: 1;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
+  padding: 0 32px;
+  animation: hero_001_fadeUp 1s ease both;
+}
+
+/* Badge */
+.hero_001__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #c9a96e22, #f5c97a33);
+  border: 1px solid #c9a96e88;
+  border-radius: 100px;
+  padding: 6px 22px;
+  margin-bottom: 22px;
+  backdrop-filter: blur(4px);
+}
+.hero_001__badge-text {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #9a6f2e;
+}
+
+/* Gujarati accent */
+.hero_001__guj-accent {
+  font-family: 'Noto Serif Gujarati', serif;
+  font-size: 1.05rem;
+  color: #b8893e;
+  letter-spacing: 0.04em;
+  margin: 0 0 18px;
+  opacity: 0.85;
+}
+
+/* Names */
+.hero_001__names-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 22px;
+}
+.hero_001__bride-name,
+.hero_001__groom-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.4rem, 8vw, 6.2rem);
+  font-weight: 600;
+  font-style: italic;
+  color: #2c1f0e;
+  line-height: 1;
+  margin: 0;
+  letter-spacing: -0.01em;
+  background: linear-gradient(135deg, #2c1f0e 30%, #8a5e28 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Mandala & ampersand ring */
+.hero_001__ampersand-ring {
+  position: relative;
+  width: clamp(64px, 10vw, 96px);
+  height: clamp(64px, 10vw, 96px);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero_001__mandala-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  animation: hero_001_rotateSlow 28s linear infinite;
+}
+.hero_001__amp {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  font-style: italic;
+  color: #c9a96e;
+  position: relative;
+  z-index: 2;
+  line-height: 1;
+}
+
+/* Date pill */
+.hero_001__date-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, #c9a96e, #e8c47a, #c9a96e);
+  background-size: 400px 100%;
+  animation: hero_001_shimmer 4s linear infinite;
+  border-radius: 100px;
+  padding: 9px 28px;
+  margin-bottom: 24px;
+}
+.hero_001__date-text {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #2c1f0e;
+}
+
+/* Divider */
+.hero_001__divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 420px;
+  margin-bottom: 16px;
+}
+.hero_001__div-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #c9a96e99, transparent);
+}
+.hero_001__petal {
+  font-size: 0.7rem;
+  color: #c9a96e;
+  opacity: 0.75;
+}
+
+/* Venue */
+.hero_001__venue {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #8a6830;
+  margin: 0 0 20px;
+}
+
+/* Message */
+.hero_001__message {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.05rem, 2vw, 1.22rem);
+  font-weight: 400;
+  line-height: 1.8;
+  color: #4a3520;
+  max-width: 540px;
+  margin: 0 auto 32px;
+  opacity: 0.88;
+}
+
+/* CTA */
+.hero_001__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 44px;
+  border: 1.5px solid #c9a96e;
+  border-radius: 100px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #7a5020;
+  text-decoration: none;
+  background: linear-gradient(135deg, #fffaf2, #fef3db);
+  box-shadow: 0 4px 24px #c9a96e22, inset 0 1px 0 #ffffffcc;
+  transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+  cursor: pointer;
+}
+.hero_001__cta:hover {
+  background: linear-gradient(135deg, #fef3db, #fde8b8);
+  box-shadow: 0 8px 36px #c9a96e44;
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   RESPONSIVE — 900px
+   ============================================================ */
+@media (max-width: 900px) {
+  .hero_001__deco-col {
+    width: 60px;
+  }
+  .hero_001__center {
+    padding: 0 16px;
+  }
+  .hero_001__toran-leaf {
+    width: 17px;
+    height: 26px;
+  }
+  .hero_001__marigold--tl {
+    width: 240px; height: 240px;
+    top: -80px; left: -80px;
+  }
+  .hero_001__marigold--br {
+    width: 280px; height: 280px;
+    bottom: -90px; right: -90px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — 640px
+   ============================================================ */
+@media (max-width: 640px) {
+  .hero_001 {
+    padding-bottom: 40px;
+  }
+  .hero_001__shell {
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 16px 0;
+    gap: 0;
+  }
+  .hero_001__deco-col {
+    display: none;
+  }
+  .hero_001__center {
+    padding: 0 8px;
+    gap: 0;
+  }
+  .hero_001__names-wrap {
+    gap: 12px;
+  }
+  .hero_001__bride-name,
+  .hero_001__groom-name {
+    font-size: clamp(2.8rem, 13vw, 4rem);
+  }
+  .hero_001__ampersand-ring {
+    width: 52px; height: 52px;
+  }
+  .hero_001__amp {
+    font-size: 1.4rem;
+  }
+  .hero_001__message {
+    font-size: 1rem;
+    padding: 0 4px;
+  }
+  .hero_001__top-bar,
+  .hero_001__bottom-bar {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .hero_001__bar-line {
+    max-width: 80px;
+  }
+  .hero_001__badge {
+    margin-bottom: 16px;
+  }
+  .hero_001__guj-accent {
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+  .hero_001__date-pill {
+    padding: 8px 20px;
+    margin-bottom: 18px;
+  }
+  .hero_001__cta {
+    padding: 13px 32px;
+    font-size: 0.72rem;
+  }
+  .hero_001__marigold--tl {
+    width: 160px; height: 160px;
+    top: -50px; left: -50px;
+  }
+  .hero_001__marigold--br {
+    width: 180px; height: 180px;
+    bottom: -50px; right: -50px;
+  }
+}
+
+  </style>
+</head>
+<body>
+<section class="ww-section hero_001">
+
+  <!-- Decorative background layers -->
+  <div class="hero_001__bg-base"></div>
+  <div class="hero_001__bg-grain"></div>
+
+  <!-- Floating decorative marigold blobs -->
+  <div class="hero_001__marigold hero_001__marigold--tl" aria-hidden="true"></div>
+  <div class="hero_001__marigold hero_001__marigold--br" aria-hidden="true"></div>
+
+  <!-- Top ornament bar -->
+  <div class="hero_001__top-bar" aria-hidden="true">
+    <span class="hero_001__bar-line"></span>
+    <span class="hero_001__ganesh-icon">ॐ</span>
+    <span class="hero_001__bar-line"></span>
+  </div>
+
+  <!-- Main content shell -->
+  <div class="hero_001__shell">
+
+    <!-- Left decorative column -->
+    <aside class="hero_001__deco-col" aria-hidden="true">
+      <div class="hero_001__toran-wrap">
+        <div class="hero_001__toran-strand">
+          <span class="hero_001__toran-leaf"></span>
+          <span class="hero_001__toran-leaf"></span>
+          <span class="hero_001__toran-leaf"></span>
+          <span class="hero_001__toran-leaf"></span>
+          <span class="hero_001__toran-leaf"></span>
+          <span class="hero_001__toran-leaf"></span>
+          <span class="hero_001__toran-leaf"></span>
+        </div>
+      </div>
+      <div class="hero_001__diya-wrap">
+        <div class="hero_001__diya">
+          <div class="hero_001__diya-flame"></div>
+          <div class="hero_001__diya-cup"></div>
+        </div>
+      </div>
+      <div class="hero_001__rangoli-dot-col">
+        <span class="hero_001__rdot"></span>
+        <span class="hero_001__rdot hero_001__rdot--lg"></span>
+        <span class="hero_001__rdot"></span>
+        <span class="hero_001__rdot hero_001__rdot--lg"></span>
+        <span class="hero_001__rdot"></span>
+      </div>
+    </aside>
+
+    <!-- Center content -->
+    <main class="hero_001__center">
+
+      <!-- Kankotri badge -->
+      <div class="hero_001__badge">
+        <span class="hero_001__badge-text">Shubh Vivah &nbsp;·&nbsp; 2026</span>
+      </div>
+
+      <!-- Gujarati script accent -->
+      <p class="hero_001__guj-accent" lang="gu">સ્નેહ અને આશીર્વાદ સાથે</p>
+
+      <!-- Names -->
+      <div class="hero_001__names-wrap">
+        <h1 class="hero_001__bride-name">Kavya</h1>
+        <div class="hero_001__ampersand-ring" aria-hidden="true">
+          <svg class="hero_001__mandala-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="50" cy="50" r="46" fill="none" stroke="#c9a96e" stroke-width="0.8" stroke-dasharray="4 3"/>
+            <circle cx="50" cy="50" r="38" fill="none" stroke="#c9a96e" stroke-width="0.4"/>
+            <circle cx="50" cy="50" r="30" fill="none" stroke="#c9a96e" stroke-width="0.8" stroke-dasharray="2 4"/>
+            <line x1="50" y1="4" x2="50" y2="96" stroke="#c9a96e" stroke-width="0.3"/>
+            <line x1="4" y1="50" x2="96" y2="50" stroke="#c9a96e" stroke-width="0.3"/>
+            <line x1="18" y1="18" x2="82" y2="82" stroke="#c9a96e" stroke-width="0.3"/>
+            <line x1="82" y1="18" x2="18" y2="82" stroke="#c9a96e" stroke-width="0.3"/>
+          </svg>
+          <span class="hero_001__amp">&amp;</span>
+        </div>
+        <h1 class="hero_001__groom-name">Mihir</h1>
+      </div>
+
+      <!-- Date pill -->
+      <div class="hero_001__date-pill">
+        <span class="hero_001__date-text">Sunday, March 22 · 2026</span>
+      </div>
+
+      <!-- Divider with petals -->
+      <div class="hero_001__divider" aria-hidden="true">
+        <span class="hero_001__div-line"></span>
+        <span class="hero_001__petal">✿</span>
+        <span class="hero_001__petal">✿</span>
+        <span class="hero_001__petal">✿</span>
+        <span class="hero_001__div-line"></span>
+      </div>
+
+      <!-- Venue -->
+      <p class="hero_001__venue">Akshar Grand Palace &nbsp;·&nbsp; Somerset, New Jersey</p>
+
+      <!-- Hero message -->
+      <p class="hero_001__message">With blessings of Shri Ganesh and our families, we invite you to celebrate a joyful Gujarati wedding filled with mehendi, garba, baraat, sacred pheras, dinner, music, and love.</p>
+
+      <!-- CTA -->
+      <a class="hero_001__cta" href="#details" role="button">View Celebrations</a>
+
+    </main>
+
+    <!-- Right decorative column (mirror) -->
+    <aside class="hero_001__deco-col hero_001__deco-col--right" aria-hidden="true">
+      <div class="hero_001__toran-wrap">
+        <div class="hero_001__toran-strand">
+          <span class="hero_001__toran-leaf"></span>
+          <span class="hero_001__toran-leaf"></span>
+          <span class="hero_001__toran-leaf"></span>
+          <span class="hero_001__toran-leaf"></span>
+          <span class="hero_001__toran-leaf"></span>
+          <span class="hero_001__toran-leaf"></span>
+          <span class="hero_001__toran-leaf"></span>
+        </div>
+      </div>
+      <div class="hero_001__diya-wrap">
+        <div class="hero_001__diya">
+          <div class="hero_001__diya-flame"></div>
+          <div class="hero_001__diya-cup"></div>
+        </div>
+      </div>
+      <div class="hero_001__rangoli-dot-col">
+        <span class="hero_001__rdot"></span>
+        <span class="hero_001__rdot hero_001__rdot--lg"></span>
+        <span class="hero_001__rdot"></span>
+        <span class="hero_001__rdot hero_001__rdot--lg"></span>
+        <span class="hero_001__rdot"></span>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Bottom ornament bar -->
+  <div class="hero_001__bottom-bar" aria-hidden="true">
+    <span class="hero_001__bar-line"></span>
+    <span class="hero_001__rangoli-diamond"></span>
+    <span class="hero_001__bar-line"></span>
+  </div>
+
+</section>
+</body>
+</html>

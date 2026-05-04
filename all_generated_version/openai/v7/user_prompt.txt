@@ -1,0 +1,14 @@
+Couple intake details:
+- Bride: Kavya
+- Groom: Mihir
+- Wedding date: March 22, 2026
+- Venue: Akshar Grand Palace
+- Location: Somerset, New Jersey
+- Community / culture: Modern non-religious
+- Style direction: Floral garden
+- Mood: romantic
+- Language preference: English
+- Hero message: With blessings of Shri Ganesh and our families, we invite you to celebrate a joyful Gujarati wedding filled with mehendi, garba, baraat, sacred pheras, dinner, music, and love.
+- No hero image provided — design a tasteful decorative layout instead.
+
+Generate the hero now. Return strict JSON only.

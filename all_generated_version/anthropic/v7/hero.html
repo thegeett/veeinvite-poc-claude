@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Noto+Serif+Gujarati:wght@400;600;700&family=Rozha+One&family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; min-height: 100%; }
+    body { overflow-x: hidden; }
+    .ww-section { width: 100%; position: relative; isolation: isolate; }
+    /* =====================================================
+   hero_001 – Kavya & Mihir | Floral Garden Romance
+   ===================================================== */
+
+.hero_001 {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, #fff0f5 0%, transparent 70%),
+    radial-gradient(ellipse 60% 80% at 0% 100%, #fde8d8 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 100% 100%, #f3e8ff 0%, transparent 60%),
+    linear-gradient(160deg, #fff8f0 0%, #fdf2f8 40%, #f8f0ff 70%, #fff5f0 100%);
+  padding: 80px 40px 100px;
+  box-sizing: border-box;
+}
+
+/* ── Floating Petals ── */
+.hero_001__petal {
+  position: absolute;
+  border-radius: 50% 10% 50% 10%;
+  opacity: 0;
+  animation: hero001PetalFloat linear infinite;
+  pointer-events: none;
+}
+.hero_001__petal--1 {
+  width: 18px; height: 28px;
+  background: linear-gradient(135deg, #f9a8d4, #fbbf24);
+  top: -30px; left: 15%;
+  animation-duration: 9s; animation-delay: 0s; opacity: 0;
+}
+.hero_001__petal--2 {
+  width: 14px; height: 22px;
+  background: linear-gradient(135deg, #c084fc, #f9a8d4);
+  top: -30px; left: 35%;
+  animation-duration: 12s; animation-delay: 2s;
+}
+.hero_001__petal--3 {
+  width: 20px; height: 30px;
+  background: linear-gradient(135deg, #fbbf24, #f97316);
+  top: -30px; left: 55%;
+  animation-duration: 10s; animation-delay: 4s;
+}
+.hero_001__petal--4 {
+  width: 12px; height: 20px;
+  background: linear-gradient(135deg, #f9a8d4, #c084fc);
+  top: -30px; left: 72%;
+  animation-duration: 14s; animation-delay: 1s;
+}
+.hero_001__petal--5 {
+  width: 16px; height: 26px;
+  background: linear-gradient(135deg, #f97316, #fbbf24);
+  top: -30px; left: 25%;
+  animation-duration: 11s; animation-delay: 5s;
+}
+.hero_001__petal--6 {
+  width: 10px; height: 18px;
+  background: linear-gradient(135deg, #c084fc, #818cf8);
+  top: -30px; left: 85%;
+  animation-duration: 13s; animation-delay: 3s;
+}
+@keyframes hero001PetalFloat {
+  0%   { transform: translateY(0) rotate(0deg) translateX(0);   opacity: 0; }
+  10%  { opacity: 0.7; }
+  90%  { opacity: 0.4; }
+  100% { transform: translateY(110vh) rotate(360deg) translateX(40px); opacity: 0; }
+}
+
+/* ── Botanical Left ── */
+.hero_001__botanical-left,
+.hero_001__botanical-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 200px;
+  pointer-events: none;
+}
+.hero_001__botanical-left  { left: 0; }
+.hero_001__botanical-right { right: 0; transform: scaleX(-1); }
+
+.hero_001__floral-stem {
+  position: absolute;
+  left: 50px;
+  width: 3px;
+  border-radius: 4px;
+  background: linear-gradient(to bottom, #86efac, #4ade80 60%, #166534);
+}
+.hero_001__floral-stem--tall  { height: 320px; top: 60px; }
+.hero_001__floral-stem--short { height: 160px; top: 400px; left: 80px; }
+
+.hero_001__bloom {
+  position: absolute;
+  border-radius: 50%;
+}
+.hero_001__bloom--rose {
+  width: 64px; height: 64px;
+  top: 40px; left: 22px;
+  background: radial-gradient(circle at 35% 35%, #fce7f3, #f9a8d4 50%, #ec4899);
+  box-shadow: 0 4px 24px rgba(249,168,212,0.5);
+  animation: hero001BloomPulse 5s ease-in-out infinite;
+}
+.hero_001__bloom--rose-alt {
+  top: 80px; left: 18px;
+  background: radial-gradient(circle at 35% 35%, #ffe4e6, #fda4af 50%, #f43f5e);
+  box-shadow: 0 4px 24px rgba(253,164,175,0.5);
+  animation-delay: 1.5s;
+}
+.hero_001__bloom--peony {
+  width: 80px; height: 80px;
+  top: 150px; left: 10px;
+  background: radial-gradient(circle at 40% 38%, #fdf4ff, #e879f9 55%, #a21caf);
+  box-shadow: 0 6px 32px rgba(232,121,249,0.4);
+  animation: hero001BloomPulse 6s ease-in-out infinite;
+  animation-delay: 0.8s;
+}
+.hero_001__bloom--peony-alt {
+  top: 200px;
+  animation-delay: 2s;
+}
+.hero_001__bloom--bud {
+  width: 30px; height: 38px;
+  top: 390px; left: 68px;
+  border-radius: 50% 50% 40% 40%;
+  background: linear-gradient(160deg, #fce7f3, #f9a8d4, #ec4899);
+  box-shadow: 0 2px 12px rgba(236,72,153,0.3);
+}
+.hero_001__bloom--bud-alt { animation-delay: 1s; }
+
+@keyframes hero001BloomPulse {
+  0%, 100% { transform: scale(1);     filter: brightness(1); }
+  50%       { transform: scale(1.07); filter: brightness(1.08); }
+}
+
+.hero_001__leaf {
+  position: absolute;
+  border-radius: 0 80% 0 80%;
+  background: linear-gradient(135deg, #bbf7d0, #4ade80 60%, #16a34a);
+  opacity: 0.85;
+}
+.hero_001__leaf--a { width: 40px; height: 22px; top: 100px; left: 55px; transform: rotate(-30deg); }
+.hero_001__leaf--b { width: 36px; height: 20px; top: 200px; left: 30px; transform: rotate(20deg); }
+.hero_001__leaf--c { width: 28px; height: 16px; top: 270px; left: 60px; transform: rotate(-45deg); }
+.hero_001__leaf--d { width: 40px; height: 22px; top: 130px; left: 55px; transform: rotate(-30deg); }
+.hero_001__leaf--e { width: 36px; height: 20px; top: 240px; left: 28px; transform: rotate(25deg); }
+.hero_001__leaf--f { width: 28px; height: 16px; top: 310px; left: 58px; transform: rotate(-40deg); }
+
+/* ── Content Wrap ── */
+.hero_001__content-wrap {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 760px;
+  width: 100%;
+  gap: 0;
+}
+
+/* ── Top Ornament ── */
+.hero_001__ornament-top,
+.hero_001__ornament-bottom {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.hero_001__ornament-bottom { margin-top: 24px; margin-bottom: 0; }
+
+.hero_001__ornament-line {
+  display: block;
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e879f9 50%, transparent);
+}
+.hero_001__ornament-diamond {
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(135deg, #f9a8d4, #c084fc);
+  transform: rotate(45deg);
+  box-shadow: 0 0 8px rgba(192,132,252,0.6);
+}
+
+/* ── Save the Date Badge ── */
+.hero_001__badge {
+  display: inline-block;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #9d174d;
+  background: linear-gradient(135deg, rgba(253,242,248,0.9), rgba(245,243,255,0.9));
+  border: 1px solid rgba(236,72,153,0.25);
+  padding: 8px 22px;
+  border-radius: 100px;
+  margin-bottom: 32px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 16px rgba(236,72,153,0.12);
+}
+
+/* ── Names ── */
+.hero_001__names-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.hero_001__name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(68px, 10vw, 112px);
+  font-weight: 600;
+  line-height: 1;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+.hero_001__name--bride {
+  background: linear-gradient(135deg, #be185d 0%, #ec4899 45%, #f9a8d4 80%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: hero001NameShimmer 6s ease-in-out infinite;
+}
+.hero_001__name--groom {
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 45%, #c084fc 80%, #e879f9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: hero001NameShimmer 6s ease-in-out infinite;
+  animation-delay: 0.4s;
+}
+@keyframes hero001NameShimmer {
+  0%, 100% { filter: brightness(1); }
+  50%       { filter: brightness(1.12); }
+}
+
+.hero_001__ampersand-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+}
+.hero_001__ampersand {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  font-style: italic;
+  font-weight: 400;
+  color: #f9a8d4;
+  position: relative;
+  z-index: 2;
+  line-height: 1;
+}
+.hero_001__amp-bloom {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(249,168,212,0.25) 0%, transparent 70%);
+  animation: hero001AmpGlow 4s ease-in-out infinite;
+}
+@keyframes hero001AmpGlow {
+  0%, 100% { transform: scale(1);   opacity: 0.6; }
+  50%       { transform: scale(1.4); opacity: 1; }
+}
+
+/* ── Meta Info ── */
+.hero_001__meta-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+.hero_001__meta-date,
+.hero_001__meta-venue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.hero_001__meta-label {
+  font-family: 'Manrope', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #be185d;
+  opacity: 0.7;
+}
+.hero_001__meta-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #3b0764;
+  letter-spacing: 0.01em;
+}
+.hero_001__meta-location {
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #7e22ce;
+  opacity: 0.75;
+  letter-spacing: 0.06em;
+}
+.hero_001__meta-divider {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(to bottom, transparent, rgba(192,132,252,0.5), transparent);
+}
+
+/* ── Glass Panel ── */
+.hero_001__glass-panel {
+  background: linear-gradient(135deg, rgba(255,255,255,0.62), rgba(245,243,255,0.52));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(236,72,153,0.18);
+  border-radius: 20px;
+  padding: 28px 36px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow:
+    0 4px 32px rgba(192,132,252,0.12),
+    0 1px 0 rgba(255,255,255,0.8) inset,
+    0 -1px 0 rgba(249,168,212,0.15) inset;
+  margin-bottom: 0;
+}
+.hero_001__message {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.75;
+  color: #4a044e;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+/* ── Bottom Ornament Florette ── */
+.hero_001__ornament-florette {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+.hero_001__florette-petal {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #f9a8d4, #c084fc);
+  border-radius: 50%;
+  opacity: 0.8;
+}
+.hero_001__florette-petal--n { top: 0;    left: 50%; transform: translateX(-50%); }
+.hero_001__florette-petal--e { top: 50%;  right: 0;  transform: translateY(-50%); }
+.hero_001__florette-petal--s { bottom: 0; left: 50%; transform: translateX(-50%); }
+.hero_001__florette-petal--w { top: 50%;  left: 0;   transform: translateY(-50%); }
+.hero_001__florette-center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fbbf24, #f97316);
+  box-shadow: 0 0 6px rgba(251,191,36,0.6);
+}
+
+/* ── CTA Button ── */
+.hero_001__cta {
+  display: inline-block;
+  margin-top: 36px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(135deg, #be185d 0%, #a855f7 60%, #7c3aed 100%);
+  padding: 16px 44px;
+  border-radius: 100px;
+  box-shadow:
+    0 4px 24px rgba(168,85,247,0.4),
+    0 1px 0 rgba(255,255,255,0.25) inset;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+.hero_001__cta:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow:
+    0 8px 36px rgba(168,85,247,0.55),
+    0 1px 0 rgba(255,255,255,0.25) inset;
+  filter: brightness(1.08);
+}
+
+/* ── Bottom Fade ── */
+.hero_001__fade-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, rgba(253,242,248,0.6));
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — 900px
+══════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .hero_001 {
+    padding: 70px 28px 90px;
+  }
+  .hero_001__botanical-left,
+  .hero_001__botanical-right {
+    width: 130px;
+    opacity: 0.7;
+  }
+  .hero_001__name {
+    font-size: clamp(56px, 12vw, 88px);
+  }
+  .hero_001__glass-panel {
+    padding: 24px 28px;
+  }
+  .hero_001__message {
+    font-size: 17px;
+  }
+  .hero_001__ornament-line {
+    width: 56px;
+  }
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — 640px
+══════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .hero_001 {
+    padding: 56px 20px 80px;
+    min-height: 100svh;
+  }
+  .hero_001__botanical-left,
+  .hero_001__botanical-right {
+    width: 80px;
+    opacity: 0.45;
+  }
+  .hero_001__bloom--peony,
+  .hero_001__bloom--peony-alt {
+    width: 52px;
+    height: 52px;
+  }
+  .hero_001__bloom--rose,
+  .hero_001__bloom--rose-alt {
+    width: 40px;
+    height: 40px;
+  }
+  .hero_001__names-wrap {
+    gap: 8px;
+    flex-direction: column;
+  }
+  .hero_001__ampersand-wrap {
+    width: 48px;
+    height: 48px;
+  }
+  .hero_001__ampersand {
+    font-size: 40px;
+  }
+  .hero_001__name {
+    font-size: clamp(54px, 16vw, 78px);
+  }
+  .hero_001__meta-wrap {
+    gap: 18px;
+  }
+  .hero_001__meta-divider {
+    display: none;
+  }
+  .hero_001__meta-value {
+    font-size: 17px;
+  }
+  .hero_001__glass-panel {
+    padding: 20px 20px;
+    border-radius: 16px;
+  }
+  .hero_001__message {
+    font-size: 15.5px;
+    line-height: 1.7;
+  }
+  .hero_001__cta {
+    font-size: 12px;
+    padding: 14px 34px;
+    margin-top: 28px;
+  }
+  .hero_001__ornament-line {
+    width: 36px;
+  }
+  .hero_001__badge {
+    font-size: 10px;
+    padding: 7px 18px;
+    margin-bottom: 24px;
+  }
+}
+  </style>
+</head>
+<body>
+<section class="ww-section hero_001">
+
+  <!-- Decorative floating petals -->
+  <div class="hero_001__petal hero_001__petal--1"></div>
+  <div class="hero_001__petal hero_001__petal--2"></div>
+  <div class="hero_001__petal hero_001__petal--3"></div>
+  <div class="hero_001__petal hero_001__petal--4"></div>
+  <div class="hero_001__petal hero_001__petal--5"></div>
+  <div class="hero_001__petal hero_001__petal--6"></div>
+
+  <!-- Left botanical column -->
+  <div class="hero_001__botanical-left" aria-hidden="true">
+    <div class="hero_001__floral-stem hero_001__floral-stem--tall"></div>
+    <div class="hero_001__bloom hero_001__bloom--rose"></div>
+    <div class="hero_001__bloom hero_001__bloom--peony"></div>
+    <div class="hero_001__leaf hero_001__leaf--a"></div>
+    <div class="hero_001__leaf hero_001__leaf--b"></div>
+    <div class="hero_001__leaf hero_001__leaf--c"></div>
+    <div class="hero_001__floral-stem hero_001__floral-stem--short"></div>
+    <div class="hero_001__bloom hero_001__bloom--bud"></div>
+  </div>
+
+  <!-- Right botanical column -->
+  <div class="hero_001__botanical-right" aria-hidden="true">
+    <div class="hero_001__floral-stem hero_001__floral-stem--tall"></div>
+    <div class="hero_001__bloom hero_001__bloom--rose hero_001__bloom--rose-alt"></div>
+    <div class="hero_001__bloom hero_001__bloom--peony hero_001__bloom--peony-alt"></div>
+    <div class="hero_001__leaf hero_001__leaf--d"></div>
+    <div class="hero_001__leaf hero_001__leaf--e"></div>
+    <div class="hero_001__leaf hero_001__leaf--f"></div>
+    <div class="hero_001__floral-stem hero_001__floral-stem--short"></div>
+    <div class="hero_001__bloom hero_001__bloom--bud hero_001__bloom--bud-alt"></div>
+  </div>
+
+  <!-- Main content -->
+  <div class="hero_001__content-wrap">
+
+    <!-- Top ornament -->
+    <div class="hero_001__ornament-top" aria-hidden="true">
+      <span class="hero_001__ornament-line"></span>
+      <span class="hero_001__ornament-diamond"></span>
+      <span class="hero_001__ornament-line"></span>
+    </div>
+
+    <!-- Save the date badge -->
+    <div class="hero_001__badge">Save the Date</div>
+
+    <!-- Names -->
+    <div class="hero_001__names-wrap">
+      <h1 class="hero_001__name hero_001__name--bride">Kavya</h1>
+      <div class="hero_001__ampersand-wrap" aria-hidden="true">
+        <span class="hero_001__ampersand">&amp;</span>
+        <div class="hero_001__amp-bloom"></div>
+      </div>
+      <h1 class="hero_001__name hero_001__name--groom">Mihir</h1>
+    </div>
+
+    <!-- Date & venue -->
+    <div class="hero_001__meta-wrap">
+      <div class="hero_001__meta-date">
+        <span class="hero_001__meta-label">Sunday</span>
+        <span class="hero_001__meta-value">March 22, 2026</span>
+      </div>
+      <div class="hero_001__meta-divider" aria-hidden="true"></div>
+      <div class="hero_001__meta-venue">
+        <span class="hero_001__meta-label">Venue</span>
+        <span class="hero_001__meta-value">Akshar Grand Palace</span>
+        <span class="hero_001__meta-location">Somerset, New Jersey</span>
+      </div>
+    </div>
+
+    <!-- Hero message glass panel -->
+    <div class="hero_001__glass-panel">
+      <p class="hero_001__message">With blessings of Shri Ganesh and our families, we invite you to celebrate a joyful Gujarati wedding filled with mehendi, garba, baraat, sacred pheras, dinner, music, and love.</p>
+    </div>
+
+    <!-- Bottom ornament -->
+    <div class="hero_001__ornament-bottom" aria-hidden="true">
+      <span class="hero_001__ornament-line"></span>
+      <div class="hero_001__ornament-florette">
+        <span class="hero_001__florette-petal hero_001__florette-petal--n"></span>
+        <span class="hero_001__florette-petal hero_001__florette-petal--e"></span>
+        <span class="hero_001__florette-petal hero_001__florette-petal--s"></span>
+        <span class="hero_001__florette-petal hero_001__florette-petal--w"></span>
+        <span class="hero_001__florette-center"></span>
+      </div>
+      <span class="hero_001__ornament-line"></span>
+    </div>
+
+    <!-- CTA -->
+    <a class="hero_001__cta" href="#events" role="button">View Celebrations</a>
+
+  </div>
+
+  <!-- Bottom gradient fade -->
+  <div class="hero_001__fade-bottom" aria-hidden="true"></div>
+
+</section>
+</body>
+</html>
