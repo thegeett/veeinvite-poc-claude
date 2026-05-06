@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Noto+Serif+Gujarati:wght@400;600;700&family=Rozha+One&family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; min-height: 100%; }
+    body { overflow-x: hidden; }
+    .ww-section { width: 100%; position: relative; isolation: isolate; }
+    
+/* ─── HERO_001 ROOT ─────────────────────────────────────────────────────── */
+.hero_001 {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  font-family: 'Manrope', sans-serif;
+  color: #f5ede0;
+}
+
+/* ─── BACKGROUND ─────────────────────────────────────────────────────────── */
+.hero_001__bg-base {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero_001__bg-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg,
+      #1a0a00 0%,
+      #2d1200 20%,
+      #4a1e00 40%,
+      #1e0d2e 70%,
+      #0d0820 100%
+    );
+}
+
+.hero_001__bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.hero_001__bg-glow--left {
+  width: 520px;
+  height: 520px;
+  top: -100px;
+  left: -140px;
+  background: radial-gradient(circle, #c8600a 0%, transparent 70%);
+  animation: hero_001_pulse 7s ease-in-out infinite alternate;
+}
+
+.hero_001__bg-glow--right {
+  width: 480px;
+  height: 480px;
+  bottom: -80px;
+  right: -120px;
+  background: radial-gradient(circle, #7b2d8b 0%, transparent 70%);
+  animation: hero_001_pulse 9s ease-in-out 2s infinite alternate;
+}
+
+.hero_001__bg-glow--center {
+  width: 600px;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse, #d4880020 0%, transparent 70%);
+  animation: hero_001_pulse 11s ease-in-out 1s infinite alternate;
+}
+
+@keyframes hero_001_pulse {
+  0%   { opacity: 0.35; transform: scale(1); }
+  100% { opacity: 0.6;  transform: scale(1.12); }
+}
+
+/* ─── GRID LINES ─────────────────────────────────────────────────────────── */
+.hero_001__grid-lines {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero_001__line {
+  position: absolute;
+  background: rgba(212, 168, 80, 0.12);
+}
+
+.hero_001__line--v1 {
+  width: 1px;
+  height: 100%;
+  left: 14%;
+  top: 0;
+}
+
+.hero_001__line--v2 {
+  width: 1px;
+  height: 100%;
+  right: 14%;
+  top: 0;
+}
+
+.hero_001__line--h1 {
+  width: 100%;
+  height: 1px;
+  top: 55%;
+  left: 0;
+}
+
+/* ─── FLOATING PETALS ────────────────────────────────────────────────────── */
+.hero_001__petals {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero_001__petal {
+  position: absolute;
+  border-radius: 50% 0 50% 0;
+  opacity: 0.55;
+  animation: hero_001_float linear infinite;
+}
+
+.hero_001__petal--1 { width: 14px; height: 14px; background: #e8a020; top: 12%; left: 22%; animation-duration: 12s; animation-delay: 0s; }
+.hero_001__petal--2 { width: 10px; height: 10px; background: #d44f00; top: 30%; left: 8%;  animation-duration: 15s; animation-delay: 3s; }
+.hero_001__petal--3 { width: 12px; height: 12px; background: #f0c040; top: 60%; left: 18%; animation-duration: 10s; animation-delay: 1s; }
+.hero_001__petal--4 { width: 16px; height: 16px; background: #e8a020; top: 20%; right: 22%; animation-duration: 13s; animation-delay: 2s; }
+.hero_001__petal--5 { width: 9px;  height: 9px;  background: #d44f00; top: 70%; right: 12%; animation-duration: 16s; animation-delay: 4s; }
+.hero_001__petal--6 { width: 11px; height: 11px; background: #f0c040; top: 45%; right: 30%; animation-duration: 14s; animation-delay: 5s; }
+
+@keyframes hero_001_float {
+  0%   { transform: translateY(0) rotate(0deg);   opacity: 0.55; }
+  50%  { opacity: 0.75; }
+  100% { transform: translateY(-80px) rotate(180deg); opacity: 0; }
+}
+
+/* ─── MANDALA RING ───────────────────────────────────────────────────────── */
+.hero_001__mandala-ring {
+  position: absolute;
+  top: -120px;
+  right: -120px;
+  z-index: 1;
+  pointer-events: none;
+  animation: hero_001_spin_slow 60s linear infinite;
+}
+
+.hero_001__mandala-outer,
+.hero_001__mandala-mid,
+.hero_001__mandala-inner {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 168, 80, 0.18);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hero_001__mandala-outer { width: 420px; height: 420px; border-width: 1px; }
+.hero_001__mandala-mid   { width: 300px; height: 300px; border-width: 1px; border-style: dashed; }
+.hero_001__mandala-inner { width: 180px; height: 180px; border-width: 1px; }
+
+@keyframes hero_001_spin_slow {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ─── SHELL (3-column layout) ─────────────────────────────────────────────── */
+.hero_001__shell {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 80px 1fr 80px;
+  align-items: center;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 80px 24px 60px;
+  gap: 0;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* ─── ASIDE COLUMNS ──────────────────────────────────────────────────────── */
+.hero_001__aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  height: 100%;
+  justify-content: center;
+}
+
+.hero_001__aside-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, rgba(212,168,80,0.5), transparent);
+}
+
+.hero_001__aside-line--long { height: 120px; }
+
+.hero_001__aside-ornament {
+  font-size: 12px;
+  color: rgba(212,168,80,0.7);
+  letter-spacing: 2px;
+}
+
+/* Diya */
+.hero_001__diya-base-wrap {
+  width: 28px;
+  height: 14px;
+  background: linear-gradient(135deg, #c87820, #8b4500);
+  border-radius: 50% 50% 50% 50% / 0% 0% 100% 100%;
+  position: relative;
+}
+
+.hero_001__diya-flame {
+  width: 10px;
+  height: 18px;
+  background: linear-gradient(to top, #ff8c00, #ffe066, #fff8dc);
+  border-radius: 50% 50% 30% 30%;
+  margin: 0 auto;
+  position: relative;
+  animation: hero_001_flicker 2.5s ease-in-out infinite alternate;
+  box-shadow: 0 0 10px 4px rgba(255,160,0,0.4);
+}
+
+@keyframes hero_001_flicker {
+  0%   { transform: scaleX(1) scaleY(1) rotate(-2deg); opacity: 1; }
+  50%  { transform: scaleX(0.85) scaleY(1.1) rotate(2deg); opacity: 0.9; }
+  100% { transform: scaleX(1.05) scaleY(0.95) rotate(-1deg); opacity: 1; }
+}
+
+/* Toran */
+.hero_001__toran-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero_001__toran-strand {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+
+.hero_001__toran-leaf {
+  display: block;
+  width: 18px;
+  height: 28px;
+  background: linear-gradient(160deg, #2d7a2d, #1a4a1a);
+  border-radius: 50% 0 50% 0;
+  opacity: 0.85;
+}
+
+.hero_001__toran-flowers {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.hero_001__toran-flower {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, #f5c518 30%, #e87800 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 8px 2px rgba(248, 180, 0, 0.35);
+}
+
+/* ─── MAIN CONTENT ───────────────────────────────────────────────────────── */
+.hero_001__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 32px;
+  gap: 0;
+}
+
+/* Badge */
+.hero_001__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(212,168,80,0.1);
+  border: 1px solid rgba(212,168,80,0.3);
+  border-radius: 100px;
+  padding: 7px 22px;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #d4a84a;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  margin-bottom: 22px;
+}
+
+.hero_001__badge-icon {
+  font-size: 9px;
+  color: #d4a84a;
+}
+
+/* Ganesh blessing */
+.hero_001__ganesh {
+  font-family: 'Noto Serif Gujarati', serif;
+  font-size: clamp(13px, 2vw, 17px);
+  color: rgba(255, 200, 90, 0.75);
+  letter-spacing: 0.08em;
+  margin: 0 0 18px;
+  font-style: italic;
+}
+
+/* Names wrap */
+.hero_001__names-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.hero_001__name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(58px, 9vw, 110px);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  background: linear-gradient(135deg, #fde68a 0%, #d4a84a 40%, #fff7d6 70%, #c87820 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+}
+
+.hero_001__ampersand-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border: 1px solid rgba(212,168,80,0.4);
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: rgba(212,168,80,0.06);
+  margin: 0 8px;
+}
+
+.hero_001__ampersand {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 3.5vw, 36px);
+  font-style: italic;
+  color: #d4a84a;
+  line-height: 1;
+}
+
+/* Divider */
+.hero_001__divider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.hero_001__divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(212,168,80,0.5), transparent);
+}
+
+.hero_001__divider-icon {
+  color: #d4a84a;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* Message */
+.hero_001__message {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(13.5px, 1.6vw, 16.5px);
+  line-height: 1.85;
+  color: rgba(245, 230, 195, 0.82);
+  max-width: 560px;
+  margin: 0 auto 32px;
+  font-weight: 400;
+  letter-spacing: 0.015em;
+}
+
+/* Glass Panel */
+.hero_001__glass-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(212,168,80,0.22);
+  border-radius: 16px;
+  padding: 20px 32px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  margin-bottom: 28px;
+  width: 100%;
+  max-width: 620px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.hero_001__detail-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 0 24px;
+}
+
+.hero_001__detail-label {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(212,168,80,0.65);
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+}
+
+.hero_001__detail-value {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(13px, 1.5vw, 15.5px);
+  color: #f5ede0;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.hero_001__detail-sep {
+  color: rgba(212,168,80,0.35);
+  font-size: 10px;
+  align-self: center;
+}
+
+/* Celebrations ribbon */
+.hero_001__ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 36px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(212,168,80,0.6);
+  font-weight: 600;
+}
+
+.hero_001__ribbon-dot {
+  color: rgba(212,168,80,0.3);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.hero_001__ribbon-item {
+  color: rgba(212, 168, 80, 0.65);
+}
+
+/* CTAs */
+.hero_001__cta-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero_001__cta-btn {
+  display: inline-block;
+  padding: 14px 40px;
+  background: linear-gradient(135deg, #c87820 0%, #e8a830 50%, #c87820 100%);
+  color: #1a0a00;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 100px;
+  text-decoration: none;
+  box-shadow: 0 4px 24px rgba(200, 120, 32, 0.45), 0 1px 0 rgba(255,255,255,0.1) inset;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero_001__cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(200, 120, 32, 0.6);
+}
+
+.hero_001__cta-ghost {
+  display: inline-block;
+  padding: 13px 32px;
+  border: 1px solid rgba(212,168,80,0.4);
+  color: #d4a84a;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-radius: 100px;
+  text-decoration: none;
+  background: rgba(212,168,80,0.04);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.hero_001__cta-ghost:hover {
+  background: rgba(212,168,80,0.1);
+  border-color: rgba(212,168,80,0.7);
+}
+
+/* ─── RANGOLI BAR ────────────────────────────────────────────────────────── */
+.hero_001__rangoli-bar {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 10;
+}
+
+.hero_001__rangoli-dot {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(212,168,80,0.35);
+}
+
+.hero_001__rangoli-dot--lg {
+  width: 9px;
+  height: 9px;
+  background: rgba(212,168,80,0.5);
+}
+
+.hero_001__rangoli-dot--xl {
+  width: 14px;
+  height: 14px;
+  background: rgba(212,168,80,0.7);
+  box-shadow: 0 0 8px 2px rgba(212,168,80,0.3);
+}
+
+/* ─── TABLET (max-width: 900px) ──────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero_001__shell {
+    grid-template-columns: 50px 1fr 50px;
+    padding: 60px 16px 80px;
+    gap: 0;
+  }
+
+  .hero_001__name {
+    font-size: clamp(48px, 11vw, 80px);
+  }
+
+  .hero_001__aside-line--long { height: 80px; }
+
+  .hero_001__toran-leaf { width: 14px; height: 22px; }
+  .hero_001__toran-flower { width: 16px; height: 16px; }
+
+  .hero_001__glass-panel {
+    padding: 16px 20px;
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .hero_001__detail-sep { display: none; }
+
+  .hero_001__detail-item {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 8px;
+  }
+
+  .hero_001__mandala-outer { width: 300px; height: 300px; }
+  .hero_001__mandala-mid   { width: 210px; height: 210px; }
+  .hero_001__mandala-inner { width: 120px; height: 120px; }
+
+  .hero_001__bg-glow--left  { width: 360px; height: 360px; }
+  .hero_001__bg-glow--right { width: 320px; height: 320px; }
+}
+
+/* ─── MOBILE (max-width: 640px) ──────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .hero_001__shell {
+    grid-template-columns: 1fr;
+    padding: 60px 20px 100px;
+  }
+
+  .hero_001__aside { display: none; }
+
+  .hero_001__content {
+    padding: 0;
+  }
+
+  .hero_001__badge {
+    font-size: 9.5px;
+    padding: 6px 16px;
+    gap: 7px;
+  }
+
+  .hero_001__ganesh {
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+
+  .hero_001__names-wrap {
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+
+  .hero_001__name {
+    font-size: clamp(52px, 16vw, 68px);
+  }
+
+  .hero_001__ampersand-wrap {
+    width: 44px;
+    height: 44px;
+    margin: 0 4px;
+  }
+
+  .hero_001__ampersand {
+    font-size: 22px;
+  }
+
+  .hero_001__message {
+    font-size: 13.5px;
+    line-height: 1.75;
+    margin-bottom: 24px;
+  }
+
+  .hero_001__glass-panel {
+    padding: 14px 16px;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+  }
+
+  .hero_001__detail-sep { display: none; }
+
+  .hero_001__detail-item {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0;
+    width: 100%;
+  }
+
+  .hero_001__detail-value { font-size: 13px; }
+
+  .hero_001__ribbon {
+    font-size: 9.5px;
+    gap: 6px;
+    margin-bottom: 28px;
+    letter-spacing: 0.14em;
+  }
+
+  .hero_001__ribbon-dot { font-size: 14px; }
+
+  .hero_001__cta-wrap {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .hero_001__cta-btn,
+  .hero_001__cta-ghost {
+    width: 100%;
+    text-align: center;
+    padding: 15px 20px;
+  }
+
+  .hero_001__mandala-ring { display: none; }
+
+  .hero_001__bg-glow--left  { width: 260px; height: 260px; top: -60px; left: -80px; }
+  .hero_001__bg-glow--right { width: 240px; height: 240px; bottom: -60px; right: -80px; }
+
+  .hero_001__rangoli-bar { bottom: 20px; gap: 7px; }
+  .hero_001__rangoli-dot { width: 5px; height: 5px; }
+  .hero_001__rangoli-dot--lg { width: 7px; height: 7px; }
+  .hero_001__rangoli-dot--xl { width: 11px; height: 11px; }
+}
+
+  </style>
+</head>
+<body>
+<section class="ww-section hero_001">
+
+  <!-- Decorative background layers -->
+  <div class="hero_001__bg-base">
+    <div class="hero_001__bg-gradient"></div>
+    <div class="hero_001__bg-glow hero_001__bg-glow--left"></div>
+    <div class="hero_001__bg-glow hero_001__bg-glow--right"></div>
+    <div class="hero_001__bg-glow hero_001__bg-glow--center"></div>
+  </div>
+
+  <!-- Decorative geometric grid lines -->
+  <div class="hero_001__grid-lines" aria-hidden="true">
+    <span class="hero_001__line hero_001__line--v1"></span>
+    <span class="hero_001__line hero_001__line--v2"></span>
+    <span class="hero_001__line hero_001__line--h1"></span>
+  </div>
+
+  <!-- Floating marigold petals (CSS-only decorative dots) -->
+  <div class="hero_001__petals" aria-hidden="true">
+    <span class="hero_001__petal hero_001__petal--1"></span>
+    <span class="hero_001__petal hero_001__petal--2"></span>
+    <span class="hero_001__petal hero_001__petal--3"></span>
+    <span class="hero_001__petal hero_001__petal--4"></span>
+    <span class="hero_001__petal hero_001__petal--5"></span>
+    <span class="hero_001__petal hero_001__petal--6"></span>
+  </div>
+
+  <!-- Mandala ring accent top-right -->
+  <div class="hero_001__mandala-ring" aria-hidden="true">
+    <div class="hero_001__mandala-inner"></div>
+    <div class="hero_001__mandala-mid"></div>
+    <div class="hero_001__mandala-outer"></div>
+  </div>
+
+  <!-- Main content shell -->
+  <div class="hero_001__shell">
+
+    <!-- Left: decorative column -->
+    <aside class="hero_001__aside" aria-hidden="true">
+      <div class="hero_001__aside-line"></div>
+      <div class="hero_001__aside-diya">
+        <div class="hero_001__diya-flame"></div>
+        <div class="hero_001__diya-base-wrap"></div>
+      </div>
+      <div class="hero_001__aside-line"></div>
+      <div class="hero_001__aside-ornament">✦</div>
+      <div class="hero_001__aside-line hero_001__aside-line--long"></div>
+    </aside>
+
+    <!-- Center: main typography block -->
+    <main class="hero_001__content">
+
+      <!-- Top badge -->
+      <div class="hero_001__badge">
+        <span class="hero_001__badge-icon">✦</span>
+        <span class="hero_001__badge-text">A Gujarati Wedding Celebration</span>
+        <span class="hero_001__badge-icon">✦</span>
+      </div>
+
+      <!-- Ganesh blessing -->
+      <p class="hero_001__ganesh">॥ શ્રી ગણેશાય નમઃ ॥</p>
+
+      <!-- Names -->
+      <div class="hero_001__names-wrap">
+        <div class="hero_001__name hero_001__name--bride">Kavya</div>
+        <div class="hero_001__ampersand-wrap">
+          <span class="hero_001__ampersand">&amp;</span>
+        </div>
+        <div class="hero_001__name hero_001__name--groom">Mihir</div>
+      </div>
+
+      <!-- Tagline divider -->
+      <div class="hero_001__divider-wrap" aria-hidden="true">
+        <span class="hero_001__divider-line"></span>
+        <span class="hero_001__divider-icon">❧</span>
+        <span class="hero_001__divider-line"></span>
+      </div>
+
+      <!-- Hero message -->
+      <p class="hero_001__message">
+        With blessings of Shri Ganesh and our families, we invite you to celebrate a joyful Gujarati wedding filled with mehendi, garba, baraat, sacred pheras, dinner, music, and love.
+      </p>
+
+      <!-- Event details glass panel -->
+      <div class="hero_001__glass-panel">
+        <div class="hero_001__detail-item">
+          <span class="hero_001__detail-label">Date</span>
+          <span class="hero_001__detail-value">March 22, 2026</span>
+        </div>
+        <div class="hero_001__detail-sep" aria-hidden="true">✦</div>
+        <div class="hero_001__detail-item">
+          <span class="hero_001__detail-label">Venue</span>
+          <span class="hero_001__detail-value">Akshar Grand Palace</span>
+        </div>
+        <div class="hero_001__detail-sep" aria-hidden="true">✦</div>
+        <div class="hero_001__detail-item">
+          <span class="hero_001__detail-label">Location</span>
+          <span class="hero_001__detail-value">Somerset, New Jersey</span>
+        </div>
+      </div>
+
+      <!-- Celebrations ribbon -->
+      <div class="hero_001__ribbon">
+        <span class="hero_001__ribbon-item">Mehendi</span>
+        <span class="hero_001__ribbon-dot">·</span>
+        <span class="hero_001__ribbon-item">Garba</span>
+        <span class="hero_001__ribbon-dot">·</span>
+        <span class="hero_001__ribbon-item">Baraat</span>
+        <span class="hero_001__ribbon-dot">·</span>
+        <span class="hero_001__ribbon-item">Pheras</span>
+        <span class="hero_001__ribbon-dot">·</span>
+        <span class="hero_001__ribbon-item">Dinner</span>
+        <span class="hero_001__ribbon-dot">·</span>
+        <span class="hero_001__ribbon-item">Music</span>
+      </div>
+
+      <!-- CTA -->
+      <div class="hero_001__cta-wrap">
+        <a href="#rsvp" class="hero_001__cta-btn">RSVP Now</a>
+        <a href="#schedule" class="hero_001__cta-ghost">View Schedule</a>
+      </div>
+
+    </main>
+
+    <!-- Right: toran decorative column -->
+    <aside class="hero_001__aside hero_001__aside--right" aria-hidden="true">
+      <div class="hero_001__toran-wrap">
+        <div class="hero_001__toran-strand">
+          <span class="hero_001__toran-leaf"></span>
+          <span class="hero_001__toran-leaf"></span>
+          <span class="hero_001__toran-leaf"></span>
+          <span class="hero_001__toran-leaf"></span>
+          <span class="hero_001__toran-leaf"></span>
+        </div>
+        <div class="hero_001__toran-flowers">
+          <span class="hero_001__toran-flower"></span>
+          <span class="hero_001__toran-flower"></span>
+          <span class="hero_001__toran-flower"></span>
+        </div>
+      </div>
+      <div class="hero_001__aside-line hero_001__aside-line--long"></div>
+      <div class="hero_001__aside-ornament">✦</div>
+      <div class="hero_001__aside-line"></div>
+    </aside>
+
+  </div>
+
+  <!-- Bottom rangoli bar -->
+  <div class="hero_001__rangoli-bar" aria-hidden="true">
+    <span class="hero_001__rangoli-dot"></span>
+    <span class="hero_001__rangoli-dot hero_001__rangoli-dot--lg"></span>
+    <span class="hero_001__rangoli-dot"></span>
+    <span class="hero_001__rangoli-dot hero_001__rangoli-dot--lg"></span>
+    <span class="hero_001__rangoli-dot hero_001__rangoli-dot--xl"></span>
+    <span class="hero_001__rangoli-dot hero_001__rangoli-dot--lg"></span>
+    <span class="hero_001__rangoli-dot"></span>
+    <span class="hero_001__rangoli-dot hero_001__rangoli-dot--lg"></span>
+    <span class="hero_001__rangoli-dot"></span>
+  </div>
+
+</section>
+</body>
+</html>
