@@ -18,13 +18,21 @@ export async function POST(req: Request) {
     );
   }
 
-  const { provider, model, intake, currentHero, message } = (body || {}) as {
+  const { provider, model, intake, currentHero, message, editScope } = (body ||
+    {}) as {
     provider?: unknown;
     model?: unknown;
     intake?: unknown;
     currentHero?: unknown;
     message?: unknown;
+    editScope?: unknown;
   };
+
+  const validScopes = new Set(["content", "section_style", "global_design"]);
+  const normalizedScope =
+    typeof editScope === "string" && validScopes.has(editScope)
+      ? (editScope as "content" | "section_style" | "global_design")
+      : undefined;
 
   if (!validateProvider(provider)) {
     return NextResponse.json(
@@ -83,6 +91,7 @@ export async function POST(req: Request) {
         css: ch.css,
         designNotes: ch.designNotes,
       },
+      editScope: normalizedScope,
     });
   } catch (err) {
     const errMsg = err instanceof Error ? err.message : "Unknown AI error";
@@ -117,6 +126,7 @@ export async function POST(req: Request) {
       css: ch.css,
       designNotes: ch.designNotes,
     },
+    editScope: normalizedScope,
   };
 
   return NextResponse.json({

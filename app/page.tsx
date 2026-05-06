@@ -3,6 +3,14 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { AIProvider, HeroResult, IntakeForm } from "@/lib/ai/types";
 import { buildPreviewHtml } from "@/lib/buildPreview";
+import { buildGlobalDesignTokenCss } from "@/lib/design-dna/buildGlobalDesignTokenCss";
+import { shouldRefreshDNAForIntakeChange } from "@/lib/design-dna/shouldRefreshDNAForIntakeChange";
+import type {
+  DesignDNAVersion,
+  DesignDNAVersionSource,
+  EditClassification,
+  SiteDesignDNA,
+} from "@/lib/design-dna/types";
 import {
   COMMUNITY_OPTIONS,
   DEFAULT_INTAKE,
@@ -22,6 +30,11 @@ interface VersionEntry {
   hero: HeroResult;
 }
 
+interface PendingDnaNotice {
+  source: DesignDNAVersionSource;
+  reason: string;
+}
+
 const STORAGE_KEY = "veeinvite-poc-state-v1";
 
 interface PersistedState {
@@ -30,6 +43,10 @@ interface PersistedState {
   model: string;
   hero: HeroResult | null;
   chat: ChatMessage[];
+  // DNA itself is persisted on disk via /api/design-dna. We only keep the
+  // diff-baseline (intakeAtDnaExtraction) in localStorage because it's per-tab
+  // UI state, not a project artifact.
+  intakeAtDnaExtraction: IntakeForm | null;
 }
 
 function loadPersisted(): Partial<PersistedState> | null {
@@ -40,6 +57,19 @@ function loadPersisted(): Partial<PersistedState> | null {
     return JSON.parse(raw) as Partial<PersistedState>;
   } catch {
     return null;
+  }
+}
+
+function labelForDnaSource(source: DesignDNAVersionSource): string {
+  switch (source) {
+    case "initial_generation":
+      return "Initial Design DNA";
+    case "manual_refresh":
+      return "Manual DNA refresh";
+    case "global_design_edit":
+      return "DNA refresh after global design edit";
+    case "intake_change":
+      return "DNA refresh after intake change";
   }
 }
 
@@ -54,7 +84,16 @@ export default function Page() {
   const [device, setDevice] = useState<DeviceMode>("desktop");
   const [isGenerating, setIsGenerating] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [isExtractingDna, setIsExtractingDna] = useState(false);
+  const [isClassifyingEdit, setIsClassifyingEdit] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const [designDNA, setDesignDNA] = useState<SiteDesignDNA | null>(null);
+  const [dnaVersions, setDnaVersions] = useState<DesignDNAVersion[]>([]);
+  const [intakeAtDnaExtraction, setIntakeAtDnaExtraction] =
+    useState<IntakeForm | null>(null);
+  const [pendingDnaNotice, setPendingDnaNotice] =
+    useState<PendingDnaNotice | null>(null);
 
   // Hydrate non-version state from localStorage once on mount.
   useEffect(() => {
@@ -65,6 +104,33 @@ export default function Page() {
     if (typeof persisted.model === "string") setModel(persisted.model);
     if (persisted.hero) setHero(persisted.hero);
     if (Array.isArray(persisted.chat)) setChat(persisted.chat);
+    if (persisted.intakeAtDnaExtraction) {
+      setIntakeAtDnaExtraction(persisted.intakeAtDnaExtraction);
+    }
+  }, []);
+
+  // Hydrate Design DNA versions from the server (all_generated_design_dna/).
+  // The most recent version becomes the current designDNA.
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch("/api/design-dna");
+        const data = await res.json();
+        if (!cancelled && data.success && Array.isArray(data.versions)) {
+          const list = data.versions as DesignDNAVersion[];
+          setDnaVersions(list);
+          if (list.length > 0) {
+            setDesignDNA(list[list.length - 1].designDNA);
+          }
+        }
+      } catch {
+        // Network errors are non-fatal — UI works without prior DNA history.
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   // Hydrate version history from the server (all_generated_version/ directory).
@@ -100,18 +166,161 @@ export default function Page() {
       model,
       hero,
       chat,
+      intakeAtDnaExtraction,
     };
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
     } catch {
       // Quota errors are non-fatal — POC keeps running with in-memory state.
     }
-  }, [intake, provider, model, hero, chat]);
+  }, [intake, provider, model, hero, chat, intakeAtDnaExtraction]);
 
-  const previewHtml = useMemo(() => buildPreviewHtml(hero), [hero]);
+  const designTokenCss = useMemo(
+    () => buildGlobalDesignTokenCss(designDNA),
+    [designDNA],
+  );
+
+  const previewHtml = useMemo(
+    () => buildPreviewHtml({ hero, designTokenCss }),
+    [hero, designTokenCss],
+  );
+
+  // Watch intake for design-affecting changes vs. the snapshot taken at the
+  // last DNA extraction. If a refresh is warranted, surface a non-blocking
+  // notice. A pending "global_design_edit" notice (from chat) blocks this so
+  // we don't clobber the more specific reason.
+  useEffect(() => {
+    const diff = shouldRefreshDNAForIntakeChange(intakeAtDnaExtraction, intake);
+    if (pendingDnaNotice?.source === "global_design_edit") return;
+    if (diff.shouldRefreshDNA) {
+      setPendingDnaNotice({
+        source: "intake_change",
+        reason: diff.reasons.join(" "),
+      });
+    } else if (pendingDnaNotice?.source === "intake_change") {
+      setPendingDnaNotice(null);
+    }
+  }, [intake, intakeAtDnaExtraction, pendingDnaNotice]);
 
   function patchIntake<K extends keyof IntakeForm>(key: K, value: IntakeForm[K]) {
     setIntake((prev) => ({ ...prev, [key]: value }));
+  }
+
+  // ============================================================
+  // Design DNA helpers
+  // ============================================================
+
+  async function pushDnaVersion(
+    label: string,
+    dna: SiteDesignDNA,
+    source: DesignDNAVersionSource,
+  ): Promise<DesignDNAVersion | null> {
+    try {
+      const res = await fetch("/api/design-dna", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          label,
+          designDNA: dna,
+          source,
+          provider,
+          model: model.trim() || undefined,
+        }),
+      });
+      const data = await res.json();
+      if (data.success && data.version) {
+        const v = data.version as DesignDNAVersion;
+        setDnaVersions((prev) => [...prev, v]);
+        return v;
+      }
+      setError(data.message || "Failed to save Design DNA on disk.");
+      return null;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to save Design DNA.");
+      return null;
+    }
+  }
+
+  async function extractDnaFromCurrent(
+    heroForExtraction: HeroResult,
+    intakeForExtraction: IntakeForm,
+  ): Promise<SiteDesignDNA | null> {
+    setIsExtractingDna(true);
+    try {
+      const res = await fetch("/api/extract-design-dna", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          provider,
+          model: model.trim() || undefined,
+          intake: intakeForExtraction,
+          hero: heroForExtraction,
+        }),
+      });
+      const data = await res.json();
+      if (!data.success || !data.designDNA) {
+        setError(data.message || "DNA extraction failed.");
+        return null;
+      }
+      return data.designDNA as SiteDesignDNA;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "DNA extraction failed.");
+      return null;
+    } finally {
+      setIsExtractingDna(false);
+    }
+  }
+
+  async function refreshDna(
+    source: DesignDNAVersionSource,
+    label?: string,
+  ): Promise<void> {
+    if (!hero) {
+      setError("Generate a hero first before refreshing Design DNA.");
+      return;
+    }
+    const dna = await extractDnaFromCurrent(hero, intake);
+    if (!dna) return;
+    setDesignDNA(dna);
+    setIntakeAtDnaExtraction(intake);
+    await pushDnaVersion(label ?? labelForDnaSource(source), dna, source);
+    setPendingDnaNotice(null);
+    setChat((prev) => [
+      ...prev,
+      {
+        role: "system",
+        content:
+          source === "manual_refresh"
+            ? "Design DNA refreshed manually."
+            : source === "global_design_edit"
+              ? "Design DNA refreshed after global design edit."
+              : source === "intake_change"
+                ? "Design DNA refreshed because intake changed."
+                : "Design DNA refreshed.",
+      },
+    ]);
+  }
+
+  function dismissDnaNotice(): void {
+    if (pendingDnaNotice?.source === "intake_change") {
+      // Treat "Keep existing DNA" as accepting the current intake for diff
+      // purposes — same field changing again later won't re-fire the notice.
+      setIntakeAtDnaExtraction(intake);
+    }
+    setPendingDnaNotice(null);
+  }
+
+  function restoreDnaVersion(id: string): void {
+    const v = dnaVersions.find((x) => x.id === id);
+    if (!v) return;
+    setDesignDNA(v.designDNA);
+    setChat((prev) => [
+      ...prev,
+      {
+        role: "system",
+        content: `Restored Design DNA: ${v.label} (${v.id}).`,
+      },
+    ]);
   }
 
   async function pushVersion(
@@ -180,6 +389,16 @@ export default function Page() {
           content: `Hero generated using ${provider}${model.trim() ? ` (${model.trim()})` : ""}. ${newHero.designNotes}`,
         },
       ]);
+
+      // Auto-extract Design DNA from the new hero. This is a best-effort step:
+      // if it fails, the hero is still usable, just without DNA-driven tokens.
+      const dna = await extractDnaFromCurrent(newHero, intake);
+      if (dna) {
+        setDesignDNA(dna);
+        setIntakeAtDnaExtraction(intake);
+        await pushDnaVersion("Initial Design DNA", dna, "initial_generation");
+        setPendingDnaNotice(null);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Network error.");
     } finally {
@@ -195,9 +414,44 @@ export default function Page() {
       return;
     }
     setError(null);
-    setIsEditing(true);
     setChat((prev) => [...prev, { role: "user", content: message }]);
     setChatInput("");
+
+    // 1. Classify the edit so the prompt and the DNA-notice flow can adapt.
+    //    Server-side fallback returns section_style/false on classifier errors,
+    //    so this call should always resolve with usable data. We still guard
+    //    network failures and fall back locally to be safe.
+    setIsClassifyingEdit(true);
+    let classification: EditClassification = {
+      scope: "section_style",
+      shouldUpdateDNA: false,
+      reason: "Classifier not called (network error). Treated as local section edit.",
+    };
+    try {
+      const classifyRes = await fetch("/api/classify-edit-request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          provider,
+          model: model.trim() || undefined,
+          intake,
+          currentHero: hero,
+          designDNA,
+          message,
+        }),
+      });
+      const classifyData = await classifyRes.json();
+      if (classifyData.success && classifyData.classification) {
+        classification = classifyData.classification as EditClassification;
+      }
+    } catch {
+      // keep fallback classification
+    } finally {
+      setIsClassifyingEdit(false);
+    }
+
+    // 2. Run the edit with the resolved scope.
+    setIsEditing(true);
     try {
       const res = await fetch("/api/edit-hero", {
         method: "POST",
@@ -213,6 +467,7 @@ export default function Page() {
           },
           message,
           intake,
+          editScope: classification.scope,
         }),
       });
       const data = await res.json();
@@ -234,8 +489,19 @@ export default function Page() {
       );
       setChat((prev) => [
         ...prev,
+        {
+          role: "system",
+          content: `Edit classified as ${classification.scope}: ${classification.reason}`,
+        },
         { role: "assistant", content: newHero.designNotes || "Updated." },
       ]);
+
+      if (classification.shouldUpdateDNA) {
+        setPendingDnaNotice({
+          source: "global_design_edit",
+          reason: classification.reason,
+        });
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Network error.");
     } finally {
@@ -255,7 +521,9 @@ export default function Page() {
 
   function onDownloadHtml() {
     if (!hero) return;
-    const blob = new Blob([buildPreviewHtml(hero)], { type: "text/html" });
+    const blob = new Blob([buildPreviewHtml({ hero, designTokenCss })], {
+      type: "text/html",
+    });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -269,7 +537,7 @@ export default function Page() {
   function onResetAll() {
     if (
       !confirm(
-        "Reset intake, hero, and chat?\nSaved versions in all_generated_version/ are kept on disk.",
+        "Reset intake, hero, and chat?\nSaved hero versions in all_generated_version/ and saved Design DNA versions in all_generated_design_dna/ are kept on disk.",
       )
     )
       return;
@@ -278,12 +546,18 @@ export default function Page() {
     setChat([]);
     setChatInput("");
     setError(null);
+    setIntakeAtDnaExtraction(null);
+    setPendingDnaNotice(null);
+    // Note: designDNA and dnaVersions stay in memory (and on disk). They will
+    // re-hydrate from the server on next mount anyway.
   }
+
+  const isBusy = isGenerating || isEditing || isExtractingDna || isClassifyingEdit;
 
   return (
     <div className="flex h-screen flex-col bg-[#f5f3ef] text-[#1a1a1f]">
       <Topbar />
-      <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 p-3 lg:grid-cols-[360px_minmax(0,1fr)_360px]">
+      <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 p-3 lg:grid-cols-[360px_minmax(0,1fr)_400px]">
         <IntakePanel
           intake={intake}
           patchIntake={patchIntake}
@@ -304,16 +578,28 @@ export default function Page() {
           versions={versions}
           onRestoreVersion={onRestoreVersion}
           error={error}
-          isBusy={isGenerating || isEditing}
+          isBusy={isBusy}
         />
-        <ChatPanel
-          chat={chat}
-          chatInput={chatInput}
-          setChatInput={setChatInput}
-          onSendChat={onSendChat}
-          isEditing={isEditing}
-          heroExists={!!hero}
-        />
+        <div className="grid min-h-0 grid-rows-[auto_minmax(0,1fr)] gap-3">
+          <DesignDnaPanel
+            designDNA={designDNA}
+            dnaVersions={dnaVersions}
+            pendingNotice={pendingDnaNotice}
+            heroExists={!!hero}
+            isExtracting={isExtractingDna}
+            onRefreshDna={refreshDna}
+            onDismissNotice={dismissDnaNotice}
+            onRestoreDnaVersion={restoreDnaVersion}
+          />
+          <ChatPanel
+            chat={chat}
+            chatInput={chatInput}
+            setChatInput={setChatInput}
+            onSendChat={onSendChat}
+            isEditing={isEditing || isClassifyingEdit}
+            heroExists={!!hero}
+          />
+        </div>
       </div>
     </div>
   );
@@ -705,6 +991,216 @@ function ChatPanel({
         </div>
       </footer>
     </section>
+  );
+}
+
+interface DesignDnaPanelProps {
+  designDNA: SiteDesignDNA | null;
+  dnaVersions: DesignDNAVersion[];
+  pendingNotice: PendingDnaNotice | null;
+  heroExists: boolean;
+  isExtracting: boolean;
+  onRefreshDna: (source: DesignDNAVersionSource, label?: string) => void;
+  onDismissNotice: () => void;
+  onRestoreDnaVersion: (id: string) => void;
+}
+
+function DesignDnaPanel(props: DesignDnaPanelProps) {
+  const {
+    designDNA,
+    dnaVersions,
+    pendingNotice,
+    heroExists,
+    isExtracting,
+    onRefreshDna,
+    onDismissNotice,
+    onRestoreDnaVersion,
+  } = props;
+
+  return (
+    <section className="flex min-h-0 flex-col rounded-lg border border-black/5 bg-white">
+      <header className="flex items-center justify-between border-b border-black/5 px-4 py-3">
+        <div>
+          <h2 className="text-sm font-semibold">Site Design DNA</h2>
+          <p className="text-[11px] text-black/50">
+            Global visual identity for future sections
+          </p>
+        </div>
+        <button
+          onClick={() => onRefreshDna("manual_refresh")}
+          disabled={!heroExists || isExtracting}
+          className="rounded-md border border-black/10 px-3 py-1.5 text-xs font-medium hover:bg-black/5 disabled:cursor-not-allowed disabled:opacity-40"
+          title={heroExists ? "Re-extract DNA from current Hero" : "Generate a hero first"}
+        >
+          {isExtracting ? "Refreshing…" : "Refresh DNA"}
+        </button>
+      </header>
+
+      {pendingNotice ? (
+        <div className="border-b border-amber-200 bg-amber-50 px-4 py-3 text-xs text-amber-900">
+          <div className="mb-1 font-semibold">
+            {pendingNotice.source === "intake_change"
+              ? "Your intake changes may affect the full design direction."
+              : "This edit may affect the full website design direction."}
+          </div>
+          <div className="mb-2 text-amber-800/80">{pendingNotice.reason}</div>
+          <div className="flex gap-2">
+            <button
+              onClick={() => onRefreshDna(pendingNotice.source)}
+              disabled={isExtracting}
+              className="rounded-md bg-amber-700 px-3 py-1.5 text-xs font-medium text-white hover:bg-amber-800 disabled:opacity-50"
+            >
+              Refresh Design DNA
+            </button>
+            <button
+              onClick={onDismissNotice}
+              className="rounded-md border border-amber-300 px-3 py-1.5 text-xs font-medium text-amber-900 hover:bg-amber-100"
+            >
+              Keep existing DNA
+            </button>
+          </div>
+        </div>
+      ) : null}
+
+      <div className="min-h-0 flex-1 space-y-3 overflow-y-auto p-4">
+        {designDNA ? (
+          <DnaSummary dna={designDNA} />
+        ) : (
+          <div className="rounded-md border border-dashed border-black/15 p-3 text-xs text-black/50">
+            DNA will be extracted automatically after the first hero generation.
+          </div>
+        )}
+
+        {dnaVersions.length > 0 ? (
+          <div>
+            <div className="mb-1 text-[11px] uppercase tracking-wide text-black/50">
+              DNA history
+            </div>
+            <div className="space-y-1">
+              {dnaVersions.map((v) => (
+                <div
+                  key={v.id}
+                  className="flex items-center justify-between gap-2 rounded-md border border-black/10 bg-white px-2.5 py-1.5 text-xs"
+                >
+                  <div className="min-w-0">
+                    <div className="truncate font-semibold">{v.label}</div>
+                    <div className="truncate text-[10px] text-black/40">
+                      {v.id} · {v.source}
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => onRestoreDnaVersion(v.id)}
+                    className="shrink-0 rounded-md border border-black/10 px-2 py-1 text-[11px] hover:bg-black/5"
+                  >
+                    Restore
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : null}
+      </div>
+    </section>
+  );
+}
+
+function DnaSummary({ dna }: { dna: SiteDesignDNA }) {
+  const swatches: { label: string; value: string | undefined }[] = [
+    { label: "primary", value: dna.palette.primary },
+    { label: "secondary", value: dna.palette.secondary },
+    { label: "accent", value: dna.palette.accent },
+    { label: "background", value: dna.palette.background },
+    { label: "surface", value: dna.palette.surface },
+    { label: "text", value: dna.palette.text },
+    { label: "gold", value: dna.palette.gold },
+    { label: "green", value: dna.palette.green },
+  ];
+
+  return (
+    <div className="space-y-3 text-xs">
+      <div>
+        <div className="text-[11px] uppercase tracking-wide text-black/50">Concept</div>
+        <div className="font-semibold">{dna.concept}</div>
+        <div className="text-black/70">{dna.tone}</div>
+      </div>
+      <div className="grid grid-cols-2 gap-2 text-[11px]">
+        <div>
+          <div className="uppercase tracking-wide text-black/50">Community</div>
+          <div className="text-black/80">{dna.community}</div>
+        </div>
+        <div>
+          <div className="uppercase tracking-wide text-black/50">Style</div>
+          <div className="text-black/80">{dna.styleDirection}</div>
+        </div>
+      </div>
+      <div>
+        <div className="mb-1 text-[11px] uppercase tracking-wide text-black/50">Palette</div>
+        <div className="flex flex-wrap gap-1.5">
+          {swatches
+            .filter((s) => s.value && s.value.trim().length > 0)
+            .map((s) => (
+              <div
+                key={s.label}
+                className="flex items-center gap-1.5 rounded-md border border-black/10 bg-white px-1.5 py-1"
+                title={`${s.label}: ${s.value}`}
+              >
+                <span
+                  className="inline-block h-4 w-4 rounded border border-black/10"
+                  style={{ background: s.value ?? "transparent" }}
+                />
+                <span className="text-[10px] text-black/60">{s.label}</span>
+              </div>
+            ))}
+        </div>
+      </div>
+      <div>
+        <div className="mb-0.5 text-[11px] uppercase tracking-wide text-black/50">Fonts</div>
+        <div className="text-black/80">
+          <span className="text-black/50">heading:</span> {dna.fonts.heading}
+        </div>
+        <div className="text-black/80">
+          <span className="text-black/50">body:</span> {dna.fonts.body}
+        </div>
+        {dna.fonts.accent ? (
+          <div className="text-black/80">
+            <span className="text-black/50">accent:</span> {dna.fonts.accent}
+          </div>
+        ) : null}
+      </div>
+      {dna.visualMotifs.length > 0 ? (
+        <div>
+          <div className="mb-1 text-[11px] uppercase tracking-wide text-black/50">Motifs</div>
+          <div className="flex flex-wrap gap-1">
+            {dna.visualMotifs.map((m) => (
+              <span
+                key={m}
+                className="rounded-full border border-black/10 bg-black/5 px-2 py-0.5 text-[10px] text-black/70"
+              >
+                {m}
+              </span>
+            ))}
+          </div>
+        </div>
+      ) : null}
+      <div>
+        <div className="mb-0.5 text-[11px] uppercase tracking-wide text-black/50">Animation</div>
+        <div className="text-black/80">
+          <span className="text-black/50">intensity:</span> {dna.animationMood.intensity}
+        </div>
+      </div>
+      {dna.sectionRules.length > 0 ? (
+        <div>
+          <div className="mb-1 text-[11px] uppercase tracking-wide text-black/50">
+            Future-section rules
+          </div>
+          <ul className="list-disc space-y-0.5 pl-4 text-[11px] text-black/70">
+            {dna.sectionRules.slice(0, 6).map((r, i) => (
+              <li key={i}>{r}</li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+    </div>
   );
 }
 

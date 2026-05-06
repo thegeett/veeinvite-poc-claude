@@ -1,13 +1,25 @@
 import type { HeroResult } from "./ai/types";
 
-// The iframe shell — base reset, viewport meta, Google Fonts preconnects,
-// and the AI-generated HTML/CSS injected into it. The AI controls only
-// the content inside .hero_001; the surrounding shell is fixed.
-export function buildPreviewHtml(hero: HeroResult | null): string {
+interface BuildPreviewArgs {
+  hero: HeroResult | null;
+  designTokenCss?: string;
+}
+
+// The iframe shell — base reset, viewport meta, Google Fonts preconnects, the
+// optional global design-token CSS (from Site Design DNA), and the AI-generated
+// hero HTML/CSS injected on top. The AI controls only the content inside
+// .hero_001; the surrounding shell is fixed.
+export function buildPreviewHtml(arg: BuildPreviewArgs | HeroResult | null): string {
+  const { hero, designTokenCss } = normalize(arg);
   const css = hero?.css ?? "";
   const html =
     hero?.html ??
     `<section class="ww-section hero_001"><div style="padding:48px;font-family:ui-sans-serif,system-ui;color:#666">No hero generated yet.</div></section>`;
+
+  const tokenBlock =
+    designTokenCss && designTokenCss.trim().length > 0
+      ? `\n    ${designTokenCss}\n`
+      : "";
 
   return `<!DOCTYPE html>
 <html>
@@ -22,11 +34,24 @@ export function buildPreviewHtml(hero: HeroResult | null): string {
     html, body { margin: 0; width: 100%; min-height: 100%; }
     body { overflow-x: hidden; }
     .ww-section { width: 100%; position: relative; isolation: isolate; }
-    ${css}
+${tokenBlock}    ${css}
   </style>
 </head>
 <body>
 ${html}
 </body>
 </html>`;
+}
+
+// Backwards-compatible: callers used to pass a HeroResult or null directly.
+// Keep both signatures working so existing call sites don't break during the
+// DNA rollout. Callers that want token injection use the new args object.
+function normalize(
+  arg: BuildPreviewArgs | HeroResult | null,
+): BuildPreviewArgs {
+  if (arg === null) return { hero: null };
+  if (typeof arg === "object" && "hero" in arg) {
+    return arg as BuildPreviewArgs;
+  }
+  return { hero: arg as HeroResult };
 }
