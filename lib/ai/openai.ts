@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import type { EditClassification, SiteDesignDNA } from "../design-dna/types";
+import { assertSiteDesignDNA } from "../design-dna/validateSiteDesignDNA";
 import { extractJson } from "../extractJson";
 import {
   buildClassifyEditUserPrompt,
@@ -183,7 +184,11 @@ export async function callOpenAIExtractDesignDNA(
     buildExtractDnaUserPrompt(input.intake, input.hero),
     8192,
   );
-  return extractJson<SiteDesignDNA>(raw);
+  // json_object mode does not enforce schema; mirror the Anthropic
+  // forced-tool-use guarantee with an explicit validator. Mismatch throws
+  // and is caught by the route as a normal AI-call failure.
+  const parsed = extractJson<unknown>(raw);
+  return assertSiteDesignDNA(parsed);
 }
 
 export async function callOpenAIClassifyEditRequest(

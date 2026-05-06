@@ -4,9 +4,15 @@ import type {
   DesignDNAVersionSource,
   SiteDesignDNA,
 } from "@/lib/design-dna/types";
+import { validateSiteDesignDNA } from "@/lib/design-dna/validateSiteDesignDNA";
 import { validateProvider } from "@/lib/validateIntake";
 
 export const runtime = "nodejs";
+
+// 256KB cap on the serialized DNA payload. Real DNA serializes to ~10–50KB;
+// this leaves plenty of headroom while preventing a runaway model output (or
+// a hand-crafted POST) from filling disk.
+const MAX_DNA_PAYLOAD_BYTES = 256 * 1024;
 
 const VALID_SOURCES: DesignDNAVersionSource[] = [
   "initial_generation",
@@ -19,27 +25,6 @@ function isValidSource(value: unknown): value is DesignDNAVersionSource {
   return (
     typeof value === "string" &&
     (VALID_SOURCES as string[]).includes(value)
-  );
-}
-
-// Light shape check — DNA payloads come from our own AI pipeline, but a
-// malformed POST shouldn't crash the route or write garbage to disk.
-function looksLikeDesignDNA(value: unknown): value is SiteDesignDNA {
-  if (!value || typeof value !== "object") return false;
-  const v = value as Record<string, unknown>;
-  return (
-    typeof v.concept === "string" &&
-    typeof v.tone === "string" &&
-    typeof v.community === "string" &&
-    typeof v.styleDirection === "string" &&
-    !!v.palette &&
-    typeof v.palette === "object" &&
-    !!v.fonts &&
-    typeof v.fonts === "object" &&
-    Array.isArray(v.visualMotifs) &&
-    Array.isArray(v.sectionRules) &&
-    !!v.cssVariables &&
-    typeof v.cssVariables === "object"
   );
 }
 
@@ -92,10 +77,26 @@ export async function POST(req: Request) {
     );
   }
 
-  if (!looksLikeDesignDNA(designDNA)) {
+  const dnaCheck = validateSiteDesignDNA(designDNA);
+  if (!dnaCheck.ok) {
     return NextResponse.json(
-      { success: false, message: "designDNA does not match the expected shape." },
+      {
+        success: false,
+        message: `designDNA does not match the expected shape: ${dnaCheck.errors.join(" ")}`,
+      },
       { status: 400 },
+    );
+  }
+
+  // Cheap upper bound on payload size before disk write.
+  const serialized = JSON.stringify(designDNA);
+  if (serialized.length > MAX_DNA_PAYLOAD_BYTES) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: `designDNA exceeds the ${MAX_DNA_PAYLOAD_BYTES}-byte cap.`,
+      },
+      { status: 413 },
     );
   }
 
@@ -110,7 +111,7 @@ export async function POST(req: Request) {
   try {
     const version = await saveDnaVersion({
       label: label.trim(),
-      designDNA,
+      designDNA: designDNA as SiteDesignDNA,
       source,
       provider: provider as "openai" | "anthropic" | undefined,
       model: typeof model === "string" ? model : undefined,

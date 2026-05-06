@@ -9,8 +9,8 @@ interface BuildPreviewArgs {
 // optional global design-token CSS (from Site Design DNA), and the AI-generated
 // hero HTML/CSS injected on top. The AI controls only the content inside
 // .hero_001; the surrounding shell is fixed.
-export function buildPreviewHtml(arg: BuildPreviewArgs | HeroResult | null): string {
-  const { hero, designTokenCss } = normalize(arg);
+export function buildPreviewHtml(args: BuildPreviewArgs): string {
+  const { hero, designTokenCss } = args;
   const css = hero?.css ?? "";
   const html =
     hero?.html ??
@@ -41,17 +41,4 @@ ${tokenBlock}    ${css}
 ${html}
 </body>
 </html>`;
-}
-
-// Backwards-compatible: callers used to pass a HeroResult or null directly.
-// Keep both signatures working so existing call sites don't break during the
-// DNA rollout. Callers that want token injection use the new args object.
-function normalize(
-  arg: BuildPreviewArgs | HeroResult | null,
-): BuildPreviewArgs {
-  if (arg === null) return { hero: null };
-  if (typeof arg === "object" && "hero" in arg) {
-    return arg as BuildPreviewArgs;
-  }
-  return { hero: arg as HeroResult };
 }

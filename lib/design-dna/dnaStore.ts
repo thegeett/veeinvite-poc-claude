@@ -46,6 +46,35 @@ export async function listDnaVersions(): Promise<StoredDnaVersion[]> {
   return versions;
 }
 
+// Atomically claim the next vN/ directory. `mkdir({ recursive: false })` will
+// fail with EEXIST if another caller (e.g. a second tab, an in-flight auto-
+// extract racing a manual refresh) already created the same dir. We bump and
+// retry until we win the race. Bounded retries so a corrupted directory tree
+// doesn't loop forever.
+async function claimNextVersionDir(
+  baseDir: string,
+  startingSeq: number,
+): Promise<{ seq: number; dir: string }> {
+  let seq = startingSeq;
+  for (let attempt = 0; attempt < 16; attempt++) {
+    const dir = path.join(baseDir, `v${seq}`);
+    try {
+      await fs.mkdir(dir, { recursive: false });
+      return { seq, dir };
+    } catch (err: unknown) {
+      const code = (err as NodeJS.ErrnoException)?.code;
+      if (code === "EEXIST") {
+        seq += 1;
+        continue;
+      }
+      throw err;
+    }
+  }
+  throw new Error(
+    `Could not claim a free version directory under ${baseDir} after 16 attempts.`,
+  );
+}
+
 export async function saveDnaVersion(input: {
   label: string;
   designDNA: SiteDesignDNA;
@@ -61,9 +90,7 @@ export async function saveDnaVersion(input: {
       const seq = parseSeq(e.name);
       return seq !== null && seq > max ? seq : max;
     }, 0);
-  const seq = maxSeq + 1;
-  const versionDir = path.join(DNA_DIR, `v${seq}`);
-  await fs.mkdir(versionDir, { recursive: true });
+  const { seq, dir: versionDir } = await claimNextVersionDir(DNA_DIR, maxSeq + 1);
 
   const stored: StoredDnaVersion = {
     id: `dna_v${seq}`,

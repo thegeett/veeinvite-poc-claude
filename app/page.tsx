@@ -70,6 +70,13 @@ function labelForDnaSource(source: DesignDNAVersionSource): string {
       return "DNA refresh after global design edit";
     case "intake_change":
       return "DNA refresh after intake change";
+    default: {
+      // Compile-time check that every union member is handled. Catches the
+      // case where someone adds a new DesignDNAVersionSource and forgets to
+      // update this function — the assignment below would fail to type-check.
+      const _exhaustive: never = source;
+      return _exhaustive;
+    }
   }
 }
 
@@ -185,22 +192,33 @@ export default function Page() {
     [hero, designTokenCss],
   );
 
-  // Watch intake for design-affecting changes vs. the snapshot taken at the
-  // last DNA extraction. If a refresh is warranted, surface a non-blocking
-  // notice. A pending "global_design_edit" notice (from chat) blocks this so
-  // we don't clobber the more specific reason.
-  useEffect(() => {
+  // Compute the candidate intake-driven notice as a pure derivation so the
+  // reconciler effect below can react to *changes in the candidate*, not to
+  // every change in the notice it itself writes.
+  const intakeNoticeCandidate = useMemo<PendingDnaNotice | null>(() => {
     const diff = shouldRefreshDNAForIntakeChange(intakeAtDnaExtraction, intake);
-    if (pendingDnaNotice?.source === "global_design_edit") return;
-    if (diff.shouldRefreshDNA) {
-      setPendingDnaNotice({
-        source: "intake_change",
-        reason: diff.reasons.join(" "),
-      });
-    } else if (pendingDnaNotice?.source === "intake_change") {
+    return diff.shouldRefreshDNA
+      ? { source: "intake_change", reason: diff.reasons.join(" ") }
+      : null;
+  }, [intake, intakeAtDnaExtraction]);
+
+  // Hold the latest pendingDnaNotice in a ref so the reconciler can read it
+  // without becoming a fragile read/write loop on its own dep array.
+  const pendingDnaNoticeRef = useRef<PendingDnaNotice | null>(null);
+  useEffect(() => {
+    pendingDnaNoticeRef.current = pendingDnaNotice;
+  }, [pendingDnaNotice]);
+
+  // Reconcile candidate → pendingDnaNotice. A `global_design_edit` notice
+  // from chat blocks intake-driven overrides until the user takes action.
+  useEffect(() => {
+    if (pendingDnaNoticeRef.current?.source === "global_design_edit") return;
+    if (intakeNoticeCandidate) {
+      setPendingDnaNotice(intakeNoticeCandidate);
+    } else if (pendingDnaNoticeRef.current?.source === "intake_change") {
       setPendingDnaNotice(null);
     }
-  }, [intake, intakeAtDnaExtraction, pendingDnaNotice]);
+  }, [intakeNoticeCandidate]);
 
   function patchIntake<K extends keyof IntakeForm>(key: K, value: IntakeForm[K]) {
     setIntake((prev) => ({ ...prev, [key]: value }));
@@ -244,8 +262,26 @@ export default function Page() {
   async function extractDnaFromCurrent(
     heroForExtraction: HeroResult,
     intakeForExtraction: IntakeForm,
+    options?: { silent?: boolean },
   ): Promise<SiteDesignDNA | null> {
     setIsExtractingDna(true);
+    const reportFailure = (msg: string) => {
+      if (options?.silent) {
+        // Auto-extract path (e.g. right after Generate Hero) is documented
+        // as best-effort — the hero itself is fine. Funnel into a system
+        // chat breadcrumb instead of a red banner so the working hero
+        // doesn't look broken.
+        setChat((prev) => [
+          ...prev,
+          {
+            role: "system",
+            content: `Couldn't auto-extract Design DNA: ${msg}`,
+          },
+        ]);
+      } else {
+        setError(msg);
+      }
+    };
     try {
       const res = await fetch("/api/extract-design-dna", {
         method: "POST",
@@ -259,12 +295,12 @@ export default function Page() {
       });
       const data = await res.json();
       if (!data.success || !data.designDNA) {
-        setError(data.message || "DNA extraction failed.");
+        reportFailure(data.message || "DNA extraction failed.");
         return null;
       }
       return data.designDNA as SiteDesignDNA;
     } catch (err) {
-      setError(err instanceof Error ? err.message : "DNA extraction failed.");
+      reportFailure(err instanceof Error ? err.message : "DNA extraction failed.");
       return null;
     } finally {
       setIsExtractingDna(false);
@@ -314,6 +350,11 @@ export default function Page() {
     const v = dnaVersions.find((x) => x.id === id);
     if (!v) return;
     setDesignDNA(v.designDNA);
+    // The user is declaring this DNA correct for their current state, so the
+    // intake-change watcher should treat the *current* intake as the new
+    // baseline. Future intake changes from this point will trigger a notice.
+    setIntakeAtDnaExtraction(intake);
+    setPendingDnaNotice(null);
     setChat((prev) => [
       ...prev,
       {
@@ -390,9 +431,10 @@ export default function Page() {
         },
       ]);
 
-      // Auto-extract Design DNA from the new hero. This is a best-effort step:
-      // if it fails, the hero is still usable, just without DNA-driven tokens.
-      const dna = await extractDnaFromCurrent(newHero, intake);
+      // Auto-extract Design DNA from the new hero. Best-effort: failures
+      // surface as a system chat breadcrumb (not a red banner) so the
+      // freshly-generated hero doesn't look broken.
+      const dna = await extractDnaFromCurrent(newHero, intake, { silent: true });
       if (dna) {
         setDesignDNA(dna);
         setIntakeAtDnaExtraction(intake);
@@ -580,7 +622,7 @@ export default function Page() {
           error={error}
           isBusy={isBusy}
         />
-        <div className="grid min-h-0 grid-rows-[auto_minmax(0,1fr)] gap-3">
+        <div className="grid min-h-0 grid-rows-[minmax(0,1fr)_minmax(0,1fr)] gap-3">
           <DesignDnaPanel
             designDNA={designDNA}
             dnaVersions={dnaVersions}
@@ -1105,15 +1147,25 @@ function DesignDnaPanel(props: DesignDnaPanelProps) {
 }
 
 function DnaSummary({ dna }: { dna: SiteDesignDNA }) {
+  // Defense in depth: even though /api/design-dna validates the shape, an
+  // older saved version on disk (from before the validator landed) might be
+  // missing fields. Optional-chain everything so a stale entry can't crash
+  // the panel.
+  const palette = dna.palette ?? ({} as SiteDesignDNA["palette"]);
+  const fonts = dna.fonts ?? ({} as SiteDesignDNA["fonts"]);
+  const animationMood = dna.animationMood;
+  const visualMotifs = Array.isArray(dna.visualMotifs) ? dna.visualMotifs : [];
+  const sectionRules = Array.isArray(dna.sectionRules) ? dna.sectionRules : [];
+
   const swatches: { label: string; value: string | undefined }[] = [
-    { label: "primary", value: dna.palette.primary },
-    { label: "secondary", value: dna.palette.secondary },
-    { label: "accent", value: dna.palette.accent },
-    { label: "background", value: dna.palette.background },
-    { label: "surface", value: dna.palette.surface },
-    { label: "text", value: dna.palette.text },
-    { label: "gold", value: dna.palette.gold },
-    { label: "green", value: dna.palette.green },
+    { label: "primary", value: palette.primary },
+    { label: "secondary", value: palette.secondary },
+    { label: "accent", value: palette.accent },
+    { label: "background", value: palette.background },
+    { label: "surface", value: palette.surface },
+    { label: "text", value: palette.text },
+    { label: "gold", value: palette.gold },
+    { label: "green", value: palette.green },
   ];
 
   return (
@@ -1155,23 +1207,27 @@ function DnaSummary({ dna }: { dna: SiteDesignDNA }) {
       </div>
       <div>
         <div className="mb-0.5 text-[11px] uppercase tracking-wide text-black/50">Fonts</div>
-        <div className="text-black/80">
-          <span className="text-black/50">heading:</span> {dna.fonts.heading}
-        </div>
-        <div className="text-black/80">
-          <span className="text-black/50">body:</span> {dna.fonts.body}
-        </div>
-        {dna.fonts.accent ? (
+        {fonts.heading ? (
           <div className="text-black/80">
-            <span className="text-black/50">accent:</span> {dna.fonts.accent}
+            <span className="text-black/50">heading:</span> {fonts.heading}
+          </div>
+        ) : null}
+        {fonts.body ? (
+          <div className="text-black/80">
+            <span className="text-black/50">body:</span> {fonts.body}
+          </div>
+        ) : null}
+        {fonts.accent ? (
+          <div className="text-black/80">
+            <span className="text-black/50">accent:</span> {fonts.accent}
           </div>
         ) : null}
       </div>
-      {dna.visualMotifs.length > 0 ? (
+      {visualMotifs.length > 0 ? (
         <div>
           <div className="mb-1 text-[11px] uppercase tracking-wide text-black/50">Motifs</div>
           <div className="flex flex-wrap gap-1">
-            {dna.visualMotifs.map((m) => (
+            {visualMotifs.map((m) => (
               <span
                 key={m}
                 className="rounded-full border border-black/10 bg-black/5 px-2 py-0.5 text-[10px] text-black/70"
@@ -1182,19 +1238,21 @@ function DnaSummary({ dna }: { dna: SiteDesignDNA }) {
           </div>
         </div>
       ) : null}
-      <div>
-        <div className="mb-0.5 text-[11px] uppercase tracking-wide text-black/50">Animation</div>
-        <div className="text-black/80">
-          <span className="text-black/50">intensity:</span> {dna.animationMood.intensity}
+      {animationMood?.intensity ? (
+        <div>
+          <div className="mb-0.5 text-[11px] uppercase tracking-wide text-black/50">Animation</div>
+          <div className="text-black/80">
+            <span className="text-black/50">intensity:</span> {animationMood.intensity}
+          </div>
         </div>
-      </div>
-      {dna.sectionRules.length > 0 ? (
+      ) : null}
+      {sectionRules.length > 0 ? (
         <div>
           <div className="mb-1 text-[11px] uppercase tracking-wide text-black/50">
             Future-section rules
           </div>
           <ul className="list-disc space-y-0.5 pl-4 text-[11px] text-black/70">
-            {dna.sectionRules.slice(0, 6).map((r, i) => (
+            {sectionRules.slice(0, 6).map((r, i) => (
               <li key={i}>{r}</li>
             ))}
           </ul>

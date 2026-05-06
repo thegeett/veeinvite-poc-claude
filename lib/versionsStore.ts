@@ -61,6 +61,35 @@ export async function listVersions(): Promise<StoredVersion[]> {
   return all;
 }
 
+// Atomically claim the next vN/ directory inside the provider folder.
+// `mkdir({ recursive: false })` fails with EEXIST if a concurrent caller
+// already won the race for this seq; we bump and retry until we get a
+// fresh dir. Bounded so a corrupted tree doesn't loop forever.
+async function claimNextVersionDir(
+  provider: AIProvider,
+  startingSeq: number,
+): Promise<{ seq: number; dir: string }> {
+  let seq = startingSeq;
+  const baseDir = providerDir(provider);
+  for (let attempt = 0; attempt < 16; attempt++) {
+    const dir = path.join(baseDir, `v${seq}`);
+    try {
+      await fs.mkdir(dir, { recursive: false });
+      return { seq, dir };
+    } catch (err: unknown) {
+      const code = (err as NodeJS.ErrnoException)?.code;
+      if (code === "EEXIST") {
+        seq += 1;
+        continue;
+      }
+      throw err;
+    }
+  }
+  throw new Error(
+    `Could not claim a free version directory under ${baseDir} after 16 attempts.`,
+  );
+}
+
 export async function saveVersion(input: {
   label: string;
   hero: HeroResult;
@@ -77,9 +106,10 @@ export async function saveVersion(input: {
       const seq = parseSeq(e.name);
       return seq !== null && seq > max ? seq : max;
     }, 0);
-  const seq = maxSeq + 1;
-  const versionDir = path.join(providerDir(input.provider), `v${seq}`);
-  await fs.mkdir(versionDir, { recursive: true });
+  const { seq, dir: versionDir } = await claimNextVersionDir(
+    input.provider,
+    maxSeq + 1,
+  );
 
   const stored: StoredVersion = {
     id: `${input.provider}/v${seq}`,
