@@ -1,0 +1,127 @@
+{
+  "id": "dna_v1",
+  "label": "Initial Design DNA",
+  "createdAt": "2026-05-06T12:58:26.263Z",
+  "designDNA": {
+    "concept": "A festive Gujarati wedding invitation set inside a modern royal palace atmosphere, combining Shri Ganesh blessings, marigold celebration details, diya warmth, mandala ornament, and glassmorphic luxury against a deep jewel-tone backdrop.",
+    "tone": "Joyful, reverent, regal, warm, celebratory, and polished with a contemporary wedding-site sensibility.",
+    "community": "Gujarati wedding celebration presented through a Modern Western luxury layout language.",
+    "styleDirection": "Royal palace with Indo-Gujarati ceremonial motifs, dark jewel gradients, glowing gold accents, translucent glass surfaces, grand serif typography, and ornate but controlled decorative elements.",
+    "palette": {
+      "primary": "#751b2d",
+      "secondary": "#151632",
+      "accent": "#f0a33a",
+      "background": "#150f2d",
+      "surface": "#fff4dc",
+      "text": "#fff6e5",
+      "mutedText": "#fff4dc",
+      "gold": "#d8a84f",
+      "green": "#2f6b4f",
+      "custom": {
+        "wine": "#341022",
+        "ruby": "#751b2d",
+        "rose": "#b94a4d",
+        "indigo": "#151632",
+        "cream": "#fff4dc",
+        "marigold": "#f7c35f",
+        "saffron": "#f0a33a",
+        "deepPlum": "#281229",
+        "palaceGold": "#ffe6aa",
+        "burntOrange": "#d27022"
+      }
+    },
+    "fonts": {
+      "heading": "Playfair Display",
+      "body": "Manrope",
+      "accent": "Cormorant Garamond"
+    },
+    "shapeLanguage": {
+      "borderRadius": "Soft pill and circular accents with ornate palace-inspired curves.",
+      "cardRadius": "Large rounded glass cards around 20px-24px, with pill labels and circular date seals.",
+      "sectionRadius": "Sweeping arches, domes, circular mandalas, and rounded palace panels.",
+      "preferredShapes": [
+        "palace arches",
+        "domes",
+        "pill badges",
+        "circular seals",
+        "mandala rings",
+        "toran strands",
+        "diya bowls",
+        "large rounded glass panels"
+      ]
+    },
+    "visualMotifs": [
+      "marigold toran garlands",
+      "Shri Ganesh blessing cue",
+      "palace dome and arches",
+      "mandala radial ornament",
+      "diya lamps with glowing flames",
+      "gold date seal",
+      "festive ribbon label",
+      "subtle ceremonial grid texture",
+      "saffron and marigold halos"
+    ],
+    "textureStyle": "Layered radial jewel gradients, faint cream grid texture, translucent glass overlays, soft glow halos, and mandala/conic ornamental patterns used sparingly as background depth.",
+    "shadowStyle": "Luxurious medium-deep shadows with soft black depth, warm gold glows, and subtle inset highlights on glass surfaces.",
+    "animationMood": {
+      "intensity": "subtle",
+      "preferredAnimations": [
+        "slow golden glow pulse",
+        "gentle diya flame flicker",
+        "soft floating halo drift",
+        "subtle mandala rotation",
+        "delicate toran sway",
+        "fade-up content reveal"
+      ]
+    },
+    "layoutPersonality": "Grand editorial hero layout with generous spacing, asymmetric text-and-illustration balance, centered ceremonial alignment on mobile, and layered decorative depth without clutter.",
+    "sectionRules": [
+      "Maintain the dark jewel-tone backdrop.",
+      "Use marigold, saffron, cream, and gold as warm accents.",
+      "Preserve Gujarati ceremonial motifs with modern restraint.",
+      "Favor glassmorphic cards over flat white blocks.",
+      "Use grand serif headings and clean sans body text.",
+      "Keep shapes rounded, arched, circular, and palace-inspired.",
+      "Add soft glows rather than harsh highlights.",
+      "Use decorative motifs as framing, not clutter.",
+      "Keep copy warm, reverent, and celebratory.",
+      "Preserve generous spacing and luxury scale.",
+      "Avoid pastel minimalism.",
+      "Avoid rustic farmhouse styling.",
+      "Avoid stark black-and-white layouts.",
+      "Avoid neon colors or playful cartoon motifs.",
+      "Avoid dense ornament that competes with content."
+    ],
+    "cssVariables": {
+      "--color-primary": "#751b2d",
+      "--color-secondary": "#151632",
+      "--color-accent": "#f0a33a",
+      "--color-background": "#150f2d",
+      "--color-surface": "#fff4dc",
+      "--color-text": "#fff6e5",
+      "--color-muted-text": "#fff4dc",
+      "--color-gold": "#d8a84f",
+      "--color-green": "#2f6b4f",
+      "--color-wine": "#341022",
+      "--color-ruby": "#751b2d",
+      "--color-rose": "#b94a4d",
+      "--color-indigo": "#151632",
+      "--color-cream": "#fff4dc",
+      "--color-marigold": "#f7c35f",
+      "--color-saffron": "#f0a33a",
+      "--color-palace-gold": "#ffe6aa",
+      "--font-heading": "Playfair Display",
+      "--font-body": "Manrope",
+      "--font-accent": "Cormorant Garamond",
+      "--radius-card": "24px",
+      "--radius-pill": "999px",
+      "--radius-arch": "80px 80px 0 0",
+      "--shadow-glass": "0 24px 60px rgba(0,0,0,0.18)",
+      "--shadow-palace": "0 38px 110px rgba(0,0,0,0.36)",
+      "--blur-glass": "18px",
+      "--spacing-section": "clamp(28px, 4vw, 58px)"
+    }
+  },
+  "source": "initial_generation",
+  "provider": "openai"
+}

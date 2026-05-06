@@ -1,0 +1,122 @@
+{
+  "concept": "Festive Gujarati minimal elegance — a warm cream-and-gold wedding identity rooted in cultural reverence and modern restraint, where sacred motifs (ॐ, marigolds, diyas) are rendered through pure CSS and refined typography rather than heavy ornamentation.",
+  "tone": "Festive yet refined — celebratory warmth balanced with editorial restraint; devotional undertones expressed through glowing sacred symbols and poetic italic copy, never loud or overdecorated.",
+  "community": "Modern non-religious Gujarati — culturally rooted with Ganesh invocation and traditional ceremony references (garba, baraat, mehendi, pheras), yet presented through a contemporary minimal-elegant lens for an English-speaking diaspora audience.",
+  "styleDirection": "Minimal elegant with festive cultural accents — asymmetric editorial grid, oversized gradient name typography, frosted-glass surface treatments, ambient radial glow depth layers, and restrained dot-grid texture. No photography dependency; all richness is typographic and CSS-native.",
+  "palette": {
+    "primary": "#7B1E35",
+    "secondary": "#A83252",
+    "accent": "#C9973A",
+    "background": "#FAF5EC",
+    "surface": "#FFFDF7",
+    "text": "#2A1A0E",
+    "mutedText": "#9C7A52",
+    "gold": "#C9973A",
+    "custom": {
+      "goldLight": "#E8C47A",
+      "goldPale": "#F5E6C0",
+      "maroonLight": "#A83252",
+      "creamDark": "#F0E5CE",
+      "textMid": "#5C3D24"
+    }
+  },
+  "fonts": {
+    "heading": "Rozha One, serif",
+    "body": "Manrope, sans-serif",
+    "accent": "Cormorant Garamond, Playfair Display, serif"
+  },
+  "shapeLanguage": {
+    "borderRadius": "3px",
+    "cardRadius": "16px",
+    "sectionRadius": "0px",
+    "preferredShapes": [
+      "pill (40–60px radius for badges)",
+      "sharp-cornered rectangles for buttons (3px)",
+      "rounded pill for detail strips (60px)",
+      "circular dots for ornamental accents",
+      "diamond/rhombus decorative glyphs"
+    ]
+  },
+  "visualMotifs": [
+    "ॐ Om symbol as sacred invocation badge",
+    "✦ and ◆ star/diamond glyphs as floating petal particles",
+    "❋ floral ornamental repeaters in header/footer bands",
+    "✿ floral divider icon",
+    "Vertical ornamental side pillars with dot–line–diamond rhythm",
+    "Dot-grid radial background pattern in gold and maroon",
+    "Marigold/diya/music emoji as cultural celebration icons",
+    "Maroon-to-gold gradient text fill on display names",
+    "Frosted-glass pill surfaces with gold border and inner highlight",
+    "Radial ambient corner glows in gold-left / maroon-right",
+    "Horizontal ornamental bands (top + bottom) with fade-line flanking centered text",
+    "Ampersand in italic serif as couple connector motif",
+    "Staggered bride/groom name alignment (left-offset bride, right-offset groom)"
+  ],
+  "textureStyle": "Warm cream base with a subtle dual-frequency dot-grid overlay (gold at 48px, maroon at 96px, both at low opacity). Ambient radial ellipse glows in corners create soft depth without imagery. Frosted-glass surfaces use backdrop-filter blur with semi-transparent cream-to-gold-pale gradients and bright inner-top highlight strokes.",
+  "shadowStyle": "Layered and warm-toned: primary shadows use rgba(123,30,53,0.35) maroon depth for buttons, rgba(201,151,58,0.12–0.15) gold warmth for surface cards, and inset rgba(255,255,255,0.8–0.9) top-edge highlights for frosted-glass lift. No cold grey or neutral shadows anywhere.",
+  "animationMood": {
+    "intensity": "subtle",
+    "preferredAnimations": [
+      "slow radial glow pulse (6–7s ease-in-out infinite alternate)",
+      "floating petal drift with opacity fade (8s ease-in-out infinite)",
+      "gentle vertical float for celebration icons (3s ease-in-out infinite alternate)",
+      "Om symbol text-shadow glow breathe (4s ease-in-out infinite alternate)",
+      "CTA button shimmer sweep on hover (left-to-right pseudo-element, 0.45s)",
+      "translateY(-2px) lift on button hover with box-shadow deepen"
+    ]
+  },
+  "layoutPersonality": "Three-column editorial grid with narrow decorative side pillars flanking a wide dominant center column — collapses to single-column on mobile. Center content stacks vertically with generous gap rhythm (28px between major blocks). Top and bottom ornamental bands frame the full-bleed section. Max-width container at 1280px with symmetric horizontal padding. Typography drives hierarchy; decorative elements are structural, not supplemental.",
+  "sectionRules": [
+    "Maintain the warm cream (#FAF5EC) background as the base — never switch to white, dark, or cool-toned backgrounds",
+    "Always use the maroon (#7B1E35) to gold (#C9973A) gradient system for primary display text and key accents",
+    "Preserve the gold (#C9973A) as the dominant accent for borders, lines, labels, and ornamental glyphs",
+    "Use Rozha One for all display/hero-scale headings; Cormorant Garamond italics for poetic or descriptive body passages",
+    "Use Manrope for all UI labels, captions, badges, and CTA text with wide letter-spacing (0.18em–0.25em) and uppercase treatment",
+    "Frosted-glass pill/card surfaces must use the cream-to-gold-pale gradient with gold border and white inset highlight — no flat white cards",
+    "Buttons: primary = maroon gradient fill with gold-pale text; ghost = transparent with maroon border — maintain this two-button CTA pattern",
+    "All shadows must be warm-toned (maroon or gold rgba) — no neutral grey shadows",
+    "Include at least one cultural Gujarati motif per section (ॐ, floral glyph, diya, marigold, garba reference, or ornamental band)",
+    "Ornamental horizontal bands with fade-lines flanking centered uppercase motif text must frame section tops or bottoms where appropriate",
+    "Floating particle or ambient glow animations must remain subtle (opacity max 0.45, slow timing 6s+)",
+    "Maintain the dot-grid background texture at low opacity as a unifying background layer across sections",
+    "Side decorative columns (dot–line–diamond vertical rhythm) can appear in wider layouts but must hide on mobile",
+    "Never introduce photography, image backgrounds, or external asset dependencies — all richness must be CSS-native",
+    "Avoid cold colors, dark backdrops, neon accents, sans-serif-only typographic sections, or flat minimalism stripped of cultural warmth"
+  ],
+  "cssVariables": {
+    "--color-primary": "#7B1E35",
+    "--color-primary-light": "#A83252",
+    "--color-accent": "#C9973A",
+    "--color-accent-light": "#E8C47A",
+    "--color-accent-pale": "#F5E6C0",
+    "--color-background": "#FAF5EC",
+    "--color-background-dark": "#F0E5CE",
+    "--color-surface": "#FFFDF7",
+    "--color-text-dark": "#2A1A0E",
+    "--color-text-mid": "#5C3D24",
+    "--color-text-muted": "#9C7A52",
+    "--font-heading": "'Rozha One', serif",
+    "--font-body": "'Manrope', sans-serif",
+    "--font-accent": "'Cormorant Garamond', 'Playfair Display', serif",
+    "--font-devanagari": "'Noto Serif Gujarati', serif",
+    "--radius-button": "3px",
+    "--radius-card": "16px",
+    "--radius-pill": "60px",
+    "--radius-badge": "40px",
+    "--shadow-button": "0 6px 24px rgba(123,30,53,0.35), inset 0 1px 0 rgba(255,255,255,0.15)",
+    "--shadow-card": "0 4px 28px rgba(201,151,58,0.12), inset 0 1px 0 rgba(255,255,255,0.9)",
+    "--shadow-name": "drop-shadow(0 4px 24px rgba(123,30,53,0.18))",
+    "--gradient-names": "linear-gradient(135deg, #7B1E35 0%, #A83252 40%, #C9973A 70%, #E8C47A 100%)",
+    "--gradient-background": "linear-gradient(160deg, #FAF5EC 0%, #F5E6C0 40%, #F0E5CE 70%, #F7EAD5 100%)",
+    "--gradient-surface": "linear-gradient(135deg, rgba(255,253,247,0.85), rgba(245,230,192,0.5))",
+    "--gradient-button-primary": "linear-gradient(135deg, #7B1E35 0%, #A83252 50%, #8B2040 100%)",
+    "--border-gold": "1px solid rgba(201,151,58,0.3)",
+    "--border-gold-strong": "1px solid rgba(201,151,58,0.45)",
+    "--border-maroon": "1px solid rgba(123,30,53,0.45)",
+    "--letter-spacing-label": "0.25em",
+    "--letter-spacing-badge": "0.22em",
+    "--animation-glow": "hero001GlowPulse 6s ease-in-out infinite alternate",
+    "--animation-float": "hero001PetalFloat 8s ease-in-out infinite",
+    "--max-width-content": "1280px"
+  }
+}

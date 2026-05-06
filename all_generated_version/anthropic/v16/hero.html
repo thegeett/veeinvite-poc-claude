@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Noto+Serif+Gujarati:wght@400;600;700&family=Rozha+One&family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; min-height: 100%; }
+    body { overflow-x: hidden; }
+    .ww-section { width: 100%; position: relative; isolation: isolate; }
+    
+/* ============================================================
+   HERO_001 — Kavya & Mihir | Festive Gujarati Elegant Hero
+   All selectors scoped to .hero_001
+   ============================================================ */
+
+/* ---------- Root variables ---------- */
+.hero_001 {
+  --h-gold:       #C9973A;
+  --h-gold-lt:    #E8C47A;
+  --h-gold-pale:  #F5E6C0;
+  --h-maroon:     #7B1E35;
+  --h-maroon-lt:  #A83252;
+  --h-cream:      #FAF5EC;
+  --h-cream-dk:   #F0E5CE;
+  --h-text-dark:  #2A1A0E;
+  --h-text-mid:   #5C3D24;
+  --h-text-light: #9C7A52;
+  --h-white:      #FFFDF7;
+  --h-font-serif: 'Cormorant Garamond', 'Playfair Display', serif;
+  --h-font-sans:  'Manrope', sans-serif;
+  --h-font-rozha: 'Rozha One', serif;
+}
+
+/* ---------- Section shell ---------- */
+.hero_001 {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  background-color: var(--h-cream);
+  font-family: var(--h-font-sans);
+  box-sizing: border-box;
+  padding: 0;
+}
+
+/* ---------- Background layers ---------- */
+.hero_001__bg-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero_001__bg-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 15% 20%, rgba(201,151,58,0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 50% at 85% 80%, rgba(123,30,53,0.14) 0%, transparent 65%),
+    linear-gradient(160deg, #FAF5EC 0%, #F5E6C0 40%, #F0E5CE 70%, #F7EAD5 100%);
+}
+
+.hero_001__bg-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(201,151,58,0.08) 1px, transparent 1px),
+    radial-gradient(circle, rgba(123,30,53,0.06) 1px, transparent 1px);
+  background-size: 48px 48px, 96px 96px;
+  background-position: 0 0, 24px 24px;
+}
+
+.hero_001__glow {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.35;
+}
+.hero_001__glow--left {
+  top: -80px;
+  left: -100px;
+  background: radial-gradient(circle, #E8C47A 0%, transparent 70%);
+  animation: hero001GlowPulse 6s ease-in-out infinite alternate;
+}
+.hero_001__glow--right {
+  bottom: -80px;
+  right: -100px;
+  background: radial-gradient(circle, #A83252 0%, transparent 70%);
+  animation: hero001GlowPulse 7s ease-in-out 1s infinite alternate;
+}
+
+@keyframes hero001GlowPulse {
+  from { opacity: 0.25; transform: scale(0.95); }
+  to   { opacity: 0.45; transform: scale(1.05); }
+}
+
+/* ---------- Floating petals ---------- */
+.hero_001__petals {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero_001__petal {
+  position: absolute;
+  font-size: 10px;
+  color: var(--h-gold);
+  opacity: 0;
+  animation: hero001PetalFloat 8s ease-in-out infinite;
+}
+
+.hero_001__petal--1 { left: 8%;  top: 15%; animation-delay: 0s;    font-size: 8px;  color: var(--h-gold-lt); }
+.hero_001__petal--2 { left: 20%; top: 70%; animation-delay: 1.5s;  font-size: 6px;  color: var(--h-maroon-lt); }
+.hero_001__petal--3 { left: 75%; top: 12%; animation-delay: 2.5s;  font-size: 7px;  color: var(--h-gold); }
+.hero_001__petal--4 { left: 88%; top: 60%; animation-delay: 0.8s;  font-size: 9px;  color: var(--h-gold-lt); }
+.hero_001__petal--5 { left: 50%; top: 85%; animation-delay: 3.2s;  font-size: 6px;  color: var(--h-maroon-lt); }
+.hero_001__petal--6 { left: 35%; top: 8%;  animation-delay: 4.1s;  font-size: 8px;  color: var(--h-gold); }
+
+@keyframes hero001PetalFloat {
+  0%   { opacity: 0;    transform: translateY(0px)    rotate(0deg);   }
+  20%  { opacity: 0.7; }
+  50%  { opacity: 0.5;  transform: translateY(-18px)  rotate(180deg); }
+  80%  { opacity: 0.6; }
+  100% { opacity: 0;    transform: translateY(6px)    rotate(360deg); }
+}
+
+/* ---------- Top band ---------- */
+.hero_001__top-band {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 18px 32px 14px;
+  background: linear-gradient(90deg, transparent, rgba(201,151,58,0.12) 30%, rgba(201,151,58,0.18) 50%, rgba(201,151,58,0.12) 70%, transparent);
+  border-bottom: 1px solid rgba(201,151,58,0.25);
+}
+
+.hero_001__band-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--h-gold), transparent);
+  max-width: 180px;
+}
+
+.hero_001__band-motif {
+  font-family: var(--h-font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: var(--h-gold);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ---------- Content shell ---------- */
+.hero_001__content-shell {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 80px 1fr 80px;
+  align-items: center;
+  padding: 40px 32px;
+  box-sizing: border-box;
+  gap: 24px;
+}
+
+/* ---------- Side columns ---------- */
+.hero_001__side-col,
+.hero_001__right-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.hero_001__side-ornament {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero_001__side-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--h-gold);
+  opacity: 0.7;
+}
+
+.hero_001__side-vline {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--h-gold), transparent);
+}
+
+.hero_001__side-diamond {
+  font-size: 14px;
+  color: var(--h-gold);
+  opacity: 0.8;
+}
+
+.hero_001__side-label {
+  font-family: var(--h-font-sans);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--h-text-light);
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  margin-top: 8px;
+}
+
+/* Right celebration stack */
+.hero_001__celebration-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero_001__cel-item {
+  font-size: 22px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(201,151,58,0.3));
+  animation: hero001CelFloat 3s ease-in-out infinite alternate;
+}
+
+.hero_001__cel-item:nth-child(3) { animation-delay: 0.8s; }
+.hero_001__cel-item:nth-child(5) { animation-delay: 1.6s; }
+
+@keyframes hero001CelFloat {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-5px); }
+}
+
+.hero_001__cel-label {
+  font-family: var(--h-font-sans);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--h-text-light);
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+/* ---------- Center wrap ---------- */
+.hero_001__center-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 28px;
+}
+
+/* ---------- Ganesh badge ---------- */
+.hero_001__ganesh-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 22px;
+  border: 1px solid rgba(201,151,58,0.45);
+  border-radius: 40px;
+  background: linear-gradient(135deg, rgba(255,253,247,0.9), rgba(245,230,192,0.6));
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 16px rgba(201,151,58,0.15), inset 0 1px 0 rgba(255,255,255,0.8);
+}
+
+.hero_001__ganesh-symbol {
+  font-family: 'Noto Serif Gujarati', serif;
+  font-size: 22px;
+  color: var(--h-maroon);
+  line-height: 1;
+  animation: hero001OmGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes hero001OmGlow {
+  from { text-shadow: 0 0 6px rgba(123,30,53,0.3); }
+  to   { text-shadow: 0 0 18px rgba(123,30,53,0.7), 0 0 32px rgba(201,151,58,0.3); }
+}
+
+.hero_001__ganesh-text {
+  font-family: var(--h-font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--h-gold);
+  text-transform: uppercase;
+}
+
+/* ---------- Names ---------- */
+.hero_001__names-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.hero_001__name {
+  font-family: var(--h-font-rozha);
+  font-size: clamp(72px, 12vw, 128px);
+  font-weight: 400;
+  line-height: 0.9;
+  margin: 0;
+  letter-spacing: -0.01em;
+  background: linear-gradient(135deg, var(--h-maroon) 0%, var(--h-maroon-lt) 40%, var(--h-gold) 70%, var(--h-gold-lt) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 4px 24px rgba(123,30,53,0.18));
+}
+
+.hero_001__name--bride {
+  align-self: flex-start;
+  padding-left: 8%;
+}
+
+.hero_001__name--groom {
+  align-self: flex-end;
+  padding-right: 8%;
+}
+
+.hero_001__ampersand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 4px 0;
+  width: 100%;
+  justify-content: center;
+}
+
+.hero_001__amp-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--h-gold-lt), transparent);
+  max-width: 120px;
+}
+
+.hero_001__ampersand {
+  font-family: var(--h-font-serif);
+  font-size: clamp(36px, 5vw, 56px);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--h-gold);
+  line-height: 1;
+  text-shadow: 0 2px 12px rgba(201,151,58,0.35);
+}
+
+/* ---------- Divider ---------- */
+.hero_001__divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.hero_001__div-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,151,58,0.6), transparent);
+}
+
+.hero_001__div-icon {
+  font-size: 18px;
+  color: var(--h-gold);
+  opacity: 0.8;
+}
+
+/* ---------- Hero message ---------- */
+.hero_001__hero-message {
+  font-family: var(--h-font-serif);
+  font-size: clamp(15px, 1.8vw, 19px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.75;
+  color: var(--h-text-mid);
+  max-width: 580px;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+/* ---------- Details strip ---------- */
+.hero_001__details-strip {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 32px;
+  background: linear-gradient(135deg, rgba(255,253,247,0.85), rgba(245,230,192,0.5));
+  border: 1px solid rgba(201,151,58,0.3);
+  border-radius: 60px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 28px rgba(201,151,58,0.12), inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+.hero_001__detail-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.hero_001__detail-label {
+  font-family: var(--h-font-sans);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: var(--h-gold);
+  text-transform: uppercase;
+}
+
+.hero_001__detail-value {
+  font-family: var(--h-font-serif);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--h-text-dark);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.hero_001__detail-sep {
+  font-size: 7px;
+  color: var(--h-gold-lt);
+  opacity: 0.7;
+}
+
+/* ---------- CTA buttons ---------- */
+.hero_001__cta-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero_001__cta-btn {
+  display: inline-block;
+  padding: 14px 36px;
+  background: linear-gradient(135deg, var(--h-maroon) 0%, var(--h-maroon-lt) 50%, #8B2040 100%);
+  color: var(--h-gold-pale);
+  font-family: var(--h-font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 3px;
+  border: 1px solid rgba(201,151,58,0.4);
+  box-shadow: 0 6px 24px rgba(123,30,53,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero_001__cta-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  transition: left 0.45s ease;
+}
+
+.hero_001__cta-btn:hover::before { left: 100%; }
+
+.hero_001__cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(123,30,53,0.45), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.hero_001__cta-ghost {
+  display: inline-block;
+  padding: 13px 32px;
+  background: transparent;
+  color: var(--h-maroon);
+  font-family: var(--h-font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 3px;
+  border: 1px solid rgba(123,30,53,0.45);
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.hero_001__cta-ghost:hover {
+  background: rgba(123,30,53,0.07);
+  border-color: var(--h-maroon);
+  color: var(--h-maroon);
+}
+
+/* ---------- Bottom band ---------- */
+.hero_001__bottom-band {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 14px 32px 18px;
+  background: linear-gradient(90deg, transparent, rgba(201,151,58,0.12) 30%, rgba(123,30,53,0.1) 50%, rgba(201,151,58,0.12) 70%, transparent);
+  border-top: 1px solid rgba(201,151,58,0.22);
+}
+
+/* ============================================================
+   RESPONSIVE — 900px
+   ============================================================ */
+@media (max-width: 900px) {
+  .hero_001__content-shell {
+    grid-template-columns: 48px 1fr 48px;
+    padding: 28px 20px;
+    gap: 12px;
+  }
+
+  .hero_001__side-label {
+    display: none;
+  }
+
+  .hero_001__side-vline {
+    height: 40px;
+  }
+
+  .hero_001__cel-label {
+    display: none;
+  }
+
+  .hero_001__details-strip {
+    gap: 14px;
+    padding: 14px 22px;
+    flex-wrap: wrap;
+    border-radius: 16px;
+  }
+
+  .hero_001__detail-sep {
+    display: none;
+  }
+
+  .hero_001__hero-message {
+    font-size: 16px;
+  }
+
+  .hero_001__detail-value {
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — 640px
+   ============================================================ */
+@media (max-width: 640px) {
+  .hero_001__content-shell {
+    grid-template-columns: 1fr;
+    padding: 24px 20px 32px;
+    gap: 24px;
+  }
+
+  .hero_001__side-col,
+  .hero_001__right-col {
+    display: none;
+  }
+
+  .hero_001__center-wrap {
+    gap: 22px;
+  }
+
+  .hero_001__ganesh-badge {
+    padding: 7px 16px;
+  }
+
+  .hero_001__ganesh-symbol {
+    font-size: 18px;
+  }
+
+  .hero_001__ganesh-text {
+    font-size: 9px;
+    letter-spacing: 0.16em;
+  }
+
+  .hero_001__name {
+    font-size: clamp(60px, 18vw, 88px);
+  }
+
+  .hero_001__name--bride {
+    padding-left: 0;
+    align-self: center;
+  }
+
+  .hero_001__name--groom {
+    padding-right: 0;
+    align-self: center;
+  }
+
+  .hero_001__ampersand {
+    font-size: 40px;
+  }
+
+  .hero_001__hero-message {
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 0 4px;
+  }
+
+  .hero_001__details-strip {
+    flex-direction: column;
+    border-radius: 16px;
+    padding: 18px 20px;
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .hero_001__detail-sep { display: none; }
+
+  .hero_001__detail-value {
+    font-size: 14px;
+  }
+
+  .hero_001__cta-wrap {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .hero_001__cta-btn,
+  .hero_001__cta-ghost {
+    width: 100%;
+    text-align: center;
+    padding: 15px 20px;
+  }
+
+  .hero_001__top-band,
+  .hero_001__bottom-band {
+    padding: 12px 16px;
+  }
+
+  .hero_001__band-motif {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+  }
+}
+
+  </style>
+</head>
+<body>
+<section class="ww-section hero_001">
+
+  <!-- Decorative background layer -->
+  <div class="hero_001__bg-wrap">
+    <div class="hero_001__bg-gradient"></div>
+    <div class="hero_001__bg-pattern"></div>
+    <div class="hero_001__glow hero_001__glow--left"></div>
+    <div class="hero_001__glow hero_001__glow--right"></div>
+  </div>
+
+  <!-- Floating marigold petals -->
+  <div class="hero_001__petals" aria-hidden="true">
+    <span class="hero_001__petal hero_001__petal--1">✦</span>
+    <span class="hero_001__petal hero_001__petal--2">✦</span>
+    <span class="hero_001__petal hero_001__petal--3">◆</span>
+    <span class="hero_001__petal hero_001__petal--4">✦</span>
+    <span class="hero_001__petal hero_001__petal--5">◆</span>
+    <span class="hero_001__petal hero_001__petal--6">✦</span>
+  </div>
+
+  <!-- Top ornamental band -->
+  <div class="hero_001__top-band" aria-hidden="true">
+    <span class="hero_001__band-line"></span>
+    <span class="hero_001__band-motif">❋ ❋ ❋</span>
+    <span class="hero_001__band-line"></span>
+  </div>
+
+  <!-- Main content shell -->
+  <div class="hero_001__content-shell">
+
+    <!-- Left column: decorative vertical -->
+    <aside class="hero_001__side-col" aria-hidden="true">
+      <div class="hero_001__side-ornament">
+        <div class="hero_001__side-dot"></div>
+        <div class="hero_001__side-vline"></div>
+        <div class="hero_001__side-diamond">◇</div>
+        <div class="hero_001__side-vline"></div>
+        <div class="hero_001__side-dot"></div>
+      </div>
+      <div class="hero_001__side-label">WEDDING 2026</div>
+    </aside>
+
+    <!-- Center: primary content -->
+    <div class="hero_001__center-wrap">
+
+      <!-- Ganesh invocation badge -->
+      <div class="hero_001__ganesh-badge">
+        <span class="hero_001__ganesh-symbol">ॐ</span>
+        <span class="hero_001__ganesh-text">Shri Ganeshaya Namah</span>
+      </div>
+
+      <!-- Names -->
+      <div class="hero_001__names-wrap">
+        <h1 class="hero_001__name hero_001__name--bride">Kavya</h1>
+        <div class="hero_001__ampersand-wrap">
+          <span class="hero_001__amp-line"></span>
+          <span class="hero_001__ampersand">&amp;</span>
+          <span class="hero_001__amp-line"></span>
+        </div>
+        <h1 class="hero_001__name hero_001__name--groom">Mihir</h1>
+      </div>
+
+      <!-- Decorative divider -->
+      <div class="hero_001__divider" aria-hidden="true">
+        <span class="hero_001__div-line"></span>
+        <span class="hero_001__div-icon">✿</span>
+        <span class="hero_001__div-line"></span>
+      </div>
+
+      <!-- Hero message -->
+      <p class="hero_001__hero-message">
+        With blessings of Shri Ganesh and our families, we invite you to celebrate a joyful
+        Gujarati wedding filled with mehendi, garba, baraat, sacred pheras, dinner, music, and love.
+      </p>
+
+      <!-- Event details strip -->
+      <div class="hero_001__details-strip">
+        <div class="hero_001__detail-item">
+          <span class="hero_001__detail-label">Date</span>
+          <span class="hero_001__detail-value">March 22, 2026</span>
+        </div>
+        <div class="hero_001__detail-sep" aria-hidden="true">◆</div>
+        <div class="hero_001__detail-item">
+          <span class="hero_001__detail-label">Venue</span>
+          <span class="hero_001__detail-value">Akshar Grand Palace</span>
+        </div>
+        <div class="hero_001__detail-sep" aria-hidden="true">◆</div>
+        <div class="hero_001__detail-item">
+          <span class="hero_001__detail-label">Location</span>
+          <span class="hero_001__detail-value">Somerset, New Jersey</span>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="hero_001__cta-wrap">
+        <a href="#rsvp" class="hero_001__cta-btn">RSVP Now</a>
+        <a href="#schedule" class="hero_001__cta-ghost">View Schedule</a>
+      </div>
+
+    </div><!-- /.center-wrap -->
+
+    <!-- Right column: celebration icons -->
+    <aside class="hero_001__right-col" aria-hidden="true">
+      <div class="hero_001__celebration-stack">
+        <div class="hero_001__cel-item">🪔</div>
+        <div class="hero_001__cel-label">Mehendi</div>
+        <div class="hero_001__cel-item">🌼</div>
+        <div class="hero_001__cel-label">Garba</div>
+        <div class="hero_001__cel-item">🎶</div>
+        <div class="hero_001__cel-label">Music</div>
+      </div>
+    </aside>
+
+  </div><!-- /.content-shell -->
+
+  <!-- Bottom ornamental band -->
+  <div class="hero_001__bottom-band" aria-hidden="true">
+    <span class="hero_001__band-line"></span>
+    <span class="hero_001__band-motif">✦ KAVYA · MIHIR · 2026 ✦</span>
+    <span class="hero_001__band-line"></span>
+  </div>
+
+</section>
+</body>
+</html>
