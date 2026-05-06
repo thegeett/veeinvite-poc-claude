@@ -80,7 +80,7 @@ export async function POST(req: Request) {
       provider,
       systemPrompt,
       userPrompt,
-      previewHtml: buildPreviewHtml(heroResult),
+      previewHtml: buildPreviewHtml({ hero: heroResult }),
     });
     return NextResponse.json({ success: true, version });
   } catch (err) {

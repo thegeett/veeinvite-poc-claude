@@ -38,4 +38,24 @@ export interface EditHeroInput {
   currentHero: Pick<HeroResult, "sectionId" | "html" | "css" | "designNotes">;
   message: string;
   intake: IntakeForm;
+  // Optional scope from /api/classify-edit-request. When provided, the prompt
+  // adapts so the AI knows whether the user expects a content tweak, a
+  // local style change, or a global redesign.
+  editScope?: import("../design-dna/types").EditScope;
+}
+
+export interface ExtractDesignDnaInput {
+  provider: AIProvider;
+  model?: string;
+  intake: IntakeForm;
+  hero: HeroResult;
+}
+
+export interface ClassifyEditInput {
+  provider: AIProvider;
+  model?: string;
+  intake: IntakeForm;
+  currentHero: HeroResult;
+  designDNA?: import("../design-dna/types").SiteDesignDNA | null;
+  message: string;
 }

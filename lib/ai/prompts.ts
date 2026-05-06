@@ -1,3 +1,4 @@
+import { scopeGuidanceForEditPrompt } from "./dnaPrompts";
 import type { EditHeroInput, IntakeForm } from "./types";
 
 // The system prompt is intentionally strict about output shape.
@@ -71,10 +72,19 @@ export function buildGenerateUserPrompt(intake: IntakeForm): string {
 }
 
 export function buildEditUserPrompt(input: EditHeroInput): string {
-  return [
+  const scopeGuidance = scopeGuidanceForEditPrompt(input.editScope);
+
+  const lines = [
     "User edit request:",
     input.message,
     "",
+  ];
+
+  if (scopeGuidance) {
+    lines.push(scopeGuidance, "");
+  }
+
+  lines.push(
     "Current hero HTML:",
     input.currentHero.html,
     "",
@@ -88,5 +98,7 @@ export function buildEditUserPrompt(input: EditHeroInput): string {
     JSON.stringify(input.intake, null, 2),
     "",
     "Return the full updated hero JSON.",
-  ].join("\n");
+  );
+
+  return lines.join("\n");
 }

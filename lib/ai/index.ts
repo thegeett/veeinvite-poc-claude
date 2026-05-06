@@ -1,10 +1,20 @@
+import type { EditClassification, SiteDesignDNA } from "../design-dna/types";
 import {
+  callAnthropicClassifyEditRequest,
+  callAnthropicExtractDesignDNA,
   callAnthropicHeroEditor,
   callAnthropicHeroGenerator,
 } from "./anthropic";
-import { callOpenAIHeroEditor, callOpenAIHeroGenerator } from "./openai";
+import {
+  callOpenAIClassifyEditRequest,
+  callOpenAIExtractDesignDNA,
+  callOpenAIHeroEditor,
+  callOpenAIHeroGenerator,
+} from "./openai";
 import type {
+  ClassifyEditInput,
   EditHeroInput,
+  ExtractDesignDnaInput,
   GenerateHeroInput,
   HeroResult,
 } from "./types";
@@ -34,4 +44,34 @@ export async function editHero(input: EditHeroInput): Promise<HeroResult> {
   throw new Error(`Unsupported provider: ${String(input.provider)}`);
 }
 
-export type { EditHeroInput, GenerateHeroInput, HeroResult } from "./types";
+export async function extractDesignDNA(
+  input: ExtractDesignDnaInput,
+): Promise<SiteDesignDNA> {
+  if (input.provider === "openai") {
+    return callOpenAIExtractDesignDNA(input);
+  }
+  if (input.provider === "anthropic") {
+    return callAnthropicExtractDesignDNA(input);
+  }
+  throw new Error(`Unsupported provider: ${String(input.provider)}`);
+}
+
+export async function classifyEditRequest(
+  input: ClassifyEditInput,
+): Promise<EditClassification> {
+  if (input.provider === "openai") {
+    return callOpenAIClassifyEditRequest(input);
+  }
+  if (input.provider === "anthropic") {
+    return callAnthropicClassifyEditRequest(input);
+  }
+  throw new Error(`Unsupported provider: ${String(input.provider)}`);
+}
+
+export type {
+  ClassifyEditInput,
+  EditHeroInput,
+  ExtractDesignDnaInput,
+  GenerateHeroInput,
+  HeroResult,
+} from "./types";
